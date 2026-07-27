@@ -1,0 +1,1 @@
+export function Carte({ titre, valeur, aide }: { titre: string; valeur: string | number; aide?: string }) { return <div className="rounded-2xl border bg-white p-5 shadow-sm"><p className="text-sm text-slate-500">{titre}</p><p className="mt-2 text-3xl font-bold">{valeur}</p>{aide&&<p className="mt-1 text-xs text-slate-400">{aide}</p>}</div>; }

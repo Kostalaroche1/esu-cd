@@ -1,0 +1,4 @@
+import { NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { prisma } from "@/lib/prisma";
+export async function GET(){const session=await auth(); if(!session?.user)return NextResponse.json({message:"Non autorisé"},{status:401}); const [total,retenues,rejetees,actives,paiements]=await Promise.all([prisma.candidature.count(),prisma.candidature.count({where:{statut:"RETENUE"}}),prisma.candidature.count({where:{statut:"REJETEE"}}),prisma.attributionBourse.count({where:{statut:"ACTIVE"}}),prisma.paiement.aggregate({where:{statut:"EFFECTUE"},_sum:{montant:true}})]); const recentes=await prisma.candidature.findMany({take:50,orderBy:{creeLe:"desc"},include:{etudiant:true,appel:true}}); return NextResponse.json({donnees:{total,retenues,rejetees,actives,montantPaye:Number(paiements._sum.montant??0),recentes}})}

@@ -1,0 +1,254 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum RoleUtilisateur {
+  SUPER_ADMINISTRATEUR
+  ADMINISTRATEUR
+  GESTIONNAIRE_BOURSES
+  EVALUATEUR
+  COMPTABLE
+  ETUDIANT
+}
+
+enum StatutCandidature {
+  BROUILLON
+  SOUMISE
+  EN_VERIFICATION
+  ELIGIBLE
+  NON_ELIGIBLE
+  EN_EVALUATION
+  RETENUE
+  REJETEE
+  ANNULEE
+}
+
+enum TypeDocument {
+  CARTE_IDENTITE
+  PHOTO_IDENTITE
+  RELEVE_NOTES
+  ATTESTATION_INSCRIPTION
+  LETTRE_MOTIVATION
+  RECOMMANDATION
+  AUTRE
+}
+
+enum DecisionEvaluation {
+  FAVORABLE
+  DEFAVORABLE
+  A_REVOIR
+}
+
+enum StatutAttribution {
+  ACTIVE
+  SUSPENDUE
+  TERMINEE
+  ANNULEE
+}
+
+enum StatutPaiement {
+  PREVU
+  EFFECTUE
+  ECHEC
+  ANNULE
+}
+
+model Utilisateur {
+  id           String          @id @default(cuid())
+  nomComplet   String
+  email        String          @unique
+  motDePasse   String
+  role         RoleUtilisateur
+  estActif     Boolean         @default(true)
+  etudiantId   String?         @unique
+  etudiant     Etudiant?       @relation(fields: [etudiantId], references: [id])
+  evaluations  Evaluation[]
+  notifications Notification[]
+  creeLe       DateTime        @default(now())
+  modifieLe    DateTime        @updatedAt
+}
+
+model Etablissement {
+  id          String      @id @default(cuid())
+  nom         String
+  sigle       String?
+  province    String?
+  ville       String?
+  type        String?
+  estActif    Boolean     @default(true)
+  etudiants   Etudiant[]
+  creeLe      DateTime    @default(now())
+  modifieLe   DateTime    @updatedAt
+}
+
+model Etudiant {
+  id               String          @id @default(cuid())
+  matricule         String          @unique
+  nom               String
+  postnom           String?
+  prenom            String
+  sexe              String?
+  dateNaissance     DateTime?
+  telephone         String?
+  email              String?
+  adresse            String?
+  provinceOrigine    String?
+  niveauEtude        String?
+  filiere             String?
+  anneeAcademique    String?
+  estActif            Boolean         @default(true)
+  etablissementId   String
+  etablissement      Etablissement   @relation(fields: [etablissementId], references: [id])
+  utilisateur        Utilisateur?
+  candidatures       Candidature[]
+  attributions       AttributionBourse[]
+  creeLe             DateTime        @default(now())
+  modifieLe          DateTime        @updatedAt
+}
+
+model ProgrammeBourse {
+  id                  String       @id @default(cuid())
+  code                String       @unique
+  nom                 String
+  description         String?      @db.Text
+  organismeFinanceur  String?
+  montantMaximum      Decimal?     @db.Decimal(12, 2)
+  devise              String       @default("USD")
+  niveauCible         String?
+  domaineCible        String?
+  estActif            Boolean      @default(true)
+  appels              AppelCandidature[]
+  creeLe              DateTime     @default(now())
+  modifieLe           DateTime     @updatedAt
+}
+
+model AppelCandidature {
+  id                 String            @id @default(cuid())
+  reference          String            @unique
+  titre              String
+  description        String?           @db.Text
+  dateOuverture      DateTime
+  dateCloture        DateTime
+  nombrePlaces       Int?
+  criteresEligibilite String?          @db.Text
+  estPublie          Boolean           @default(false)
+  programmeId        String
+  programme          ProgrammeBourse  @relation(fields: [programmeId], references: [id])
+  candidatures       Candidature[]
+  creeLe             DateTime          @default(now())
+  modifieLe          DateTime          @updatedAt
+}
+
+model Candidature {
+  id              String              @id @default(cuid())
+  reference       String              @unique
+  dateSoumission  DateTime?
+  motivation      String?             @db.Text
+  statut          StatutCandidature   @default(BROUILLON)
+  scoreFinal      Decimal?            @db.Decimal(5, 2)
+  commentaire     String?             @db.Text
+  etudiantId      String
+  appelId         String
+  etudiant        Etudiant            @relation(fields: [etudiantId], references: [id])
+  appel           AppelCandidature    @relation(fields: [appelId], references: [id])
+  documents       DocumentCandidature[]
+  evaluations     Evaluation[]
+  attribution     AttributionBourse?
+  creeLe          DateTime            @default(now())
+  modifieLe       DateTime            @updatedAt
+  @@unique([etudiantId, appelId])
+}
+
+model DocumentCandidature {
+  id             String          @id @default(cuid())
+  type           TypeDocument
+  nomFichier     String
+  cheminFichier  String
+  estValide      Boolean         @default(false)
+  commentaire    String?
+  candidatureId  String
+  candidature    Candidature     @relation(fields: [candidatureId], references: [id], onDelete: Cascade)
+  creeLe         DateTime        @default(now())
+}
+
+model Evaluation {
+  id              String               @id @default(cuid())
+  note             Decimal?            @db.Decimal(5, 2)
+  decision         DecisionEvaluation
+  commentaire      String?              @db.Text
+  candidatureId   String
+  evaluateurId    String
+  candidature     Candidature          @relation(fields: [candidatureId], references: [id], onDelete: Cascade)
+  evaluateur      Utilisateur          @relation(fields: [evaluateurId], references: [id])
+  creeLe          DateTime             @default(now())
+  @@unique([candidatureId, evaluateurId])
+}
+
+model AttributionBourse {
+  id                String             @id @default(cuid())
+  reference         String             @unique
+  montantAccorde    Decimal            @db.Decimal(12, 2)
+  devise            String             @default("USD")
+  dateDebut         DateTime
+  dateFin           DateTime
+  statut            StatutAttribution  @default(ACTIVE)
+  candidatureId     String             @unique
+  etudiantId        String
+  candidature       Candidature        @relation(fields: [candidatureId], references: [id])
+  etudiant           Etudiant           @relation(fields: [etudiantId], references: [id])
+  paiements         Paiement[]
+  renouvellements   Renouvellement[]
+  creeLe            DateTime           @default(now())
+  modifieLe         DateTime           @updatedAt
+}
+
+model Paiement {
+  id              String          @id @default(cuid())
+  reference       String          @unique
+  periode         String
+  montant         Decimal         @db.Decimal(12, 2)
+  devise          String          @default("USD")
+  datePrevue      DateTime
+  datePaiement    DateTime?
+  statut          StatutPaiement  @default(PREVU)
+  modePaiement    String?
+  preuveUrl       String?
+  attributionId  String
+  attribution    AttributionBourse @relation(fields: [attributionId], references: [id], onDelete: Cascade)
+  creeLe          DateTime        @default(now())
+}
+
+model Renouvellement {
+  id                String             @id @default(cuid())
+  anneeAcademique   String
+  decision          String
+  commentaire       String?            @db.Text
+  dateDecision      DateTime            @default(now())
+  attributionId     String
+  attribution       AttributionBourse  @relation(fields: [attributionId], references: [id], onDelete: Cascade)
+  creeLe            DateTime           @default(now())
+  @@unique([attributionId, anneeAcademique])
+}
+
+model Notification {
+  id            String      @id @default(cuid())
+  titre         String
+  message       String      @db.Text
+  estLue        Boolean     @default(false)
+  utilisateurId String
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id], onDelete: Cascade)
+  creeLe        DateTime    @default(now())
+}
+
+model Parametre {
+  id         String   @id @default(cuid())
+  cle        String   @unique
+  valeur     String   @db.Text
+  creeLe     DateTime @default(now())
+  modifieLe  DateTime @updatedAt
+}
