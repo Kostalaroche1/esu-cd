@@ -1,10 +1,9 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { BarreLaterale } from "@/components/disposition/barre-laterale";
-import { Entete } from "@/components/disposition/entete";
+import { CoquilleAdministration } from "@/components/disposition/coquille-administration";
 
 export default async function LayoutAdministration({ children }: { children: React.ReactNode }) {
   const session = await auth();
   if (!session?.user) redirect("/connexion");
-  return <div className="min-h-screen"><BarreLaterale/><div className="ml-72 min-h-screen"><Entete/><main className="p-6">{children}</main></div></div>;
+  return <CoquilleAdministration utilisateur={{ nom: session.user.name ?? session.user.email ?? "Utilisateur", role: session.user.role }}>{children}</CoquilleAdministration>;
 }

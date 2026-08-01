@@ -1,119 +1,37 @@
-import dotenv from "dotenv";
+import "dotenv/config";
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
+import { PrismaMariaDb } from "@prisma/adapter-mariadb";
+import { PrismaClient } from "../src/generated/prisma/client";
 
-dotenv.config();
+const url = process.env.DATABASE_URL;
+const email = process.env.ADMIN_INITIAL_EMAIL;
+const nom = process.env.ADMIN_INITIAL_NOM;
+const motDePasseInitial = process.env.ADMIN_INITIAL_MOT_DE_PASSE;
 
-const prisma = new PrismaClient();
+if (!url || !email || !nom || !motDePasseInitial) {
+  throw new Error("DATABASE_URL, ADMIN_INITIAL_NOM, ADMIN_INITIAL_EMAIL et ADMIN_INITIAL_MOT_DE_PASSE sont obligatoires pour le seed.");
+}
+if (motDePasseInitial.length < 12) throw new Error("ADMIN_INITIAL_MOT_DE_PASSE doit contenir au moins 12 caractères.");
 
-async function main() {
-  const motDePasse = await bcrypt.hash("Admin@123", 12);
+const emailAdmin = email;
+const nomAdmin = nom;
+const motDePasseAdmin = motDePasseInitial;
 
-  const universite = await prisma.etablissement.upsert({
-    where: { id: "etab-demo" },
-    update: {},
-    create: {
-      id: "etab-demo",
-      nom: "Université de démonstration",
-      sigle: "UDEMO",
-      province: "Kinshasa",
-      ville: "Kinshasa",
-      type: "Université",
-    },
-  });
+const prisma = new PrismaClient({ adapter: new PrismaMariaDb(url) });
 
-  const etudiant = await prisma.etudiant.upsert({
-    where: { matricule: "ETU-2026-001" },
-    update: {},
-    create: {
-      matricule: "ETU-2026-001",
-      nom: "KABAMBA",
-      prenom: "Aline",
-      sexe: "F",
-      email: "etudiant@esu.cd",
-      niveauEtude: "Licence",
-      filiere: "Informatique",
-      anneeAcademique: "2025-2026",
-      etablissementId: universite.id,
-    },
-  });
-
+async function initialiser() {
+  const motDePasse = await bcrypt.hash(motDePasseAdmin, 12);
   await prisma.utilisateur.upsert({
-    where: { email: "admin@esu.cd" },
-    update: {},
-    create: {
-      nomComplet: "Administrateur ESU",
-      email: "admin@esu.cd",
-      motDePasse,
-      role: "SUPER_ADMINISTRATEUR",
-    },
+    where: { email: emailAdmin },
+    update: { nomComplet: nomAdmin, motDePasse, role: "SUPER_ADMINISTRATEUR", estActif: true },
+    create: { nomComplet: nomAdmin, email: emailAdmin, motDePasse, role: "SUPER_ADMINISTRATEUR" },
   });
-
-  await prisma.utilisateur.upsert({
-    where: { email: "etudiant@esu.cd" },
-    update: {},
-    create: {
-      nomComplet: "Aline KABAMBA",
-      email: "etudiant@esu.cd",
-      motDePasse,
-      role: "ETUDIANT",
-      etudiantId: etudiant.id,
-    },
-  });
-
-  const programme = await prisma.programmeBourse.upsert({
-    where: { code: "PB-ESU-2026" },
-    update: {},
-    create: {
-      code: "PB-ESU-2026",
-      nom: "Bourse nationale d’excellence 2026",
-      description: "Programme pilote de soutien aux étudiants méritants.",
-      organismeFinanceur: "Ministère de l’Enseignement supérieur et universitaire",
-      montantMaximum: 1500,
-      devise: "USD",
-      niveauCible: "Licence et Master",
-      domaineCible: "Toutes filières",
-    },
-  });
-
-  const appel = await prisma.appelCandidature.upsert({
-    where: { reference: "AC-2026-001" },
-    update: {},
-    create: {
-      reference: "AC-2026-001",
-      titre: "Appel à candidatures 2026",
-      description: "Soumission des dossiers pour la bourse nationale d’excellence.",
-      dateOuverture: new Date("2026-01-15"),
-      dateCloture: new Date("2026-09-30"),
-      nombrePlaces: 100,
-      criteresEligibilite: "Être régulièrement inscrit et présenter un dossier complet.",
-      estPublie: true,
-      programmeId: programme.id,
-    },
-  });
-
-  await prisma.candidature.upsert({
-    where: { etudiantId_appelId: { etudiantId: etudiant.id, appelId: appel.id } },
-    update: {},
-    create: {
-      reference: "CAN-2026-0001",
-      motivation: "Je sollicite cette bourse afin de poursuivre mes études dans de bonnes conditions.",
-      statut: "SOUMISE",
-      dateSoumission: new Date(),
-      etudiantId: etudiant.id,
-      appelId: appel.id,
-    },
-  });
-
   await prisma.parametre.upsert({
     where: { cle: "nomInstitution" },
-    update: { valeur: "Ministère de l’Enseignement supérieur et universitaire" },
+    update: {},
     create: { cle: "nomInstitution", valeur: "Ministère de l’Enseignement supérieur et universitaire" },
   });
-
-  console.log("Données initiales créées.");
-  console.log("Admin: admin@esu.cd / Admin@123");
-  console.log("Étudiant: etudiant@esu.cd / Admin@123");
+  console.info(`Compte administrateur initialisé pour ${emailAdmin}.`);
 }
 
-main().finally(async () => prisma.$disconnect());
+initialiser().catch(erreur => { console.error(erreur); process.exitCode = 1; }).finally(async () => prisma.$disconnect());

@@ -5,3 +5,10 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: #f8fafc; color: #0f172a; font-family: Arial, Helvetica, sans-serif; }
 button, input, select, textarea { font: inherit; }
+
+@media print {
+  body { background: white; }
+  header, aside, .print\:hidden { display: none !important; }
+  main { padding: 0 !important; }
+  table { font-size: 10px; }
+}

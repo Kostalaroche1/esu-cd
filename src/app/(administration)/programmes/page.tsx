@@ -1,3 +1,2 @@
-import { EnTetePage } from "@/components/partages/en-tete-page";
-import { ModuleSimple } from "@/components/partages/module-simple";
-export default function Page(){return <><EnTetePage titre="Programmes de bourses" description="Configuration des programmes et financements."/><ModuleSimple module="programmes"/></>}
+import { GestionModule } from "@/components/partages/gestion-module";
+export default function Page(){return <GestionModule module="programmes"/>}

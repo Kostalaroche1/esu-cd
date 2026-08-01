@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 
 export default function PageConnexion() {
   const routeur = useRouter();
-  const [email, setEmail] = useState("admin@esu.cd");
-  const [motDePasse, setMotDePasse] = useState("Admin@123");
+  const [email, setEmail] = useState("");
+  const [motDePasse, setMotDePasse] = useState("");
   const [erreur, setErreur] = useState("");
   const [chargement, setChargement] = useState(false);
 
@@ -28,7 +28,6 @@ export default function PageConnexion() {
       <input className="mt-2 w-full rounded-lg border px-3 py-2" value={motDePasse} onChange={e=>setMotDePasse(e.target.value)} type="password" required />
       {erreur && <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{erreur}</p>}
       <button disabled={chargement} className="mt-6 w-full rounded-lg bg-blue-700 px-4 py-2.5 font-semibold text-white hover:bg-blue-800 disabled:opacity-60" type="submit">{chargement ? "Connexion..." : "Se connecter"}</button>
-      <p className="mt-4 text-center text-xs text-slate-500">Compte de démonstration : admin@esu.cd / Admin@123</p>
     </form>
   </main>;
 }

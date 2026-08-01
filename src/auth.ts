@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { prisma } from "@/lib/prisma";
+import type { RoleUtilisateur } from "@/generated/prisma/client";
 
 const schemaConnexion = z.object({
   email: z.string().email(),
@@ -41,18 +42,27 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   callbacks: {
+    authorized({ auth: session, request }) {
+      if (!session?.user) return false;
+      const chemin = request.nextUrl.pathname;
+      const role = session.user.role;
+      if ((chemin.startsWith("/utilisateurs") || chemin.startsWith("/parametres")) && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR"].includes(role)) return false;
+      if (chemin.startsWith("/evaluations") && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "EVALUATEUR"].includes(role)) return false;
+      if (chemin.startsWith("/rapports") && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "COMPTABLE"].includes(role)) return false;
+      return true;
+    },
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
-        token.role = (user as any).role;
-        token.etudiantId = (user as any).etudiantId;
+        token.role = user.role;
+        token.etudiantId = user.etudiantId;
       }
       return token;
     },
     async session({ session, token }) {
       if (session.user) {
         session.user.id = String(token.id);
-        session.user.role = token.role as any;
+        session.user.role = token.role as RoleUtilisateur;
         session.user.etudiantId = (token.etudiantId as string | null) ?? null;
       }
       return session;

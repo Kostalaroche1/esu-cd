@@ -1,10 +1,10 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
 }
 
 datasource db {
   provider = "mysql"
-  url      = env("DATABASE_URL")
 }
 
 enum RoleUtilisateur {
@@ -71,6 +71,7 @@ model Utilisateur {
   notifications Notification[]
   creeLe       DateTime        @default(now())
   modifieLe    DateTime        @updatedAt
+  @@index([role, estActif])
 }
 
 model Etablissement {
@@ -84,6 +85,8 @@ model Etablissement {
   etudiants   Etudiant[]
   creeLe      DateTime    @default(now())
   modifieLe   DateTime    @updatedAt
+  @@index([nom])
+  @@index([province, ville])
 }
 
 model Etudiant {
@@ -109,6 +112,8 @@ model Etudiant {
   attributions       AttributionBourse[]
   creeLe             DateTime        @default(now())
   modifieLe          DateTime        @updatedAt
+  @@index([etablissementId, estActif])
+  @@index([nom, prenom])
 }
 
 model ProgrammeBourse {
@@ -125,6 +130,7 @@ model ProgrammeBourse {
   appels              AppelCandidature[]
   creeLe              DateTime     @default(now())
   modifieLe           DateTime     @updatedAt
+  @@index([estActif])
 }
 
 model AppelCandidature {
@@ -142,6 +148,8 @@ model AppelCandidature {
   candidatures       Candidature[]
   creeLe             DateTime          @default(now())
   modifieLe          DateTime          @updatedAt
+  @@index([programmeId, estPublie])
+  @@index([dateOuverture, dateCloture])
 }
 
 model Candidature {
@@ -162,6 +170,8 @@ model Candidature {
   creeLe          DateTime            @default(now())
   modifieLe       DateTime            @updatedAt
   @@unique([etudiantId, appelId])
+  @@index([statut, creeLe])
+  @@index([appelId, statut])
 }
 
 model DocumentCandidature {
@@ -171,9 +181,13 @@ model DocumentCandidature {
   cheminFichier  String
   estValide      Boolean         @default(false)
   commentaire    String?
+  typeMime       String?
+  tailleOctets   Int?
   candidatureId  String
   candidature    Candidature     @relation(fields: [candidatureId], references: [id], onDelete: Cascade)
   creeLe         DateTime        @default(now())
+
+  @@index([candidatureId, type])
 }
 
 model Evaluation {
@@ -187,6 +201,7 @@ model Evaluation {
   evaluateur      Utilisateur          @relation(fields: [evaluateurId], references: [id])
   creeLe          DateTime             @default(now())
   @@unique([candidatureId, evaluateurId])
+  @@index([decision, creeLe])
 }
 
 model AttributionBourse {
@@ -205,6 +220,8 @@ model AttributionBourse {
   renouvellements   Renouvellement[]
   creeLe            DateTime           @default(now())
   modifieLe         DateTime           @updatedAt
+  @@index([statut, dateFin])
+  @@index([etudiantId])
 }
 
 model Paiement {
@@ -221,6 +238,7 @@ model Paiement {
   attributionId  String
   attribution    AttributionBourse @relation(fields: [attributionId], references: [id], onDelete: Cascade)
   creeLe          DateTime        @default(now())
+  @@index([statut, datePrevue])
 }
 
 model Renouvellement {
@@ -233,6 +251,7 @@ model Renouvellement {
   attribution       AttributionBourse  @relation(fields: [attributionId], references: [id], onDelete: Cascade)
   creeLe            DateTime           @default(now())
   @@unique([attributionId, anneeAcademique])
+  @@index([decision, dateDecision])
 }
 
 model Notification {
