@@ -73,6 +73,14 @@ export function GestionModule({ module }: { module: NomModule }) {
 
   useEffect(() => { void charger(); }, [charger]);
 
+  useEffect(() => {
+    const temporisation = window.setTimeout(() => {
+      setRecherche(saisieRecherche.trim());
+      setPagination(paginationActuelle => ({ ...paginationActuelle, page: 1 }));
+    }, 350);
+    return () => window.clearTimeout(temporisation);
+  }, [saisieRecherche]);
+
   const sources = useMemo(() => [...new Set(interfaceModule.champs.map(c => c.source).filter(Boolean) as string[])], [interfaceModule]);
   const choixStatuts = interfaceModule.champs.find(champ => champ.nom === "statut")?.options;
   useEffect(() => {
@@ -113,11 +121,10 @@ export function GestionModule({ module }: { module: NomModule }) {
       {peutCreer && <button onClick={ouvrirCreation} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-blue-700 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-800"><Plus className="size-4"/>Ajouter</button>}
     </div>
     <section className="overflow-hidden rounded-2xl border bg-white shadow-sm">
-      <form onSubmit={e => { e.preventDefault(); setRecherche(saisieRecherche); setPagination(p => ({ ...p, page: 1 })); }} className="flex flex-col gap-3 border-b p-4 sm:flex-row">
+      <div className="flex flex-col gap-3 border-b p-4 sm:flex-row">
         <label className="relative flex-1"><span className="sr-only">Rechercher</span><Search className="absolute left-3 top-3 size-4 text-slate-400"/><input value={saisieRecherche} onChange={e => setSaisieRecherche(e.target.value)} placeholder="Rechercher…" className="h-10 w-full rounded-xl border pl-9 pr-3 outline-none focus:border-blue-600"/></label>
         {choixStatuts && <select aria-label="Filtrer par statut" value={filtreStatut} onChange={e => { setFiltreStatut(e.target.value); setPagination(p => ({ ...p, page: 1 })); }} className="h-10 rounded-xl border px-3"><option value="">Tous les statuts</option>{choixStatuts.map(statut => <option key={statut} value={statut}>{statut.replaceAll("_", " ")}</option>)}</select>}
-        <button className="h-10 rounded-xl border px-4 text-sm font-medium hover:bg-slate-50">Rechercher</button>
-      </form>
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-[760px] w-full text-sm"><thead className="bg-slate-50 text-left text-xs uppercase tracking-wide text-slate-500"><tr>{interfaceModule.colonnes.map(c => <th className="px-4 py-3" key={c.cle}>{c.libelle}</th>)}<th className="px-4 py-3 text-right">Actions</th></tr></thead>
           <tbody>{chargement ? <tr><td colSpan={interfaceModule.colonnes.length + 1} className="p-10 text-center text-slate-500">Chargement des données…</td></tr> : lignes.length === 0 ? <tr><td colSpan={interfaceModule.colonnes.length + 1} className="p-10 text-center text-slate-500">Aucun enregistrement trouvé.</td></tr> : lignes.map(ligne => <tr key={String(ligne.id)} className="border-t hover:bg-slate-50/70">{interfaceModule.colonnes.map(c => <td className="max-w-xs px-4 py-3" key={c.cle}>{afficher(lire(ligne, c.cle))}</td>)}<td className="px-4 py-3 text-right"><Menu.Root><Menu.Trigger className="inline-flex rounded-lg border p-2 hover:bg-white" aria-label="Menu Actions"><MoreHorizontal className="size-4"/></Menu.Trigger><Menu.Portal><Menu.Positioner side="bottom" align="end" sideOffset={6} className="z-[80]"><Menu.Popup className="w-44 rounded-xl border bg-white p-1 text-left shadow-xl outline-none">{module === "candidatures" && <GestionDocuments candidatureId={String(ligne.id)} reference={String(ligne.reference)}/>} {peutModifier && <Menu.Item onClick={() => ouvrirModification(ligne)} className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 outline-none hover:bg-slate-100 focus:bg-slate-100"><Pencil className="size-4"/>Modifier</Menu.Item>}{estSuperAdministrateur && <Menu.Item onClick={() => void supprimer(ligne)} className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-2 text-red-700 outline-none hover:bg-red-50 focus:bg-red-50"><Trash2 className="size-4"/>Supprimer</Menu.Item>}</Menu.Popup></Menu.Positioner></Menu.Portal></Menu.Root></td></tr>)}</tbody>
