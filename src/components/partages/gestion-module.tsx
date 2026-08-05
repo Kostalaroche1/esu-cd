@@ -11,6 +11,7 @@ import { interfacesModules, type ChampFormulaire } from "@/components/partages/c
 import { GestionDocuments } from "@/components/candidatures/gestion-documents";
 import { schemasModules, type NomModule } from "@/lib/modules-metier";
 import { useUtilisateurConnecte } from "@/components/disposition/coquille-administration";
+import { ChampMotDePasse } from "@/components/formulaires/champ-mot-de-passe";
 
 type Ligne = Record<string, unknown>;
 type Pagination = { page: number; taille: number; total: number; pages: number };
@@ -143,6 +144,6 @@ function Champ({ champ, formulaire, options }: { champ: ChampFormulaire; formula
   const classe = "mt-1.5 min-h-11 w-full rounded-xl border px-3 outline-none focus:border-blue-600";
   if (champ.type === "checkbox") return <label className="flex min-h-11 items-center gap-3 self-end rounded-xl border px-3"><input type="checkbox" {...formulaire.register(champ.nom)}/><span>{champ.libelle}</span></label>;
   return <label className={champ.type === "textarea" ? "sm:col-span-2" : ""}><span className="text-sm font-medium">{champ.libelle}{champ.requis && <span className="text-red-600"> *</span>}</span>
-    {champ.type === "textarea" ? <textarea rows={4} className={classe} {...formulaire.register(champ.nom)}/> : champ.type === "select" ? <select className={classe} {...formulaire.register(champ.nom)}><option value="">Sélectionner…</option>{(champ.options ?? []).map(v => <option key={v} value={v}>{v.replaceAll("_", " ")}</option>)}{options.map(option => <option key={String(option[champ.valeurOption ?? "id"])} value={String(option[champ.valeurOption ?? "id"])}>{String(lire(option, champ.etiquetteOption ?? "nom"))}</option>)}</select> : <input type={champ.type ?? "text"} step={champ.type === "number" ? "any" : undefined} className={classe} {...formulaire.register(champ.nom, { valueAsNumber: champ.type === "number" })}/>} {erreur && <span className="mt-1 block text-xs text-red-600">{String(erreur)}</span>}
+    {champ.type === "textarea" ? <textarea rows={4} className={classe} {...formulaire.register(champ.nom)}/> : champ.type === "select" ? <select className={classe} {...formulaire.register(champ.nom)}><option value="">Sélectionner…</option>{(champ.options ?? []).map(v => <option key={v} value={v}>{v.replaceAll("_", " ")}</option>)}{options.map(option => <option key={String(option[champ.valeurOption ?? "id"])} value={String(option[champ.valeurOption ?? "id"])}>{String(lire(option, champ.etiquetteOption ?? "nom"))}</option>)}</select> : champ.type === "password" ? <ChampMotDePasse autoComplete="new-password" className={classe} {...formulaire.register(champ.nom)}/> : <input type={champ.type ?? "text"} step={champ.type === "number" ? "any" : undefined} className={classe} {...formulaire.register(champ.nom, { valueAsNumber: champ.type === "number" })}/>} {erreur && <span className="mt-1 block text-xs text-red-600">{String(erreur)}</span>}
   </label>;
 }

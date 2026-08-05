@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { ChampMotDePasse } from "@/components/formulaires/champ-mot-de-passe";
 
 export default function PageConnexion() {
   const routeur = useRouter();
@@ -25,7 +26,7 @@ export default function PageConnexion() {
       <label className="block text-sm font-medium">Adresse électronique</label>
       <input className="mt-2 w-full rounded-lg border px-3 py-2" value={email} onChange={e=>setEmail(e.target.value)} type="email" required />
       <label className="mt-4 block text-sm font-medium">Mot de passe</label>
-      <input className="mt-2 w-full rounded-lg border px-3 py-2" value={motDePasse} onChange={e=>setMotDePasse(e.target.value)} type="password" required />
+      <ChampMotDePasse className="mt-2 w-full rounded-lg border px-3 py-2" value={motDePasse} onChange={e=>setMotDePasse(e.target.value)} required autoComplete="current-password" />
       {erreur && <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{erreur}</p>}
       <button disabled={chargement} className="mt-6 w-full rounded-lg bg-blue-700 px-4 py-2.5 font-semibold text-white hover:bg-blue-800 disabled:opacity-60" type="submit">{chargement ? "Connexion..." : "Se connecter"}</button>
     </form>
