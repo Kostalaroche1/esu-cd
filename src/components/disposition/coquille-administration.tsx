@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 import { BarChart3, BadgeDollarSign, Building2, ChevronLeft, ChevronRight, ClipboardCheck, Files, GraduationCap, LayoutDashboard, LogOut, Menu, Megaphone, RefreshCw, Settings, Users, WalletCards, X } from "lucide-react";
 import type { RoleUtilisateur } from "@/generated/prisma/client";
+import { LogoEsu } from "@/components/identite/logo-esu";
 
 const liens = [
   { href: "/tableau-de-bord", libelle: "Tableau de bord", icone: LayoutDashboard },
@@ -32,7 +33,7 @@ export function CoquilleAdministration({ children, utilisateur }: { children: Re
   const [large, setLarge] = useState(true);
   const liensVisibles = liens.filter(lien => !lien.roles || (lien.roles as readonly RoleUtilisateur[]).includes(utilisateur.role));
 
-  const navigation = <><div className="flex h-16 shrink-0 items-center gap-3 border-b border-white/10 px-4"><div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-600 font-bold">ESU</div>{large && <div className="min-w-0"><p className="truncate font-bold">Gestion des bourses</p><p className="truncate text-xs text-slate-400">Ministère de l’ESU</p></div>}<button onClick={() => setMobileOuvert(false)} className="ml-auto rounded-lg p-2 lg:hidden"><X className="size-5"/></button></div><nav className="min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain p-3">{liensVisibles.map(({ href, libelle, icone: Icone }) => { const actif = chemin === href || chemin.startsWith(`${href}/`); return <Link title={!large ? libelle : undefined} onClick={() => setMobileOuvert(false)} key={href} href={href} className={`flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm transition ${actif ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white"}`}><Icone className="size-5 shrink-0"/>{large && <span>{libelle}</span>}</Link>; })}</nav></>;
+  const navigation = <><div className="flex h-16 shrink-0 items-center gap-3 border-b border-white/10 px-4"><LogoEsu className="size-10 shrink-0 rounded-xl bg-blue-600 p-1 font-bold" />{large && <div className="min-w-0"><p className="truncate font-bold">Gestion des bourses</p><p className="truncate text-xs text-slate-400">Ministère de l’ESU</p></div>}<button onClick={() => setMobileOuvert(false)} className="ml-auto rounded-lg p-2 lg:hidden"><X className="size-5"/></button></div><nav className="min-h-0 flex-1 space-y-1 overflow-y-auto overscroll-contain p-3">{liensVisibles.map(({ href, libelle, icone: Icone }) => { const actif = chemin === href || chemin.startsWith(`${href}/`); return <Link title={!large ? libelle : undefined} onClick={() => setMobileOuvert(false)} key={href} href={href} className={`flex min-h-11 items-center gap-3 rounded-xl px-3 text-sm transition ${actif ? "bg-white text-slate-950" : "text-slate-300 hover:bg-white/10 hover:text-white"}`}><Icone className="size-5 shrink-0"/>{large && <span>{libelle}</span>}</Link>; })}</nav></>;
 
   return <ContexteUtilisateur.Provider value={utilisateur}><div className="min-h-screen bg-slate-50">
     {mobileOuvert && <button aria-label="Fermer le menu" onClick={() => setMobileOuvert(false)} className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-sm lg:hidden"/>}
