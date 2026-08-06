@@ -4,7 +4,7 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
-import { BarChart3, BadgeDollarSign, Bell, Building2, ChevronLeft, ChevronRight, ClipboardCheck, Files, GraduationCap, LayoutDashboard, LockKeyhole, LogOut, Menu, Megaphone, RefreshCw, Settings, Users, WalletCards, X } from "lucide-react";
+import { BarChart3, BadgeDollarSign, Bell, Building2, ChevronLeft, ChevronRight, ClipboardCheck, Files, GraduationCap, History, LayoutDashboard, LockKeyhole, LogOut, Menu, Megaphone, RefreshCw, Settings, Users, WalletCards, X } from "lucide-react";
 import type { RoleUtilisateur } from "@/generated/prisma/client";
 import { LogoEsu } from "@/components/identite/logo-esu";
 
@@ -17,12 +17,14 @@ const liens = [
   { href: "/appels", libelle: "Appels à candidatures", icone: Megaphone },
   { href: "/candidatures", libelle: "Candidatures", icone: Files },
   { href: "/evaluations", libelle: "Évaluations", icone: ClipboardCheck, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "EVALUATEUR"] },
+  { href: "/decisions", libelle: "Décisions", icone: ClipboardCheck, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES"] },
   { href: "/attributions", libelle: "Attributions", icone: BadgeDollarSign },
   { href: "/paiements", libelle: "Paiements", icone: WalletCards, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "COMPTABLE", "ETUDIANT"] },
   { href: "/renouvellements", libelle: "Renouvellements", icone: RefreshCw },
   { href: "/rapports", libelle: "Rapports", icone: BarChart3, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "COMPTABLE"] },
   { href: "/utilisateurs", libelle: "Utilisateurs", icone: Users, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR"] },
   { href: "/parametres", libelle: "Paramètres", icone: Settings, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR"] },
+  { href: "/journal-audit", libelle: "Journal d’audit", icone: History, roles: ["SUPER_ADMINISTRATEUR"] },
   { href: "/mon-compte", libelle: "Sécurité du compte", icone: LockKeyhole },
 ] satisfies { href: string; libelle: string; icone: typeof Menu; roles?: RoleUtilisateur[] }[];
 

@@ -1,0 +1,1 @@
+import{GestionDecisions}from"@/components/decisions/gestion-decisions";import{HistoriqueDecisions}from"@/components/decisions/historique-decisions";export default function Page(){return <div className="space-y-6"><GestionDecisions/><HistoriqueDecisions/></div>}

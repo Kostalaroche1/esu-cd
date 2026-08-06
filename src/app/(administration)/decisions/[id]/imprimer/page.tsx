@@ -1,0 +1,1 @@
+import{AvisDecisionImprimable}from"@/components/decisions/avis-decision-imprimable";export default async function Page({params}:{params:Promise<{id:string}>}){return <AvisDecisionImprimable id={(await params).id}/>}

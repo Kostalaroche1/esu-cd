@@ -39,6 +39,9 @@ export type EvaluationMinAggregateOutputType = {
   note: runtime.Decimal | null
   decision: $Enums.DecisionEvaluation | null
   commentaire: string | null
+  statut: $Enums.StatutEvaluation | null
+  dateEcheance: Date | null
+  modifieLe: Date | null
   candidatureId: string | null
   evaluateurId: string | null
   creeLe: Date | null
@@ -49,6 +52,9 @@ export type EvaluationMaxAggregateOutputType = {
   note: runtime.Decimal | null
   decision: $Enums.DecisionEvaluation | null
   commentaire: string | null
+  statut: $Enums.StatutEvaluation | null
+  dateEcheance: Date | null
+  modifieLe: Date | null
   candidatureId: string | null
   evaluateurId: string | null
   creeLe: Date | null
@@ -59,6 +65,9 @@ export type EvaluationCountAggregateOutputType = {
   note: number
   decision: number
   commentaire: number
+  statut: number
+  dateEcheance: number
+  modifieLe: number
   candidatureId: number
   evaluateurId: number
   creeLe: number
@@ -79,6 +88,9 @@ export type EvaluationMinAggregateInputType = {
   note?: true
   decision?: true
   commentaire?: true
+  statut?: true
+  dateEcheance?: true
+  modifieLe?: true
   candidatureId?: true
   evaluateurId?: true
   creeLe?: true
@@ -89,6 +101,9 @@ export type EvaluationMaxAggregateInputType = {
   note?: true
   decision?: true
   commentaire?: true
+  statut?: true
+  dateEcheance?: true
+  modifieLe?: true
   candidatureId?: true
   evaluateurId?: true
   creeLe?: true
@@ -99,6 +114,9 @@ export type EvaluationCountAggregateInputType = {
   note?: true
   decision?: true
   commentaire?: true
+  statut?: true
+  dateEcheance?: true
+  modifieLe?: true
   candidatureId?: true
   evaluateurId?: true
   creeLe?: true
@@ -194,8 +212,11 @@ export type EvaluationGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
 export type EvaluationGroupByOutputType = {
   id: string
   note: runtime.Decimal | null
-  decision: $Enums.DecisionEvaluation
+  decision: $Enums.DecisionEvaluation | null
   commentaire: string | null
+  statut: $Enums.StatutEvaluation
+  dateEcheance: Date | null
+  modifieLe: Date
   candidatureId: string
   evaluateurId: string
   creeLe: Date
@@ -227,25 +248,33 @@ export type EvaluationWhereInput = {
   NOT?: Prisma.EvaluationWhereInput | Prisma.EvaluationWhereInput[]
   id?: Prisma.StringFilter<"Evaluation"> | string
   note?: Prisma.DecimalNullableFilter<"Evaluation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFilter<"Evaluation"> | $Enums.DecisionEvaluation
+  decision?: Prisma.EnumDecisionEvaluationNullableFilter<"Evaluation"> | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.StringNullableFilter<"Evaluation"> | string | null
+  statut?: Prisma.EnumStatutEvaluationFilter<"Evaluation"> | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.DateTimeNullableFilter<"Evaluation"> | Date | string | null
+  modifieLe?: Prisma.DateTimeFilter<"Evaluation"> | Date | string
   candidatureId?: Prisma.StringFilter<"Evaluation"> | string
   evaluateurId?: Prisma.StringFilter<"Evaluation"> | string
   creeLe?: Prisma.DateTimeFilter<"Evaluation"> | Date | string
   candidature?: Prisma.XOR<Prisma.CandidatureScalarRelationFilter, Prisma.CandidatureWhereInput>
   evaluateur?: Prisma.XOR<Prisma.UtilisateurScalarRelationFilter, Prisma.UtilisateurWhereInput>
+  notesCriteres?: Prisma.NoteCritereEvaluationListRelationFilter
 }
 
 export type EvaluationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
-  decision?: Prisma.SortOrder
+  decision?: Prisma.SortOrderInput | Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  dateEcheance?: Prisma.SortOrderInput | Prisma.SortOrder
+  modifieLe?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
   evaluateurId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
   candidature?: Prisma.CandidatureOrderByWithRelationInput
   evaluateur?: Prisma.UtilisateurOrderByWithRelationInput
+  notesCriteres?: Prisma.NoteCritereEvaluationOrderByRelationAggregateInput
   _relevance?: Prisma.EvaluationOrderByRelevanceInput
 }
 
@@ -256,20 +285,27 @@ export type EvaluationWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.EvaluationWhereInput[]
   NOT?: Prisma.EvaluationWhereInput | Prisma.EvaluationWhereInput[]
   note?: Prisma.DecimalNullableFilter<"Evaluation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFilter<"Evaluation"> | $Enums.DecisionEvaluation
+  decision?: Prisma.EnumDecisionEvaluationNullableFilter<"Evaluation"> | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.StringNullableFilter<"Evaluation"> | string | null
+  statut?: Prisma.EnumStatutEvaluationFilter<"Evaluation"> | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.DateTimeNullableFilter<"Evaluation"> | Date | string | null
+  modifieLe?: Prisma.DateTimeFilter<"Evaluation"> | Date | string
   candidatureId?: Prisma.StringFilter<"Evaluation"> | string
   evaluateurId?: Prisma.StringFilter<"Evaluation"> | string
   creeLe?: Prisma.DateTimeFilter<"Evaluation"> | Date | string
   candidature?: Prisma.XOR<Prisma.CandidatureScalarRelationFilter, Prisma.CandidatureWhereInput>
   evaluateur?: Prisma.XOR<Prisma.UtilisateurScalarRelationFilter, Prisma.UtilisateurWhereInput>
+  notesCriteres?: Prisma.NoteCritereEvaluationListRelationFilter
 }, "id" | "candidatureId_evaluateurId">
 
 export type EvaluationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   note?: Prisma.SortOrderInput | Prisma.SortOrder
-  decision?: Prisma.SortOrder
+  decision?: Prisma.SortOrderInput | Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  dateEcheance?: Prisma.SortOrderInput | Prisma.SortOrder
+  modifieLe?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
   evaluateurId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
@@ -286,8 +322,11 @@ export type EvaluationScalarWhereWithAggregatesInput = {
   NOT?: Prisma.EvaluationScalarWhereWithAggregatesInput | Prisma.EvaluationScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Evaluation"> | string
   note?: Prisma.DecimalNullableWithAggregatesFilter<"Evaluation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationWithAggregatesFilter<"Evaluation"> | $Enums.DecisionEvaluation
+  decision?: Prisma.EnumDecisionEvaluationNullableWithAggregatesFilter<"Evaluation"> | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.StringNullableWithAggregatesFilter<"Evaluation"> | string | null
+  statut?: Prisma.EnumStatutEvaluationWithAggregatesFilter<"Evaluation"> | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.DateTimeNullableWithAggregatesFilter<"Evaluation"> | Date | string | null
+  modifieLe?: Prisma.DateTimeWithAggregatesFilter<"Evaluation"> | Date | string
   candidatureId?: Prisma.StringWithAggregatesFilter<"Evaluation"> | string
   evaluateurId?: Prisma.StringWithAggregatesFilter<"Evaluation"> | string
   creeLe?: Prisma.DateTimeWithAggregatesFilter<"Evaluation"> | Date | string
@@ -296,48 +335,67 @@ export type EvaluationScalarWhereWithAggregatesInput = {
 export type EvaluationCreateInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   creeLe?: Date | string
   candidature: Prisma.CandidatureCreateNestedOneWithoutEvaluationsInput
   evaluateur: Prisma.UtilisateurCreateNestedOneWithoutEvaluationsInput
+  notesCriteres?: Prisma.NoteCritereEvaluationCreateNestedManyWithoutEvaluationInput
 }
 
 export type EvaluationUncheckedCreateInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   candidatureId: string
   evaluateurId: string
   creeLe?: Date | string
+  notesCriteres?: Prisma.NoteCritereEvaluationUncheckedCreateNestedManyWithoutEvaluationInput
 }
 
 export type EvaluationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   candidature?: Prisma.CandidatureUpdateOneRequiredWithoutEvaluationsNestedInput
   evaluateur?: Prisma.UtilisateurUpdateOneRequiredWithoutEvaluationsNestedInput
+  notesCriteres?: Prisma.NoteCritereEvaluationUpdateManyWithoutEvaluationNestedInput
 }
 
 export type EvaluationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
   evaluateurId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notesCriteres?: Prisma.NoteCritereEvaluationUncheckedUpdateManyWithoutEvaluationNestedInput
 }
 
 export type EvaluationCreateManyInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   candidatureId: string
   evaluateurId: string
   creeLe?: Date | string
@@ -346,16 +404,22 @@ export type EvaluationCreateManyInput = {
 export type EvaluationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type EvaluationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
   evaluateurId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -387,6 +451,9 @@ export type EvaluationCountOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  dateEcheance?: Prisma.SortOrder
+  modifieLe?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
   evaluateurId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
@@ -401,6 +468,9 @@ export type EvaluationMaxOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  dateEcheance?: Prisma.SortOrder
+  modifieLe?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
   evaluateurId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
@@ -411,6 +481,9 @@ export type EvaluationMinOrderByAggregateInput = {
   note?: Prisma.SortOrder
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
+  statut?: Prisma.SortOrder
+  dateEcheance?: Prisma.SortOrder
+  modifieLe?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
   evaluateurId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
@@ -418,6 +491,11 @@ export type EvaluationMinOrderByAggregateInput = {
 
 export type EvaluationSumOrderByAggregateInput = {
   note?: Prisma.SortOrder
+}
+
+export type EvaluationScalarRelationFilter = {
+  is?: Prisma.EvaluationWhereInput
+  isNot?: Prisma.EvaluationWhereInput
 }
 
 export type EvaluationCreateNestedManyWithoutEvaluateurInput = {
@@ -504,26 +582,52 @@ export type EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput = {
   deleteMany?: Prisma.EvaluationScalarWhereInput | Prisma.EvaluationScalarWhereInput[]
 }
 
-export type EnumDecisionEvaluationFieldUpdateOperationsInput = {
-  set?: $Enums.DecisionEvaluation
+export type NullableEnumDecisionEvaluationFieldUpdateOperationsInput = {
+  set?: $Enums.DecisionEvaluation | null
+}
+
+export type EnumStatutEvaluationFieldUpdateOperationsInput = {
+  set?: $Enums.StatutEvaluation
+}
+
+export type EvaluationCreateNestedOneWithoutNotesCriteresInput = {
+  create?: Prisma.XOR<Prisma.EvaluationCreateWithoutNotesCriteresInput, Prisma.EvaluationUncheckedCreateWithoutNotesCriteresInput>
+  connectOrCreate?: Prisma.EvaluationCreateOrConnectWithoutNotesCriteresInput
+  connect?: Prisma.EvaluationWhereUniqueInput
+}
+
+export type EvaluationUpdateOneRequiredWithoutNotesCriteresNestedInput = {
+  create?: Prisma.XOR<Prisma.EvaluationCreateWithoutNotesCriteresInput, Prisma.EvaluationUncheckedCreateWithoutNotesCriteresInput>
+  connectOrCreate?: Prisma.EvaluationCreateOrConnectWithoutNotesCriteresInput
+  upsert?: Prisma.EvaluationUpsertWithoutNotesCriteresInput
+  connect?: Prisma.EvaluationWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.EvaluationUpdateToOneWithWhereWithoutNotesCriteresInput, Prisma.EvaluationUpdateWithoutNotesCriteresInput>, Prisma.EvaluationUncheckedUpdateWithoutNotesCriteresInput>
 }
 
 export type EvaluationCreateWithoutEvaluateurInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   creeLe?: Date | string
   candidature: Prisma.CandidatureCreateNestedOneWithoutEvaluationsInput
+  notesCriteres?: Prisma.NoteCritereEvaluationCreateNestedManyWithoutEvaluationInput
 }
 
 export type EvaluationUncheckedCreateWithoutEvaluateurInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   candidatureId: string
   creeLe?: Date | string
+  notesCriteres?: Prisma.NoteCritereEvaluationUncheckedCreateNestedManyWithoutEvaluationInput
 }
 
 export type EvaluationCreateOrConnectWithoutEvaluateurInput = {
@@ -558,8 +662,11 @@ export type EvaluationScalarWhereInput = {
   NOT?: Prisma.EvaluationScalarWhereInput | Prisma.EvaluationScalarWhereInput[]
   id?: Prisma.StringFilter<"Evaluation"> | string
   note?: Prisma.DecimalNullableFilter<"Evaluation"> | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFilter<"Evaluation"> | $Enums.DecisionEvaluation
+  decision?: Prisma.EnumDecisionEvaluationNullableFilter<"Evaluation"> | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.StringNullableFilter<"Evaluation"> | string | null
+  statut?: Prisma.EnumStatutEvaluationFilter<"Evaluation"> | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.DateTimeNullableFilter<"Evaluation"> | Date | string | null
+  modifieLe?: Prisma.DateTimeFilter<"Evaluation"> | Date | string
   candidatureId?: Prisma.StringFilter<"Evaluation"> | string
   evaluateurId?: Prisma.StringFilter<"Evaluation"> | string
   creeLe?: Prisma.DateTimeFilter<"Evaluation"> | Date | string
@@ -568,19 +675,27 @@ export type EvaluationScalarWhereInput = {
 export type EvaluationCreateWithoutCandidatureInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   creeLe?: Date | string
   evaluateur: Prisma.UtilisateurCreateNestedOneWithoutEvaluationsInput
+  notesCriteres?: Prisma.NoteCritereEvaluationCreateNestedManyWithoutEvaluationInput
 }
 
 export type EvaluationUncheckedCreateWithoutCandidatureInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   evaluateurId: string
   creeLe?: Date | string
+  notesCriteres?: Prisma.NoteCritereEvaluationUncheckedCreateNestedManyWithoutEvaluationInput
 }
 
 export type EvaluationCreateOrConnectWithoutCandidatureInput = {
@@ -609,11 +724,82 @@ export type EvaluationUpdateManyWithWhereWithoutCandidatureInput = {
   data: Prisma.XOR<Prisma.EvaluationUpdateManyMutationInput, Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureInput>
 }
 
+export type EvaluationCreateWithoutNotesCriteresInput = {
+  id?: string
+  note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  decision?: $Enums.DecisionEvaluation | null
+  commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
+  creeLe?: Date | string
+  candidature: Prisma.CandidatureCreateNestedOneWithoutEvaluationsInput
+  evaluateur: Prisma.UtilisateurCreateNestedOneWithoutEvaluationsInput
+}
+
+export type EvaluationUncheckedCreateWithoutNotesCriteresInput = {
+  id?: string
+  note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  decision?: $Enums.DecisionEvaluation | null
+  commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
+  candidatureId: string
+  evaluateurId: string
+  creeLe?: Date | string
+}
+
+export type EvaluationCreateOrConnectWithoutNotesCriteresInput = {
+  where: Prisma.EvaluationWhereUniqueInput
+  create: Prisma.XOR<Prisma.EvaluationCreateWithoutNotesCriteresInput, Prisma.EvaluationUncheckedCreateWithoutNotesCriteresInput>
+}
+
+export type EvaluationUpsertWithoutNotesCriteresInput = {
+  update: Prisma.XOR<Prisma.EvaluationUpdateWithoutNotesCriteresInput, Prisma.EvaluationUncheckedUpdateWithoutNotesCriteresInput>
+  create: Prisma.XOR<Prisma.EvaluationCreateWithoutNotesCriteresInput, Prisma.EvaluationUncheckedCreateWithoutNotesCriteresInput>
+  where?: Prisma.EvaluationWhereInput
+}
+
+export type EvaluationUpdateToOneWithWhereWithoutNotesCriteresInput = {
+  where?: Prisma.EvaluationWhereInput
+  data: Prisma.XOR<Prisma.EvaluationUpdateWithoutNotesCriteresInput, Prisma.EvaluationUncheckedUpdateWithoutNotesCriteresInput>
+}
+
+export type EvaluationUpdateWithoutNotesCriteresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidature?: Prisma.CandidatureUpdateOneRequiredWithoutEvaluationsNestedInput
+  evaluateur?: Prisma.UtilisateurUpdateOneRequiredWithoutEvaluationsNestedInput
+}
+
+export type EvaluationUncheckedUpdateWithoutNotesCriteresInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
+  evaluateurId?: Prisma.StringFieldUpdateOperationsInput | string
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 export type EvaluationCreateManyEvaluateurInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   candidatureId: string
   creeLe?: Date | string
 }
@@ -621,26 +807,37 @@ export type EvaluationCreateManyEvaluateurInput = {
 export type EvaluationUpdateWithoutEvaluateurInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   candidature?: Prisma.CandidatureUpdateOneRequiredWithoutEvaluationsNestedInput
+  notesCriteres?: Prisma.NoteCritereEvaluationUpdateManyWithoutEvaluationNestedInput
 }
 
 export type EvaluationUncheckedUpdateWithoutEvaluateurInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notesCriteres?: Prisma.NoteCritereEvaluationUncheckedUpdateManyWithoutEvaluationNestedInput
 }
 
 export type EvaluationUncheckedUpdateManyWithoutEvaluateurInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -648,8 +845,11 @@ export type EvaluationUncheckedUpdateManyWithoutEvaluateurInput = {
 export type EvaluationCreateManyCandidatureInput = {
   id?: string
   note?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision: $Enums.DecisionEvaluation
+  decision?: $Enums.DecisionEvaluation | null
   commentaire?: string | null
+  statut?: $Enums.StatutEvaluation
+  dateEcheance?: Date | string | null
+  modifieLe?: Date | string
   evaluateurId: string
   creeLe?: Date | string
 }
@@ -657,30 +857,70 @@ export type EvaluationCreateManyCandidatureInput = {
 export type EvaluationUpdateWithoutCandidatureInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluateur?: Prisma.UtilisateurUpdateOneRequiredWithoutEvaluationsNestedInput
+  notesCriteres?: Prisma.NoteCritereEvaluationUpdateManyWithoutEvaluationNestedInput
 }
 
 export type EvaluationUncheckedUpdateWithoutCandidatureInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluateurId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  notesCriteres?: Prisma.NoteCritereEvaluationUncheckedUpdateManyWithoutEvaluationNestedInput
 }
 
 export type EvaluationUncheckedUpdateManyWithoutCandidatureInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   note?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
-  decision?: Prisma.EnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation
+  decision?: Prisma.NullableEnumDecisionEvaluationFieldUpdateOperationsInput | $Enums.DecisionEvaluation | null
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutEvaluationFieldUpdateOperationsInput | $Enums.StatutEvaluation
+  dateEcheance?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluateurId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+
+/**
+ * Count Type EvaluationCountOutputType
+ */
+
+export type EvaluationCountOutputType = {
+  notesCriteres: number
+}
+
+export type EvaluationCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  notesCriteres?: boolean | EvaluationCountOutputTypeCountNotesCriteresArgs
+}
+
+/**
+ * EvaluationCountOutputType without action
+ */
+export type EvaluationCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EvaluationCountOutputType
+   */
+  select?: Prisma.EvaluationCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * EvaluationCountOutputType without action
+ */
+export type EvaluationCountOutputTypeCountNotesCriteresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NoteCritereEvaluationWhereInput
+}
 
 
 export type EvaluationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -688,11 +928,16 @@ export type EvaluationSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   note?: boolean
   decision?: boolean
   commentaire?: boolean
+  statut?: boolean
+  dateEcheance?: boolean
+  modifieLe?: boolean
   candidatureId?: boolean
   evaluateurId?: boolean
   creeLe?: boolean
   candidature?: boolean | Prisma.CandidatureDefaultArgs<ExtArgs>
   evaluateur?: boolean | Prisma.UtilisateurDefaultArgs<ExtArgs>
+  notesCriteres?: boolean | Prisma.Evaluation$notesCriteresArgs<ExtArgs>
+  _count?: boolean | Prisma.EvaluationCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["evaluation"]>
 
 
@@ -702,15 +947,20 @@ export type EvaluationSelectScalar = {
   note?: boolean
   decision?: boolean
   commentaire?: boolean
+  statut?: boolean
+  dateEcheance?: boolean
+  modifieLe?: boolean
   candidatureId?: boolean
   evaluateurId?: boolean
   creeLe?: boolean
 }
 
-export type EvaluationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "note" | "decision" | "commentaire" | "candidatureId" | "evaluateurId" | "creeLe", ExtArgs["result"]["evaluation"]>
+export type EvaluationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "note" | "decision" | "commentaire" | "statut" | "dateEcheance" | "modifieLe" | "candidatureId" | "evaluateurId" | "creeLe", ExtArgs["result"]["evaluation"]>
 export type EvaluationInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   candidature?: boolean | Prisma.CandidatureDefaultArgs<ExtArgs>
   evaluateur?: boolean | Prisma.UtilisateurDefaultArgs<ExtArgs>
+  notesCriteres?: boolean | Prisma.Evaluation$notesCriteresArgs<ExtArgs>
+  _count?: boolean | Prisma.EvaluationCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $EvaluationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -718,12 +968,16 @@ export type $EvaluationPayload<ExtArgs extends runtime.Types.Extensions.Internal
   objects: {
     candidature: Prisma.$CandidaturePayload<ExtArgs>
     evaluateur: Prisma.$UtilisateurPayload<ExtArgs>
+    notesCriteres: Prisma.$NoteCritereEvaluationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     note: runtime.Decimal | null
-    decision: $Enums.DecisionEvaluation
+    decision: $Enums.DecisionEvaluation | null
     commentaire: string | null
+    statut: $Enums.StatutEvaluation
+    dateEcheance: Date | null
+    modifieLe: Date
     candidatureId: string
     evaluateurId: string
     creeLe: Date
@@ -1069,6 +1323,7 @@ export interface Prisma__EvaluationClient<T, Null = never, ExtArgs extends runti
   readonly [Symbol.toStringTag]: "PrismaPromise"
   candidature<T extends Prisma.CandidatureDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CandidatureDefaultArgs<ExtArgs>>): Prisma.Prisma__CandidatureClient<runtime.Types.Result.GetResult<Prisma.$CandidaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   evaluateur<T extends Prisma.UtilisateurDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UtilisateurDefaultArgs<ExtArgs>>): Prisma.Prisma__UtilisateurClient<runtime.Types.Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  notesCriteres<T extends Prisma.Evaluation$notesCriteresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Evaluation$notesCriteresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NoteCritereEvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1102,6 +1357,9 @@ export interface EvaluationFieldRefs {
   readonly note: Prisma.FieldRef<"Evaluation", 'Decimal'>
   readonly decision: Prisma.FieldRef<"Evaluation", 'DecisionEvaluation'>
   readonly commentaire: Prisma.FieldRef<"Evaluation", 'String'>
+  readonly statut: Prisma.FieldRef<"Evaluation", 'StatutEvaluation'>
+  readonly dateEcheance: Prisma.FieldRef<"Evaluation", 'DateTime'>
+  readonly modifieLe: Prisma.FieldRef<"Evaluation", 'DateTime'>
   readonly candidatureId: Prisma.FieldRef<"Evaluation", 'String'>
   readonly evaluateurId: Prisma.FieldRef<"Evaluation", 'String'>
   readonly creeLe: Prisma.FieldRef<"Evaluation", 'DateTime'>
@@ -1450,6 +1708,30 @@ export type EvaluationDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.In
    * Limit how many Evaluations to delete.
    */
   limit?: number
+}
+
+/**
+ * Evaluation.notesCriteres
+ */
+export type Evaluation$notesCriteresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the NoteCritereEvaluation
+   */
+  select?: Prisma.NoteCritereEvaluationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the NoteCritereEvaluation
+   */
+  omit?: Prisma.NoteCritereEvaluationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NoteCritereEvaluationInclude<ExtArgs> | null
+  where?: Prisma.NoteCritereEvaluationWhereInput
+  orderBy?: Prisma.NoteCritereEvaluationOrderByWithRelationInput | Prisma.NoteCritereEvaluationOrderByWithRelationInput[]
+  cursor?: Prisma.NoteCritereEvaluationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NoteCritereEvaluationScalarFieldEnum | Prisma.NoteCritereEvaluationScalarFieldEnum[]
 }
 
 /**

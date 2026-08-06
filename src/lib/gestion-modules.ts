@@ -76,6 +76,7 @@ export async function creerDansModule(requete: NextRequest, module: NomModule) {
   const acces = await exigerAutorisation(action);
   if (acces.erreur) return acces.erreur;
   if (acces.session.user.role === "ETUDIANT" && module !== "candidatures") return NextResponse.json({ succes: false, message: "Action non autorisée pour un compte étudiant." }, { status: 403 });
+  if (acces.session.user.role === "EVALUATEUR" && module === "evaluations") return NextResponse.json({ succes: false, message: "Les évaluations sont assignées par un gestionnaire." }, { status: 403 });
   try {
     const analyse = schemasModules[module].safeParse(await requete.json());
     if (!analyse.success) return NextResponse.json({ succes: false, message: "Données invalides.", erreurs: analyse.error.flatten().fieldErrors }, { status: 422 });
@@ -84,6 +85,7 @@ export async function creerDansModule(requete: NextRequest, module: NomModule) {
     if (module === "candidatures") donnees.reference = genererReferenceMetier("CAND");
     if (module === "appels") donnees.reference = genererReferenceMetier("APP");
     if (module === "programmes") donnees.code = genererReferenceMetier("PRG");
+    if (module === "paiements") donnees.reference = genererReferenceMetier("PAY");
     if (module === "utilisateurs") {
       if (!donnees.motDePasse) return NextResponse.json({ succes: false, message: "Le mot de passe est obligatoire à la création." }, { status: 422 });
       if (donnees.role === "ETUDIANT" && !donnees.etudiantId) return NextResponse.json({ succes: false, message: "Un compte étudiant doit être associé à un étudiant." }, { status: 422 });
@@ -107,7 +109,14 @@ export async function creerDansModule(requete: NextRequest, module: NomModule) {
       const candidature = await prisma.candidature.findUnique({ where: { id: String(donnees.candidatureId) }, select: { statut: true, etudiantId: true } });
       if (!candidature || candidature.statut !== "RETENUE" || candidature.etudiantId !== donnees.etudiantId) return NextResponse.json({ succes: false, message: "L’attribution exige une candidature retenue du même étudiant." }, { status: 409 });
     }
-    if (module === "paiements" && donnees.statut === "EFFECTUE" && !donnees.datePaiement) donnees.datePaiement = new Date();
+    if (module === "paiements") {
+      const attribution = await prisma.attributionBourse.findUnique({ where: { id: String(donnees.attributionId) }, select: { montantAccorde: true, devise: true } });
+      if (!attribution) return NextResponse.json({ succes: false, message: "Attribution introuvable." }, { status: 404 });
+      if (String(donnees.devise) !== attribution.devise) return NextResponse.json({ succes: false, message: "La devise du paiement doit correspondre à celle de la bourse." }, { status: 409 });
+      const total = await prisma.paiement.aggregate({ where: { attributionId: String(donnees.attributionId), statut: { not: "ANNULE" } }, _sum: { montant: true } });
+      if (Number(total._sum.montant ?? 0) + Number(donnees.montant) > Number(attribution.montantAccorde)) return NextResponse.json({ succes: false, message: "Le total des paiements dépasserait le montant accordé." }, { status: 409 });
+      if (donnees.statut === "EFFECTUE" && !donnees.datePaiement) donnees.datePaiement = new Date();
+    }
     const resultat = await delegue(module).create({ data: donnees });
     if (module === "candidatures") {
       const candidatureId = String((resultat as Record<string, unknown>).id);
@@ -116,14 +125,20 @@ export async function creerDansModule(requete: NextRequest, module: NomModule) {
         prisma.journalAudit.create({ data: { action: "CREER", entite: "Candidature", entiteId: candidatureId, utilisateurId: acces.session.user.id } }),
       ]);
     }
-    if (module === "evaluations") {
+    if (module === "evaluations" && donnees.decision) {
       const candidatureId = String(donnees.candidatureId);
       const moyenne = await prisma.evaluation.aggregate({ where: { candidatureId }, _avg: { note: true } });
       await prisma.candidature.update({ where: { id: candidatureId }, data: { statut: "EN_EVALUATION", scoreFinal: moyenne._avg.note } });
     }
     if (module === "renouvellements") {
-      const statut = donnees.decision === "RENOUVELEE" ? "ACTIVE" : donnees.decision === "SUSPENDUE" ? "SUSPENDUE" : donnees.decision === "ANNULEE" ? "ANNULEE" : "TERMINEE";
-      await prisma.attributionBourse.update({ where: { id: String(donnees.attributionId) }, data: { statut } });
+      const statut = ["RENOUVELEE", "REACTIVEE"].includes(String(donnees.decision)) ? "ACTIVE" : donnees.decision === "SUSPENDUE" ? "SUSPENDUE" : donnees.decision === "ANNULEE" ? "ANNULEE" : "TERMINEE";
+      const attribution = await prisma.attributionBourse.update({ where: { id: String(donnees.attributionId) }, data: { statut }, select: { etudiant: { select: { utilisateur: { select: { id: true } } } } } });
+      const renouvellementId = String((resultat as Record<string, unknown>).id);
+      const destinataireId = attribution.etudiant.utilisateur?.id;
+      await Promise.all([
+        prisma.journalAudit.create({ data: { action: `BOURSE_${donnees.decision}`, entite: "Renouvellement", entiteId: renouvellementId, details: typeof donnees.commentaire === "string" ? donnees.commentaire : null, utilisateurId: acces.session.user.id } }),
+        ...(destinataireId ? [prisma.notification.create({ data: { utilisateurId: destinataireId, titre: "Mise à jour de votre bourse", message: `Décision : ${String(donnees.decision).replaceAll("_", " ")}. ${String(donnees.commentaire ?? "")}`, lien: "/renouvellements" } })] : []),
+      ]);
     }
     return NextResponse.json({ succes: true, message: "Enregistrement créé.", donnees: resultat }, { status: 201 });
   } catch (erreur) { return erreurApi(erreur, "La création a échoué. Vérifiez les valeurs uniques."); }
@@ -177,7 +192,17 @@ export async function modifierDansModule(requete: NextRequest, module: NomModule
       if (roleFinal === "ETUDIANT" && !etudiantFinal) return NextResponse.json({ succes: false, message: "Un compte étudiant doit être associé à un étudiant." }, { status: 422 });
       if (roleFinal !== "ETUDIANT") donnees.etudiantId = null;
     }
-    if (module === "paiements" && donnees.statut === "EFFECTUE" && !donnees.datePaiement) donnees.datePaiement = new Date();
+    if (module === "paiements") {
+      const attributionId = String(donnees.attributionId ?? existant.attributionId);
+      const attribution = await prisma.attributionBourse.findUnique({ where: { id: attributionId }, select: { montantAccorde: true, devise: true } });
+      if (!attribution) return NextResponse.json({ succes: false, message: "Attribution introuvable." }, { status: 404 });
+      const devise = String(donnees.devise ?? existant.devise);
+      if (devise !== attribution.devise) return NextResponse.json({ succes: false, message: "La devise du paiement doit correspondre à celle de la bourse." }, { status: 409 });
+      const total = await prisma.paiement.aggregate({ where: { attributionId, id: { not: id }, statut: { not: "ANNULE" } }, _sum: { montant: true } });
+      const montant = Number(donnees.montant ?? existant.montant);
+      if (Number(total._sum.montant ?? 0) + montant > Number(attribution.montantAccorde)) return NextResponse.json({ succes: false, message: "Le total des paiements dépasserait le montant accordé." }, { status: 409 });
+      if (donnees.statut === "EFFECTUE" && !donnees.datePaiement) donnees.datePaiement = new Date();
+    }
     const resultat = await delegue(module).update({ where: { id }, data: donnees });
     if (module === "candidatures" && donnees.statut && donnees.statut !== existant.statut) {
       await Promise.all([

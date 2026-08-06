@@ -61,6 +61,9 @@ export const ModelName = {
   DocumentRequisAppel: 'DocumentRequisAppel',
   HistoriqueCandidature: 'HistoriqueCandidature',
   Evaluation: 'Evaluation',
+  CritereEvaluation: 'CritereEvaluation',
+  NoteCritereEvaluation: 'NoteCritereEvaluation',
+  DecisionCandidature: 'DecisionCandidature',
   AttributionBourse: 'AttributionBourse',
   Paiement: 'Paiement',
   Renouvellement: 'Renouvellement',
@@ -244,12 +247,51 @@ export const EvaluationScalarFieldEnum = {
   note: 'note',
   decision: 'decision',
   commentaire: 'commentaire',
+  statut: 'statut',
+  dateEcheance: 'dateEcheance',
+  modifieLe: 'modifieLe',
   candidatureId: 'candidatureId',
   evaluateurId: 'evaluateurId',
   creeLe: 'creeLe'
 } as const
 
 export type EvaluationScalarFieldEnum = (typeof EvaluationScalarFieldEnum)[keyof typeof EvaluationScalarFieldEnum]
+
+
+export const CritereEvaluationScalarFieldEnum = {
+  id: 'id',
+  libelle: 'libelle',
+  description: 'description',
+  ponderation: 'ponderation',
+  noteMaximale: 'noteMaximale',
+  appelId: 'appelId',
+  creeLe: 'creeLe'
+} as const
+
+export type CritereEvaluationScalarFieldEnum = (typeof CritereEvaluationScalarFieldEnum)[keyof typeof CritereEvaluationScalarFieldEnum]
+
+
+export const NoteCritereEvaluationScalarFieldEnum = {
+  id: 'id',
+  note: 'note',
+  commentaire: 'commentaire',
+  evaluationId: 'evaluationId',
+  critereId: 'critereId'
+} as const
+
+export type NoteCritereEvaluationScalarFieldEnum = (typeof NoteCritereEvaluationScalarFieldEnum)[keyof typeof NoteCritereEvaluationScalarFieldEnum]
+
+
+export const DecisionCandidatureScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  justification: 'justification',
+  dateDecision: 'dateDecision',
+  candidatureId: 'candidatureId',
+  decideurId: 'decideurId'
+} as const
+
+export type DecisionCandidatureScalarFieldEnum = (typeof DecisionCandidatureScalarFieldEnum)[keyof typeof DecisionCandidatureScalarFieldEnum]
 
 
 export const AttributionBourseScalarFieldEnum = {
@@ -479,6 +521,36 @@ export const EvaluationOrderByRelevanceFieldEnum = {
 } as const
 
 export type EvaluationOrderByRelevanceFieldEnum = (typeof EvaluationOrderByRelevanceFieldEnum)[keyof typeof EvaluationOrderByRelevanceFieldEnum]
+
+
+export const CritereEvaluationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  libelle: 'libelle',
+  description: 'description',
+  appelId: 'appelId'
+} as const
+
+export type CritereEvaluationOrderByRelevanceFieldEnum = (typeof CritereEvaluationOrderByRelevanceFieldEnum)[keyof typeof CritereEvaluationOrderByRelevanceFieldEnum]
+
+
+export const NoteCritereEvaluationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  commentaire: 'commentaire',
+  evaluationId: 'evaluationId',
+  critereId: 'critereId'
+} as const
+
+export type NoteCritereEvaluationOrderByRelevanceFieldEnum = (typeof NoteCritereEvaluationOrderByRelevanceFieldEnum)[keyof typeof NoteCritereEvaluationOrderByRelevanceFieldEnum]
+
+
+export const DecisionCandidatureOrderByRelevanceFieldEnum = {
+  id: 'id',
+  justification: 'justification',
+  candidatureId: 'candidatureId',
+  decideurId: 'decideurId'
+} as const
+
+export type DecisionCandidatureOrderByRelevanceFieldEnum = (typeof DecisionCandidatureOrderByRelevanceFieldEnum)[keyof typeof DecisionCandidatureOrderByRelevanceFieldEnum]
 
 
 export const AttributionBourseOrderByRelevanceFieldEnum = {

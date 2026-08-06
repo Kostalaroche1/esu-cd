@@ -1,4 +1,4 @@
-type PrefixeReference = "CAND" | "APP" | "PRG";
+type PrefixeReference = "CAND" | "APP" | "PRG" | "ATTR" | "PAY";
 
 /** Génère une référence métier lisible, non prédictible et suffisamment unique. */
 export function genererReferenceMetier(prefixe: PrefixeReference) {

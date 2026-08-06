@@ -68,6 +68,21 @@ export type HistoriqueCandidature = Prisma.HistoriqueCandidatureModel
  */
 export type Evaluation = Prisma.EvaluationModel
 /**
+ * Model CritereEvaluation
+ * 
+ */
+export type CritereEvaluation = Prisma.CritereEvaluationModel
+/**
+ * Model NoteCritereEvaluation
+ * 
+ */
+export type NoteCritereEvaluation = Prisma.NoteCritereEvaluationModel
+/**
+ * Model DecisionCandidature
+ * 
+ */
+export type DecisionCandidature = Prisma.DecisionCandidatureModel
+/**
  * Model AttributionBourse
  * 
  */

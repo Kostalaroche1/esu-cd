@@ -43,6 +43,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           email: utilisateur.email,
           role: utilisateur.role,
           etudiantId: utilisateur.etudiantId,
+          doitChangerMotDePasse: utilisateur.doitChangerMotDePasse,
         };
       },
     }),
@@ -52,8 +53,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       if (!session?.user) return false;
       const chemin = request.nextUrl.pathname;
       const role = session.user.role;
+      if (session.user.doitChangerMotDePasse && chemin !== "/mon-compte") return Response.redirect(new URL("/mon-compte", request.nextUrl));
       if ((chemin.startsWith("/utilisateurs") || chemin.startsWith("/parametres")) && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR"].includes(role)) return false;
       if (chemin.startsWith("/evaluations") && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "EVALUATEUR"].includes(role)) return false;
+      if (chemin.startsWith("/decisions") && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES"].includes(role)) return false;
+      if (chemin.startsWith("/journal-audit") && role !== "SUPER_ADMINISTRATEUR") return false;
       if (chemin.startsWith("/rapports") && !["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "COMPTABLE"].includes(role)) return false;
       return true;
     },
@@ -62,6 +66,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         token.id = user.id;
         token.role = user.role;
         token.etudiantId = user.etudiantId;
+        token.doitChangerMotDePasse = user.doitChangerMotDePasse;
       }
       return token;
     },
@@ -70,6 +75,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         session.user.id = String(token.id);
         session.user.role = token.role as RoleUtilisateur;
         session.user.etudiantId = (token.etudiantId as string | null) ?? null;
+        session.user.doitChangerMotDePasse = Boolean(token.doitChangerMotDePasse);
       }
       return session;
     },

@@ -4,6 +4,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { ChampMotDePasse } from "@/components/formulaires/champ-mot-de-passe";
 import { LogoEsu } from "@/components/identite/logo-esu";
+import Link from "next/link";
 
 export default function PageConnexion() {
   const routeur = useRouter();
@@ -30,6 +31,7 @@ export default function PageConnexion() {
       <ChampMotDePasse className="mt-2 w-full rounded-lg border px-3 py-2" value={motDePasse} onChange={e=>setMotDePasse(e.target.value)} required autoComplete="current-password" />
       {erreur && <p className="mt-4 rounded-lg bg-red-50 p-3 text-sm text-red-700">{erreur}</p>}
       <button disabled={chargement} className="mt-6 w-full rounded-lg bg-blue-700 px-4 py-2.5 font-semibold text-white hover:bg-blue-800 disabled:opacity-60" type="submit">{chargement ? "Connexion..." : "Se connecter"}</button>
+      <Link href="/inscription" className="mt-4 block text-center text-sm font-medium text-blue-700 hover:underline">Créer un compte étudiant</Link>
     </form>
   </main>;
 }

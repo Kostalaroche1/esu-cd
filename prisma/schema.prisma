@@ -44,6 +44,17 @@ enum DecisionEvaluation {
   A_REVOIR
 }
 
+enum StatutEvaluation {
+  ASSIGNEE
+  EN_COURS
+  TERMINEE
+}
+
+enum TypeDecisionCandidature {
+  ACCEPTEE
+  REJETEE
+}
+
 enum StatutAttribution {
   ACTIVE
   SUSPENDUE
@@ -75,6 +86,7 @@ model Utilisateur {
   etudiantId   String?         @unique
   etudiant     Etudiant?       @relation(fields: [etudiantId], references: [id])
   evaluations  Evaluation[]
+  decisionsPrises DecisionCandidature[]
   notifications Notification[]
   documentsVerifies DocumentCandidature[] @relation("VerificationDocument")
   journauxAudit JournalAudit[]
@@ -159,6 +171,7 @@ model AppelCandidature {
   programme          ProgrammeBourse  @relation(fields: [programmeId], references: [id])
   candidatures       Candidature[]
   documentsRequis    DocumentRequisAppel[]
+  criteresEvaluation CritereEvaluation[]
   creeLe             DateTime          @default(now())
   modifieLe          DateTime          @updatedAt
   @@index([programmeId, estPublie])
@@ -180,6 +193,7 @@ model Candidature {
   documents       DocumentCandidature[]
   evaluations     Evaluation[]
   attribution     AttributionBourse?
+  decisionFormelle DecisionCandidature?
   historique      HistoriqueCandidature[]
   creeLe          DateTime            @default(now())
   modifieLe       DateTime            @updatedAt
@@ -239,15 +253,61 @@ model HistoriqueCandidature {
 model Evaluation {
   id              String               @id @default(cuid())
   note             Decimal?            @db.Decimal(5, 2)
-  decision         DecisionEvaluation
+  decision         DecisionEvaluation?
   commentaire      String?              @db.Text
+  statut           StatutEvaluation     @default(ASSIGNEE)
+  dateEcheance     DateTime?
+  modifieLe        DateTime             @updatedAt
   candidatureId   String
   evaluateurId    String
   candidature     Candidature          @relation(fields: [candidatureId], references: [id], onDelete: Cascade)
   evaluateur      Utilisateur          @relation(fields: [evaluateurId], references: [id])
+  notesCriteres   NoteCritereEvaluation[]
   creeLe          DateTime             @default(now())
   @@unique([candidatureId, evaluateurId])
   @@index([decision, creeLe])
+}
+
+model CritereEvaluation {
+  id           String             @id @default(cuid())
+  libelle      String
+  description  String?            @db.Text
+  ponderation  Decimal            @default(1) @db.Decimal(5, 2)
+  noteMaximale Decimal            @default(100) @db.Decimal(5, 2)
+  appelId      String
+  appel        AppelCandidature   @relation(fields: [appelId], references: [id], onDelete: Cascade)
+  notes        NoteCritereEvaluation[]
+  creeLe       DateTime           @default(now())
+
+  @@unique([appelId, libelle])
+  @@index([appelId])
+}
+
+model NoteCritereEvaluation {
+  id           String             @id @default(cuid())
+  note         Decimal            @db.Decimal(5, 2)
+  commentaire  String?            @db.Text
+  evaluationId String
+  critereId    String
+  evaluation   Evaluation         @relation(fields: [evaluationId], references: [id], onDelete: Cascade)
+  critere      CritereEvaluation  @relation(fields: [critereId], references: [id], onDelete: Cascade)
+
+  @@unique([evaluationId, critereId])
+  @@index([critereId])
+}
+
+model DecisionCandidature {
+  id             String                    @id @default(cuid())
+  type           TypeDecisionCandidature
+  justification  String                    @db.Text
+  dateDecision   DateTime                  @default(now())
+  candidatureId  String                    @unique
+  candidature    Candidature               @relation(fields: [candidatureId], references: [id], onDelete: Cascade)
+  decideurId     String
+  decideur       Utilisateur               @relation(fields: [decideurId], references: [id])
+
+  @@index([type, dateDecision])
+  @@index([decideurId])
 }
 
 model AttributionBourse {

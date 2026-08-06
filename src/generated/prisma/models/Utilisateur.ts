@@ -274,6 +274,7 @@ export type UtilisateurWhereInput = {
   modifieLe?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   etudiant?: Prisma.XOR<Prisma.EtudiantNullableScalarRelationFilter, Prisma.EtudiantWhereInput> | null
   evaluations?: Prisma.EvaluationListRelationFilter
+  decisionsPrises?: Prisma.DecisionCandidatureListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   documentsVerifies?: Prisma.DocumentCandidatureListRelationFilter
   journauxAudit?: Prisma.JournalAuditListRelationFilter
@@ -294,6 +295,7 @@ export type UtilisateurOrderByWithRelationInput = {
   modifieLe?: Prisma.SortOrder
   etudiant?: Prisma.EtudiantOrderByWithRelationInput
   evaluations?: Prisma.EvaluationOrderByRelationAggregateInput
+  decisionsPrises?: Prisma.DecisionCandidatureOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   documentsVerifies?: Prisma.DocumentCandidatureOrderByRelationAggregateInput
   journauxAudit?: Prisma.JournalAuditOrderByRelationAggregateInput
@@ -318,6 +320,7 @@ export type UtilisateurWhereUniqueInput = Prisma.AtLeast<{
   modifieLe?: Prisma.DateTimeFilter<"Utilisateur"> | Date | string
   etudiant?: Prisma.XOR<Prisma.EtudiantNullableScalarRelationFilter, Prisma.EtudiantWhereInput> | null
   evaluations?: Prisma.EvaluationListRelationFilter
+  decisionsPrises?: Prisma.DecisionCandidatureListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   documentsVerifies?: Prisma.DocumentCandidatureListRelationFilter
   journauxAudit?: Prisma.JournalAuditListRelationFilter
@@ -375,6 +378,7 @@ export type UtilisateurCreateInput = {
   modifieLe?: Date | string
   etudiant?: Prisma.EtudiantCreateNestedOneWithoutUtilisateurInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditCreateNestedManyWithoutUtilisateurInput
@@ -394,6 +398,7 @@ export type UtilisateurUncheckedCreateInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -413,6 +418,7 @@ export type UtilisateurUpdateInput = {
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   etudiant?: Prisma.EtudiantUpdateOneWithoutUtilisateurNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUpdateManyWithoutUtilisateurNestedInput
@@ -432,6 +438,7 @@ export type UtilisateurUncheckedUpdateInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUncheckedUpdateManyWithoutUtilisateurNestedInput
@@ -644,6 +651,20 @@ export type UtilisateurUpdateOneRequiredWithoutEvaluationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UtilisateurUpdateToOneWithWhereWithoutEvaluationsInput, Prisma.UtilisateurUpdateWithoutEvaluationsInput>, Prisma.UtilisateurUncheckedUpdateWithoutEvaluationsInput>
 }
 
+export type UtilisateurCreateNestedOneWithoutDecisionsPrisesInput = {
+  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutDecisionsPrisesInput, Prisma.UtilisateurUncheckedCreateWithoutDecisionsPrisesInput>
+  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutDecisionsPrisesInput
+  connect?: Prisma.UtilisateurWhereUniqueInput
+}
+
+export type UtilisateurUpdateOneRequiredWithoutDecisionsPrisesNestedInput = {
+  create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutDecisionsPrisesInput, Prisma.UtilisateurUncheckedCreateWithoutDecisionsPrisesInput>
+  connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutDecisionsPrisesInput
+  upsert?: Prisma.UtilisateurUpsertWithoutDecisionsPrisesInput
+  connect?: Prisma.UtilisateurWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UtilisateurUpdateToOneWithWhereWithoutDecisionsPrisesInput, Prisma.UtilisateurUpdateWithoutDecisionsPrisesInput>, Prisma.UtilisateurUncheckedUpdateWithoutDecisionsPrisesInput>
+}
+
 export type UtilisateurCreateNestedOneWithoutNotificationsInput = {
   create?: Prisma.XOR<Prisma.UtilisateurCreateWithoutNotificationsInput, Prisma.UtilisateurUncheckedCreateWithoutNotificationsInput>
   connectOrCreate?: Prisma.UtilisateurCreateOrConnectWithoutNotificationsInput
@@ -685,6 +706,7 @@ export type UtilisateurCreateWithoutEtudiantInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditCreateNestedManyWithoutUtilisateurInput
@@ -703,6 +725,7 @@ export type UtilisateurUncheckedCreateWithoutEtudiantInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -737,6 +760,7 @@ export type UtilisateurUpdateWithoutEtudiantInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluations?: Prisma.EvaluationUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUpdateManyWithoutUtilisateurNestedInput
@@ -755,6 +779,7 @@ export type UtilisateurUncheckedUpdateWithoutEtudiantInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUncheckedUpdateManyWithoutUtilisateurNestedInput
@@ -774,6 +799,7 @@ export type UtilisateurCreateWithoutDocumentsVerifiesInput = {
   modifieLe?: Date | string
   etudiant?: Prisma.EtudiantCreateNestedOneWithoutUtilisateurInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUtilisateurInput
   journauxAudit?: Prisma.JournalAuditCreateNestedManyWithoutUtilisateurInput
 }
@@ -792,6 +818,7 @@ export type UtilisateurUncheckedCreateWithoutDocumentsVerifiesInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUtilisateurInput
   journauxAudit?: Prisma.JournalAuditUncheckedCreateNestedManyWithoutUtilisateurInput
 }
@@ -826,6 +853,7 @@ export type UtilisateurUpdateWithoutDocumentsVerifiesInput = {
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   etudiant?: Prisma.EtudiantUpdateOneWithoutUtilisateurNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUtilisateurNestedInput
   journauxAudit?: Prisma.JournalAuditUpdateManyWithoutUtilisateurNestedInput
 }
@@ -844,6 +872,7 @@ export type UtilisateurUncheckedUpdateWithoutDocumentsVerifiesInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUtilisateurNestedInput
   journauxAudit?: Prisma.JournalAuditUncheckedUpdateManyWithoutUtilisateurNestedInput
 }
@@ -861,6 +890,7 @@ export type UtilisateurCreateWithoutEvaluationsInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   etudiant?: Prisma.EtudiantCreateNestedOneWithoutUtilisateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditCreateNestedManyWithoutUtilisateurInput
@@ -879,6 +909,7 @@ export type UtilisateurUncheckedCreateWithoutEvaluationsInput = {
   doitChangerMotDePasse?: boolean
   creeLe?: Date | string
   modifieLe?: Date | string
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditUncheckedCreateNestedManyWithoutUtilisateurInput
@@ -913,6 +944,7 @@ export type UtilisateurUpdateWithoutEvaluationsInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   etudiant?: Prisma.EtudiantUpdateOneWithoutUtilisateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUpdateManyWithoutUtilisateurNestedInput
@@ -931,6 +963,99 @@ export type UtilisateurUncheckedUpdateWithoutEvaluationsInput = {
   doitChangerMotDePasse?: Prisma.BoolFieldUpdateOperationsInput | boolean
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedUpdateManyWithoutDecideurNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUtilisateurNestedInput
+  documentsVerifies?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput
+  journauxAudit?: Prisma.JournalAuditUncheckedUpdateManyWithoutUtilisateurNestedInput
+}
+
+export type UtilisateurCreateWithoutDecisionsPrisesInput = {
+  id?: string
+  nomComplet: string
+  email: string
+  motDePasse: string
+  role: $Enums.RoleUtilisateur
+  estActif?: boolean
+  tentativesConnexion?: number
+  verrouilleJusqua?: Date | string | null
+  doitChangerMotDePasse?: boolean
+  creeLe?: Date | string
+  modifieLe?: Date | string
+  etudiant?: Prisma.EtudiantCreateNestedOneWithoutUtilisateurInput
+  evaluations?: Prisma.EvaluationCreateNestedManyWithoutEvaluateurInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUtilisateurInput
+  documentsVerifies?: Prisma.DocumentCandidatureCreateNestedManyWithoutVerifieParInput
+  journauxAudit?: Prisma.JournalAuditCreateNestedManyWithoutUtilisateurInput
+}
+
+export type UtilisateurUncheckedCreateWithoutDecisionsPrisesInput = {
+  id?: string
+  nomComplet: string
+  email: string
+  motDePasse: string
+  role: $Enums.RoleUtilisateur
+  estActif?: boolean
+  etudiantId?: string | null
+  tentativesConnexion?: number
+  verrouilleJusqua?: Date | string | null
+  doitChangerMotDePasse?: boolean
+  creeLe?: Date | string
+  modifieLe?: Date | string
+  evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutEvaluateurInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUtilisateurInput
+  documentsVerifies?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput
+  journauxAudit?: Prisma.JournalAuditUncheckedCreateNestedManyWithoutUtilisateurInput
+}
+
+export type UtilisateurCreateOrConnectWithoutDecisionsPrisesInput = {
+  where: Prisma.UtilisateurWhereUniqueInput
+  create: Prisma.XOR<Prisma.UtilisateurCreateWithoutDecisionsPrisesInput, Prisma.UtilisateurUncheckedCreateWithoutDecisionsPrisesInput>
+}
+
+export type UtilisateurUpsertWithoutDecisionsPrisesInput = {
+  update: Prisma.XOR<Prisma.UtilisateurUpdateWithoutDecisionsPrisesInput, Prisma.UtilisateurUncheckedUpdateWithoutDecisionsPrisesInput>
+  create: Prisma.XOR<Prisma.UtilisateurCreateWithoutDecisionsPrisesInput, Prisma.UtilisateurUncheckedCreateWithoutDecisionsPrisesInput>
+  where?: Prisma.UtilisateurWhereInput
+}
+
+export type UtilisateurUpdateToOneWithWhereWithoutDecisionsPrisesInput = {
+  where?: Prisma.UtilisateurWhereInput
+  data: Prisma.XOR<Prisma.UtilisateurUpdateWithoutDecisionsPrisesInput, Prisma.UtilisateurUncheckedUpdateWithoutDecisionsPrisesInput>
+}
+
+export type UtilisateurUpdateWithoutDecisionsPrisesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nomComplet?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  motDePasse?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  estActif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  tentativesConnexion?: Prisma.IntFieldUpdateOperationsInput | number
+  verrouilleJusqua?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  doitChangerMotDePasse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  etudiant?: Prisma.EtudiantUpdateOneWithoutUtilisateurNestedInput
+  evaluations?: Prisma.EvaluationUpdateManyWithoutEvaluateurNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUtilisateurNestedInput
+  documentsVerifies?: Prisma.DocumentCandidatureUpdateManyWithoutVerifieParNestedInput
+  journauxAudit?: Prisma.JournalAuditUpdateManyWithoutUtilisateurNestedInput
+}
+
+export type UtilisateurUncheckedUpdateWithoutDecisionsPrisesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nomComplet?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  motDePasse?: Prisma.StringFieldUpdateOperationsInput | string
+  role?: Prisma.EnumRoleUtilisateurFieldUpdateOperationsInput | $Enums.RoleUtilisateur
+  estActif?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  etudiantId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tentativesConnexion?: Prisma.IntFieldUpdateOperationsInput | number
+  verrouilleJusqua?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  doitChangerMotDePasse?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutEvaluateurNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUncheckedUpdateManyWithoutUtilisateurNestedInput
@@ -950,6 +1075,7 @@ export type UtilisateurCreateWithoutNotificationsInput = {
   modifieLe?: Date | string
   etudiant?: Prisma.EtudiantCreateNestedOneWithoutUtilisateurInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureCreateNestedManyWithoutDecideurInput
   documentsVerifies?: Prisma.DocumentCandidatureCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditCreateNestedManyWithoutUtilisateurInput
 }
@@ -968,6 +1094,7 @@ export type UtilisateurUncheckedCreateWithoutNotificationsInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedCreateNestedManyWithoutDecideurInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput
   journauxAudit?: Prisma.JournalAuditUncheckedCreateNestedManyWithoutUtilisateurInput
 }
@@ -1002,6 +1129,7 @@ export type UtilisateurUpdateWithoutNotificationsInput = {
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   etudiant?: Prisma.EtudiantUpdateOneWithoutUtilisateurNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUpdateManyWithoutDecideurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUpdateManyWithoutUtilisateurNestedInput
 }
@@ -1020,6 +1148,7 @@ export type UtilisateurUncheckedUpdateWithoutNotificationsInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedUpdateManyWithoutDecideurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput
   journauxAudit?: Prisma.JournalAuditUncheckedUpdateManyWithoutUtilisateurNestedInput
 }
@@ -1038,6 +1167,7 @@ export type UtilisateurCreateWithoutJournauxAuditInput = {
   modifieLe?: Date | string
   etudiant?: Prisma.EtudiantCreateNestedOneWithoutUtilisateurInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureCreateNestedManyWithoutVerifieParInput
 }
@@ -1056,6 +1186,7 @@ export type UtilisateurUncheckedCreateWithoutJournauxAuditInput = {
   creeLe?: Date | string
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutEvaluateurInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedCreateNestedManyWithoutDecideurInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUtilisateurInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput
 }
@@ -1090,6 +1221,7 @@ export type UtilisateurUpdateWithoutJournauxAuditInput = {
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   etudiant?: Prisma.EtudiantUpdateOneWithoutUtilisateurNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUpdateManyWithoutVerifieParNestedInput
 }
@@ -1108,6 +1240,7 @@ export type UtilisateurUncheckedUpdateWithoutJournauxAuditInput = {
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutEvaluateurNestedInput
+  decisionsPrises?: Prisma.DecisionCandidatureUncheckedUpdateManyWithoutDecideurNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUtilisateurNestedInput
   documentsVerifies?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput
 }
@@ -1119,6 +1252,7 @@ export type UtilisateurUncheckedUpdateWithoutJournauxAuditInput = {
 
 export type UtilisateurCountOutputType = {
   evaluations: number
+  decisionsPrises: number
   notifications: number
   documentsVerifies: number
   journauxAudit: number
@@ -1126,6 +1260,7 @@ export type UtilisateurCountOutputType = {
 
 export type UtilisateurCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   evaluations?: boolean | UtilisateurCountOutputTypeCountEvaluationsArgs
+  decisionsPrises?: boolean | UtilisateurCountOutputTypeCountDecisionsPrisesArgs
   notifications?: boolean | UtilisateurCountOutputTypeCountNotificationsArgs
   documentsVerifies?: boolean | UtilisateurCountOutputTypeCountDocumentsVerifiesArgs
   journauxAudit?: boolean | UtilisateurCountOutputTypeCountJournauxAuditArgs
@@ -1146,6 +1281,13 @@ export type UtilisateurCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.
  */
 export type UtilisateurCountOutputTypeCountEvaluationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.EvaluationWhereInput
+}
+
+/**
+ * UtilisateurCountOutputType without action
+ */
+export type UtilisateurCountOutputTypeCountDecisionsPrisesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DecisionCandidatureWhereInput
 }
 
 /**
@@ -1185,6 +1327,7 @@ export type UtilisateurSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   modifieLe?: boolean
   etudiant?: boolean | Prisma.Utilisateur$etudiantArgs<ExtArgs>
   evaluations?: boolean | Prisma.Utilisateur$evaluationsArgs<ExtArgs>
+  decisionsPrises?: boolean | Prisma.Utilisateur$decisionsPrisesArgs<ExtArgs>
   notifications?: boolean | Prisma.Utilisateur$notificationsArgs<ExtArgs>
   documentsVerifies?: boolean | Prisma.Utilisateur$documentsVerifiesArgs<ExtArgs>
   journauxAudit?: boolean | Prisma.Utilisateur$journauxAuditArgs<ExtArgs>
@@ -1212,6 +1355,7 @@ export type UtilisateurOmit<ExtArgs extends runtime.Types.Extensions.InternalArg
 export type UtilisateurInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   etudiant?: boolean | Prisma.Utilisateur$etudiantArgs<ExtArgs>
   evaluations?: boolean | Prisma.Utilisateur$evaluationsArgs<ExtArgs>
+  decisionsPrises?: boolean | Prisma.Utilisateur$decisionsPrisesArgs<ExtArgs>
   notifications?: boolean | Prisma.Utilisateur$notificationsArgs<ExtArgs>
   documentsVerifies?: boolean | Prisma.Utilisateur$documentsVerifiesArgs<ExtArgs>
   journauxAudit?: boolean | Prisma.Utilisateur$journauxAuditArgs<ExtArgs>
@@ -1223,6 +1367,7 @@ export type $UtilisateurPayload<ExtArgs extends runtime.Types.Extensions.Interna
   objects: {
     etudiant: Prisma.$EtudiantPayload<ExtArgs> | null
     evaluations: Prisma.$EvaluationPayload<ExtArgs>[]
+    decisionsPrises: Prisma.$DecisionCandidaturePayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     documentsVerifies: Prisma.$DocumentCandidaturePayload<ExtArgs>[]
     journauxAudit: Prisma.$JournalAuditPayload<ExtArgs>[]
@@ -1582,6 +1727,7 @@ export interface Prisma__UtilisateurClient<T, Null = never, ExtArgs extends runt
   readonly [Symbol.toStringTag]: "PrismaPromise"
   etudiant<T extends Prisma.Utilisateur$etudiantArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$etudiantArgs<ExtArgs>>): Prisma.Prisma__EtudiantClient<runtime.Types.Result.GetResult<Prisma.$EtudiantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   evaluations<T extends Prisma.Utilisateur$evaluationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$evaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  decisionsPrises<T extends Prisma.Utilisateur$decisionsPrisesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$decisionsPrisesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DecisionCandidaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.Utilisateur$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documentsVerifies<T extends Prisma.Utilisateur$documentsVerifiesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$documentsVerifiesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentCandidaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   journauxAudit<T extends Prisma.Utilisateur$journauxAuditArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Utilisateur$journauxAuditArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$JournalAuditPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2014,6 +2160,30 @@ export type Utilisateur$evaluationsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.EvaluationScalarFieldEnum | Prisma.EvaluationScalarFieldEnum[]
+}
+
+/**
+ * Utilisateur.decisionsPrises
+ */
+export type Utilisateur$decisionsPrisesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DecisionCandidature
+   */
+  select?: Prisma.DecisionCandidatureSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DecisionCandidature
+   */
+  omit?: Prisma.DecisionCandidatureOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DecisionCandidatureInclude<ExtArgs> | null
+  where?: Prisma.DecisionCandidatureWhereInput
+  orderBy?: Prisma.DecisionCandidatureOrderByWithRelationInput | Prisma.DecisionCandidatureOrderByWithRelationInput[]
+  cursor?: Prisma.DecisionCandidatureWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DecisionCandidatureScalarFieldEnum | Prisma.DecisionCandidatureScalarFieldEnum[]
 }
 
 /**

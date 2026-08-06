@@ -1,0 +1,17 @@
+"use client";
+import { Printer } from "lucide-react";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { LogoEsu } from "@/components/identite/logo-esu";
+
+type Attribution={reference:string;montantAccorde:number;devise:string;dateDebut:string;dateFin:string};
+type Decision={type:"ACCEPTEE"|"REJETEE";justification:string;dateDecision:string;decideur:{nomComplet:string};candidature:{reference:string;etudiant:{matricule:string;nom:string;postnom:string|null;prenom:string;etablissement:{nom:string}};appel:{titre:string;programme:{nom:string}};attribution:Attribution|null}};
+
+export function AvisDecisionImprimable({id}:{id:string}){
+  const[decision,setDecision]=useState<Decision|null>(null);
+  useEffect(()=>{fetch(`/api/decisions/${id}`,{cache:"no-store"}).then(async reponse=>{const resultat=await reponse.json();if(!reponse.ok)throw new Error(resultat.message);setDecision(resultat.donnees)}).catch(erreur=>toast.error(erreur.message))},[id]);
+  if(!decision)return <div className="h-64 animate-pulse rounded-2xl bg-slate-200"/>;
+  const candidature=decision.candidature;const etudiant=candidature.etudiant;
+  return <div className="mx-auto max-w-3xl"><div className="mb-4 flex justify-end print:hidden"><button onClick={()=>window.print()} className="inline-flex items-center gap-2 rounded-xl bg-blue-700 px-4 py-2 text-white"><Printer className="size-4"/>Imprimer / PDF</button></div><article className="min-h-[900px] bg-white p-8 shadow-sm print:min-h-0 print:shadow-none"><header className="flex items-center gap-5 border-b pb-5"><LogoEsu className="size-20 shrink-0 p-1 font-bold text-blue-700"/><div><p className="font-bold uppercase">Ministère de l’Enseignement supérieur et universitaire</p><p className="text-sm">Système national de gestion des bourses d’études</p></div></header><h1 className="mt-10 text-center text-2xl font-bold uppercase">Avis de décision</h1><p className="mt-2 text-center">Référence : {candidature.reference}</p><div className="mt-10 space-y-4 leading-7"><p>Étudiant : <strong>{etudiant.prenom} {etudiant.postnom} {etudiant.nom}</strong></p><p>Matricule : <strong>{etudiant.matricule}</strong></p><p>Établissement : <strong>{etudiant.etablissement.nom}</strong></p><p>Programme : <strong>{candidature.appel.programme.nom}</strong></p><p>Appel : <strong>{candidature.appel.titre}</strong></p><p>Après examen du dossier et des évaluations, la candidature est déclarée <strong className={decision.type==="ACCEPTEE"?"text-emerald-700":"text-red-700"}>{decision.type==="ACCEPTEE"?"ACCEPTÉE":"REJETÉE"}</strong>.</p><div className="rounded-xl border p-4"><strong>Motivation de la décision</strong><p className="mt-2 whitespace-pre-wrap">{decision.justification}</p></div>{candidature.attribution&&<AttributionDecision attribution={candidature.attribution}/>}</div><footer className="mt-16 text-right"><p>Fait le {new Date(decision.dateDecision).toLocaleDateString("fr-FR")}</p><p className="mt-8 font-semibold">{decision.decideur.nomComplet}</p><p className="text-sm">Autorité décisionnaire</p></footer></article></div>;
+}
+function AttributionDecision({attribution}:{attribution:Attribution}){return <div className="rounded-xl border p-4"><strong>Attribution {attribution.reference}</strong><p>Montant : {Number(attribution.montantAccorde).toLocaleString("fr-FR")} {attribution.devise}</p><p>Période : du {new Date(attribution.dateDebut).toLocaleDateString("fr-FR")} au {new Date(attribution.dateFin).toLocaleDateString("fr-FR")}</p></div>}

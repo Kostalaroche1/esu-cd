@@ -13,7 +13,7 @@ export async function GET(requete: NextRequest) {
     if (p.get("etudiantId")) where.etudiantId = p.get("etudiantId")!;
     if (p.get("programmeId")) where.appel = { programmeId: p.get("programmeId")! };
     if (p.get("etablissementId")) where.etudiant = { etablissementId: p.get("etablissementId")! };
-    if (p.get("decision")) where.evaluations = { some: { decision: p.get("decision") as Prisma.EnumDecisionEvaluationFilter } };
+    if (p.get("decision")) where.evaluations = { some: { decision: p.get("decision") as Prisma.EnumDecisionEvaluationNullableFilter } };
     if (acces.session.user.role === "ETUDIANT") where.etudiantId = acces.session.user.etudiantId ?? "__aucun__";
     const [total, retenues, rejetees, actives, paiements, lignes] = await Promise.all([
       prisma.candidature.count({ where }), prisma.candidature.count({ where: { ...where, statut: "RETENUE" } }), prisma.candidature.count({ where: { ...where, statut: "REJETEE" } }),

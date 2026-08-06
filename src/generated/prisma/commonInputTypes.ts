@@ -314,21 +314,38 @@ export type EnumStatutCandidatureNullableWithAggregatesFilter<$PrismaModel = nev
   _max?: Prisma.NestedEnumStatutCandidatureNullableFilter<$PrismaModel>
 }
 
-export type EnumDecisionEvaluationFilter<$PrismaModel = never> = {
-  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel>
-  in?: $Enums.DecisionEvaluation[]
-  notIn?: $Enums.DecisionEvaluation[]
-  not?: Prisma.NestedEnumDecisionEvaluationFilter<$PrismaModel> | $Enums.DecisionEvaluation
+export type EnumDecisionEvaluationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DecisionEvaluation[] | null
+  notIn?: $Enums.DecisionEvaluation[] | null
+  not?: Prisma.NestedEnumDecisionEvaluationNullableFilter<$PrismaModel> | $Enums.DecisionEvaluation | null
 }
 
-export type EnumDecisionEvaluationWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel>
-  in?: $Enums.DecisionEvaluation[]
-  notIn?: $Enums.DecisionEvaluation[]
-  not?: Prisma.NestedEnumDecisionEvaluationWithAggregatesFilter<$PrismaModel> | $Enums.DecisionEvaluation
+export type EnumStatutEvaluationFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutEvaluation | Prisma.EnumStatutEvaluationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutEvaluation[]
+  notIn?: $Enums.StatutEvaluation[]
+  not?: Prisma.NestedEnumStatutEvaluationFilter<$PrismaModel> | $Enums.StatutEvaluation
+}
+
+export type EnumDecisionEvaluationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DecisionEvaluation[] | null
+  notIn?: $Enums.DecisionEvaluation[] | null
+  not?: Prisma.NestedEnumDecisionEvaluationNullableWithAggregatesFilter<$PrismaModel> | $Enums.DecisionEvaluation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDecisionEvaluationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDecisionEvaluationNullableFilter<$PrismaModel>
+}
+
+export type EnumStatutEvaluationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutEvaluation | Prisma.EnumStatutEvaluationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutEvaluation[]
+  notIn?: $Enums.StatutEvaluation[]
+  not?: Prisma.NestedEnumStatutEvaluationWithAggregatesFilter<$PrismaModel> | $Enums.StatutEvaluation
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumDecisionEvaluationFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumDecisionEvaluationFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutEvaluationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutEvaluationFilter<$PrismaModel>
 }
 
 export type DecimalFilter<$PrismaModel = never> = {
@@ -340,13 +357,6 @@ export type DecimalFilter<$PrismaModel = never> = {
   gt?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   gte?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type EnumStatutAttributionFilter<$PrismaModel = never> = {
-  equals?: $Enums.StatutAttribution | Prisma.EnumStatutAttributionFieldRefInput<$PrismaModel>
-  in?: $Enums.StatutAttribution[]
-  notIn?: $Enums.StatutAttribution[]
-  not?: Prisma.NestedEnumStatutAttributionFilter<$PrismaModel> | $Enums.StatutAttribution
 }
 
 export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -363,6 +373,30 @@ export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type EnumTypeDecisionCandidatureFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDecisionCandidature | Prisma.EnumTypeDecisionCandidatureFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDecisionCandidature[]
+  notIn?: $Enums.TypeDecisionCandidature[]
+  not?: Prisma.NestedEnumTypeDecisionCandidatureFilter<$PrismaModel> | $Enums.TypeDecisionCandidature
+}
+
+export type EnumTypeDecisionCandidatureWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDecisionCandidature | Prisma.EnumTypeDecisionCandidatureFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDecisionCandidature[]
+  notIn?: $Enums.TypeDecisionCandidature[]
+  not?: Prisma.NestedEnumTypeDecisionCandidatureWithAggregatesFilter<$PrismaModel> | $Enums.TypeDecisionCandidature
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeDecisionCandidatureFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeDecisionCandidatureFilter<$PrismaModel>
+}
+
+export type EnumStatutAttributionFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAttribution | Prisma.EnumStatutAttributionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAttribution[]
+  notIn?: $Enums.StatutAttribution[]
+  not?: Prisma.NestedEnumStatutAttributionFilter<$PrismaModel> | $Enums.StatutAttribution
 }
 
 export type EnumStatutAttributionWithAggregatesFilter<$PrismaModel = never> = {
@@ -709,21 +743,38 @@ export type NestedEnumStatutCandidatureNullableWithAggregatesFilter<$PrismaModel
   _max?: Prisma.NestedEnumStatutCandidatureNullableFilter<$PrismaModel>
 }
 
-export type NestedEnumDecisionEvaluationFilter<$PrismaModel = never> = {
-  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel>
-  in?: $Enums.DecisionEvaluation[]
-  notIn?: $Enums.DecisionEvaluation[]
-  not?: Prisma.NestedEnumDecisionEvaluationFilter<$PrismaModel> | $Enums.DecisionEvaluation
+export type NestedEnumDecisionEvaluationNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DecisionEvaluation[] | null
+  notIn?: $Enums.DecisionEvaluation[] | null
+  not?: Prisma.NestedEnumDecisionEvaluationNullableFilter<$PrismaModel> | $Enums.DecisionEvaluation | null
 }
 
-export type NestedEnumDecisionEvaluationWithAggregatesFilter<$PrismaModel = never> = {
-  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel>
-  in?: $Enums.DecisionEvaluation[]
-  notIn?: $Enums.DecisionEvaluation[]
-  not?: Prisma.NestedEnumDecisionEvaluationWithAggregatesFilter<$PrismaModel> | $Enums.DecisionEvaluation
+export type NestedEnumStatutEvaluationFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutEvaluation | Prisma.EnumStatutEvaluationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutEvaluation[]
+  notIn?: $Enums.StatutEvaluation[]
+  not?: Prisma.NestedEnumStatutEvaluationFilter<$PrismaModel> | $Enums.StatutEvaluation
+}
+
+export type NestedEnumDecisionEvaluationNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.DecisionEvaluation | Prisma.EnumDecisionEvaluationFieldRefInput<$PrismaModel> | null
+  in?: $Enums.DecisionEvaluation[] | null
+  notIn?: $Enums.DecisionEvaluation[] | null
+  not?: Prisma.NestedEnumDecisionEvaluationNullableWithAggregatesFilter<$PrismaModel> | $Enums.DecisionEvaluation | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumDecisionEvaluationNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumDecisionEvaluationNullableFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutEvaluationWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutEvaluation | Prisma.EnumStatutEvaluationFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutEvaluation[]
+  notIn?: $Enums.StatutEvaluation[]
+  not?: Prisma.NestedEnumStatutEvaluationWithAggregatesFilter<$PrismaModel> | $Enums.StatutEvaluation
   _count?: Prisma.NestedIntFilter<$PrismaModel>
-  _min?: Prisma.NestedEnumDecisionEvaluationFilter<$PrismaModel>
-  _max?: Prisma.NestedEnumDecisionEvaluationFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumStatutEvaluationFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumStatutEvaluationFilter<$PrismaModel>
 }
 
 export type NestedDecimalFilter<$PrismaModel = never> = {
@@ -735,13 +786,6 @@ export type NestedDecimalFilter<$PrismaModel = never> = {
   gt?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   gte?: runtime.Decimal | runtime.DecimalJsLike | number | string | Prisma.DecimalFieldRefInput<$PrismaModel>
   not?: Prisma.NestedDecimalFilter<$PrismaModel> | runtime.Decimal | runtime.DecimalJsLike | number | string
-}
-
-export type NestedEnumStatutAttributionFilter<$PrismaModel = never> = {
-  equals?: $Enums.StatutAttribution | Prisma.EnumStatutAttributionFieldRefInput<$PrismaModel>
-  in?: $Enums.StatutAttribution[]
-  notIn?: $Enums.StatutAttribution[]
-  not?: Prisma.NestedEnumStatutAttributionFilter<$PrismaModel> | $Enums.StatutAttribution
 }
 
 export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
@@ -758,6 +802,30 @@ export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedDecimalFilter<$PrismaModel>
   _min?: Prisma.NestedDecimalFilter<$PrismaModel>
   _max?: Prisma.NestedDecimalFilter<$PrismaModel>
+}
+
+export type NestedEnumTypeDecisionCandidatureFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDecisionCandidature | Prisma.EnumTypeDecisionCandidatureFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDecisionCandidature[]
+  notIn?: $Enums.TypeDecisionCandidature[]
+  not?: Prisma.NestedEnumTypeDecisionCandidatureFilter<$PrismaModel> | $Enums.TypeDecisionCandidature
+}
+
+export type NestedEnumTypeDecisionCandidatureWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TypeDecisionCandidature | Prisma.EnumTypeDecisionCandidatureFieldRefInput<$PrismaModel>
+  in?: $Enums.TypeDecisionCandidature[]
+  notIn?: $Enums.TypeDecisionCandidature[]
+  not?: Prisma.NestedEnumTypeDecisionCandidatureWithAggregatesFilter<$PrismaModel> | $Enums.TypeDecisionCandidature
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTypeDecisionCandidatureFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTypeDecisionCandidatureFilter<$PrismaModel>
+}
+
+export type NestedEnumStatutAttributionFilter<$PrismaModel = never> = {
+  equals?: $Enums.StatutAttribution | Prisma.EnumStatutAttributionFieldRefInput<$PrismaModel>
+  in?: $Enums.StatutAttribution[]
+  notIn?: $Enums.StatutAttribution[]
+  not?: Prisma.NestedEnumStatutAttributionFilter<$PrismaModel> | $Enums.StatutAttribution
 }
 
 export type NestedEnumStatutAttributionWithAggregatesFilter<$PrismaModel = never> = {

@@ -58,6 +58,23 @@ export const DecisionEvaluation = {
 export type DecisionEvaluation = (typeof DecisionEvaluation)[keyof typeof DecisionEvaluation]
 
 
+export const StatutEvaluation = {
+  ASSIGNEE: 'ASSIGNEE',
+  EN_COURS: 'EN_COURS',
+  TERMINEE: 'TERMINEE'
+} as const
+
+export type StatutEvaluation = (typeof StatutEvaluation)[keyof typeof StatutEvaluation]
+
+
+export const TypeDecisionCandidature = {
+  ACCEPTEE: 'ACCEPTEE',
+  REJETEE: 'REJETEE'
+} as const
+
+export type TypeDecisionCandidature = (typeof TypeDecisionCandidature)[keyof typeof TypeDecisionCandidature]
+
+
 export const StatutAttribution = {
   ACTIVE: 'ACTIVE',
   SUSPENDUE: 'SUSPENDUE',

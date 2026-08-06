@@ -407,6 +407,9 @@ export const ModelName = {
   DocumentRequisAppel: 'DocumentRequisAppel',
   HistoriqueCandidature: 'HistoriqueCandidature',
   Evaluation: 'Evaluation',
+  CritereEvaluation: 'CritereEvaluation',
+  NoteCritereEvaluation: 'NoteCritereEvaluation',
+  DecisionCandidature: 'DecisionCandidature',
   AttributionBourse: 'AttributionBourse',
   Paiement: 'Paiement',
   Renouvellement: 'Renouvellement',
@@ -428,7 +431,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "utilisateur" | "etablissement" | "etudiant" | "programmeBourse" | "appelCandidature" | "candidature" | "documentCandidature" | "documentRequisAppel" | "historiqueCandidature" | "evaluation" | "attributionBourse" | "paiement" | "renouvellement" | "notification" | "journalAudit" | "parametre"
+    modelProps: "utilisateur" | "etablissement" | "etudiant" | "programmeBourse" | "appelCandidature" | "candidature" | "documentCandidature" | "documentRequisAppel" | "historiqueCandidature" | "evaluation" | "critereEvaluation" | "noteCritereEvaluation" | "decisionCandidature" | "attributionBourse" | "paiement" | "renouvellement" | "notification" | "journalAudit" | "parametre"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1092,6 +1095,204 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CritereEvaluation: {
+      payload: Prisma.$CritereEvaluationPayload<ExtArgs>
+      fields: Prisma.CritereEvaluationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CritereEvaluationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CritereEvaluationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>
+        }
+        findFirst: {
+          args: Prisma.CritereEvaluationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CritereEvaluationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>
+        }
+        findMany: {
+          args: Prisma.CritereEvaluationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>[]
+        }
+        create: {
+          args: Prisma.CritereEvaluationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>
+        }
+        createMany: {
+          args: Prisma.CritereEvaluationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.CritereEvaluationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>
+        }
+        update: {
+          args: Prisma.CritereEvaluationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>
+        }
+        deleteMany: {
+          args: Prisma.CritereEvaluationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CritereEvaluationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.CritereEvaluationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CritereEvaluationPayload>
+        }
+        aggregate: {
+          args: Prisma.CritereEvaluationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCritereEvaluation>
+        }
+        groupBy: {
+          args: Prisma.CritereEvaluationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CritereEvaluationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CritereEvaluationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CritereEvaluationCountAggregateOutputType> | number
+        }
+      }
+    }
+    NoteCritereEvaluation: {
+      payload: Prisma.$NoteCritereEvaluationPayload<ExtArgs>
+      fields: Prisma.NoteCritereEvaluationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NoteCritereEvaluationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NoteCritereEvaluationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>
+        }
+        findFirst: {
+          args: Prisma.NoteCritereEvaluationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NoteCritereEvaluationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>
+        }
+        findMany: {
+          args: Prisma.NoteCritereEvaluationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>[]
+        }
+        create: {
+          args: Prisma.NoteCritereEvaluationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>
+        }
+        createMany: {
+          args: Prisma.NoteCritereEvaluationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.NoteCritereEvaluationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>
+        }
+        update: {
+          args: Prisma.NoteCritereEvaluationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NoteCritereEvaluationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NoteCritereEvaluationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.NoteCritereEvaluationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NoteCritereEvaluationPayload>
+        }
+        aggregate: {
+          args: Prisma.NoteCritereEvaluationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNoteCritereEvaluation>
+        }
+        groupBy: {
+          args: Prisma.NoteCritereEvaluationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NoteCritereEvaluationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NoteCritereEvaluationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NoteCritereEvaluationCountAggregateOutputType> | number
+        }
+      }
+    }
+    DecisionCandidature: {
+      payload: Prisma.$DecisionCandidaturePayload<ExtArgs>
+      fields: Prisma.DecisionCandidatureFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DecisionCandidatureFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DecisionCandidatureFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>
+        }
+        findFirst: {
+          args: Prisma.DecisionCandidatureFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DecisionCandidatureFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>
+        }
+        findMany: {
+          args: Prisma.DecisionCandidatureFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>[]
+        }
+        create: {
+          args: Prisma.DecisionCandidatureCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>
+        }
+        createMany: {
+          args: Prisma.DecisionCandidatureCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DecisionCandidatureDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>
+        }
+        update: {
+          args: Prisma.DecisionCandidatureUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>
+        }
+        deleteMany: {
+          args: Prisma.DecisionCandidatureDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DecisionCandidatureUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DecisionCandidatureUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DecisionCandidaturePayload>
+        }
+        aggregate: {
+          args: Prisma.DecisionCandidatureAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDecisionCandidature>
+        }
+        groupBy: {
+          args: Prisma.DecisionCandidatureGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DecisionCandidatureGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DecisionCandidatureCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DecisionCandidatureCountAggregateOutputType> | number
+        }
+      }
+    }
     AttributionBourse: {
       payload: Prisma.$AttributionBoursePayload<ExtArgs>
       fields: Prisma.AttributionBourseFieldRefs
@@ -1686,12 +1887,51 @@ export const EvaluationScalarFieldEnum = {
   note: 'note',
   decision: 'decision',
   commentaire: 'commentaire',
+  statut: 'statut',
+  dateEcheance: 'dateEcheance',
+  modifieLe: 'modifieLe',
   candidatureId: 'candidatureId',
   evaluateurId: 'evaluateurId',
   creeLe: 'creeLe'
 } as const
 
 export type EvaluationScalarFieldEnum = (typeof EvaluationScalarFieldEnum)[keyof typeof EvaluationScalarFieldEnum]
+
+
+export const CritereEvaluationScalarFieldEnum = {
+  id: 'id',
+  libelle: 'libelle',
+  description: 'description',
+  ponderation: 'ponderation',
+  noteMaximale: 'noteMaximale',
+  appelId: 'appelId',
+  creeLe: 'creeLe'
+} as const
+
+export type CritereEvaluationScalarFieldEnum = (typeof CritereEvaluationScalarFieldEnum)[keyof typeof CritereEvaluationScalarFieldEnum]
+
+
+export const NoteCritereEvaluationScalarFieldEnum = {
+  id: 'id',
+  note: 'note',
+  commentaire: 'commentaire',
+  evaluationId: 'evaluationId',
+  critereId: 'critereId'
+} as const
+
+export type NoteCritereEvaluationScalarFieldEnum = (typeof NoteCritereEvaluationScalarFieldEnum)[keyof typeof NoteCritereEvaluationScalarFieldEnum]
+
+
+export const DecisionCandidatureScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  justification: 'justification',
+  dateDecision: 'dateDecision',
+  candidatureId: 'candidatureId',
+  decideurId: 'decideurId'
+} as const
+
+export type DecisionCandidatureScalarFieldEnum = (typeof DecisionCandidatureScalarFieldEnum)[keyof typeof DecisionCandidatureScalarFieldEnum]
 
 
 export const AttributionBourseScalarFieldEnum = {
@@ -1923,6 +2163,36 @@ export const EvaluationOrderByRelevanceFieldEnum = {
 export type EvaluationOrderByRelevanceFieldEnum = (typeof EvaluationOrderByRelevanceFieldEnum)[keyof typeof EvaluationOrderByRelevanceFieldEnum]
 
 
+export const CritereEvaluationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  libelle: 'libelle',
+  description: 'description',
+  appelId: 'appelId'
+} as const
+
+export type CritereEvaluationOrderByRelevanceFieldEnum = (typeof CritereEvaluationOrderByRelevanceFieldEnum)[keyof typeof CritereEvaluationOrderByRelevanceFieldEnum]
+
+
+export const NoteCritereEvaluationOrderByRelevanceFieldEnum = {
+  id: 'id',
+  commentaire: 'commentaire',
+  evaluationId: 'evaluationId',
+  critereId: 'critereId'
+} as const
+
+export type NoteCritereEvaluationOrderByRelevanceFieldEnum = (typeof NoteCritereEvaluationOrderByRelevanceFieldEnum)[keyof typeof NoteCritereEvaluationOrderByRelevanceFieldEnum]
+
+
+export const DecisionCandidatureOrderByRelevanceFieldEnum = {
+  id: 'id',
+  justification: 'justification',
+  candidatureId: 'candidatureId',
+  decideurId: 'decideurId'
+} as const
+
+export type DecisionCandidatureOrderByRelevanceFieldEnum = (typeof DecisionCandidatureOrderByRelevanceFieldEnum)[keyof typeof DecisionCandidatureOrderByRelevanceFieldEnum]
+
+
 export const AttributionBourseOrderByRelevanceFieldEnum = {
   id: 'id',
   reference: 'reference',
@@ -2066,6 +2336,20 @@ export type EnumStatutVerificationDocumentFieldRefInput<$PrismaModel> = FieldRef
  * Reference to a field of type 'DecisionEvaluation'
  */
 export type EnumDecisionEvaluationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DecisionEvaluation'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutEvaluation'
+ */
+export type EnumStatutEvaluationFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutEvaluation'>
+    
+
+
+/**
+ * Reference to a field of type 'TypeDecisionCandidature'
+ */
+export type EnumTypeDecisionCandidatureFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeDecisionCandidature'>
     
 
 
@@ -2250,6 +2534,9 @@ export type GlobalOmitConfig = {
   documentRequisAppel?: Prisma.DocumentRequisAppelOmit
   historiqueCandidature?: Prisma.HistoriqueCandidatureOmit
   evaluation?: Prisma.EvaluationOmit
+  critereEvaluation?: Prisma.CritereEvaluationOmit
+  noteCritereEvaluation?: Prisma.NoteCritereEvaluationOmit
+  decisionCandidature?: Prisma.DecisionCandidatureOmit
   attributionBourse?: Prisma.AttributionBourseOmit
   paiement?: Prisma.PaiementOmit
   renouvellement?: Prisma.RenouvellementOmit
