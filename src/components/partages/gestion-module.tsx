@@ -98,7 +98,10 @@ export function GestionModule({ module }: { module: NomModule }) {
 
   function ouvrirCreation() {
     setSelection(null);
-    formulaire.reset(Object.fromEntries(champsVisibles.map(champ => [champ.nom, champ.type === "checkbox" ? true : champ.nom === "devise" ? "USD" : ""])));
+    const champsCreation = champsVisibles.filter(champ =>
+      utilisateur.role !== "ETUDIANT" || module !== "candidatures" || champ.nom !== "statut"
+    );
+    formulaire.reset(Object.fromEntries(champsCreation.map(champ => [champ.nom, champ.type === "checkbox" ? true : champ.nom === "devise" ? "USD" : ""])));
     setOuvert(true);
   }
 
@@ -114,6 +117,10 @@ export function GestionModule({ module }: { module: NomModule }) {
     const resultat = await reponse.json();
     if (!reponse.ok) { toast.error(resultat.message ?? "Enregistrement impossible."); return; }
     toast.success(resultat.message); setOuvert(false); await charger(selection ? pagination.page : 1);
+  }
+
+  function signalerErreursFormulaire() {
+    toast.error("Veuillez vérifier les champs du formulaire.");
   }
 
   async function supprimer(ligne: Ligne) {
@@ -142,7 +149,7 @@ export function GestionModule({ module }: { module: NomModule }) {
       <div className="flex flex-col gap-3 border-t p-4 text-sm sm:flex-row sm:items-center sm:justify-between"><span>{pagination.total} enregistrement(s)</span><div className="flex items-center gap-2"><button disabled={pagination.page <= 1} onClick={() => { const page = pagination.page - 1; setPagination(p => ({ ...p, page })); void charger(page); }} className="rounded-lg border p-2 disabled:opacity-40"><ChevronLeft className="size-4"/></button><span>Page {pagination.page} / {pagination.pages}</span><button disabled={pagination.page >= pagination.pages} onClick={() => { const page = pagination.page + 1; setPagination(p => ({ ...p, page })); void charger(page); }} className="rounded-lg border p-2 disabled:opacity-40"><ChevronRight className="size-4"/></button></div></div>
     </section>
     <Dialog.Root open={ouvert} onOpenChange={setOuvert}><Dialog.Portal><Dialog.Backdrop className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm"/><Dialog.Viewport className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"><Dialog.Popup className="max-h-[95vh] w-full overflow-y-auto rounded-t-2xl bg-white shadow-2xl sm:max-w-3xl sm:rounded-2xl"><div className="sticky top-0 z-10 flex items-center justify-between border-b bg-white p-5"><Dialog.Title className="text-lg font-bold">{selection ? "Modifier" : "Nouvel enregistrement"}</Dialog.Title><Dialog.Close className="rounded-lg p-2 hover:bg-slate-100"><X className="size-5"/></Dialog.Close></div>
-      <form onSubmit={formulaire.handleSubmit(enregistrer)} className="grid gap-4 p-5 sm:grid-cols-2">{champsVisibles.filter(champ => (utilisateur.role !== "ETUDIANT" || module !== "candidatures" || selection || champ.nom !== "statut") && (module !== "utilisateurs" || champ.nom !== "etudiantId" || roleUtilisateurSelectionne === "ETUDIANT")).map(champ => <Champ key={champ.nom} champ={module === "utilisateurs" && champ.nom === "etudiantId" ? { ...champ, requis: true } : champ} formulaire={formulaire} options={champ.source ? options[champ.source] ?? [] : []}/>) }<div className="flex flex-col-reverse gap-2 border-t pt-4 sm:col-span-2 sm:flex-row sm:justify-end"><Dialog.Close className="min-h-11 rounded-xl border px-4">Annuler</Dialog.Close><button disabled={formulaire.formState.isSubmitting} className="min-h-11 rounded-xl bg-blue-700 px-5 font-semibold text-white disabled:opacity-50">{formulaire.formState.isSubmitting ? "Enregistrement…" : "Enregistrer"}</button></div></form>
+      <form onSubmit={formulaire.handleSubmit(enregistrer, signalerErreursFormulaire)} className="grid gap-4 p-5 sm:grid-cols-2">{champsVisibles.filter(champ => (utilisateur.role !== "ETUDIANT" || module !== "candidatures" || selection || champ.nom !== "statut") && (module !== "utilisateurs" || champ.nom !== "etudiantId" || roleUtilisateurSelectionne === "ETUDIANT")).map(champ => <Champ key={champ.nom} champ={module === "utilisateurs" && champ.nom === "etudiantId" ? { ...champ, requis: true } : champ} formulaire={formulaire} options={champ.source ? options[champ.source] ?? [] : []}/>) }<div className="flex flex-col-reverse gap-2 border-t pt-4 sm:col-span-2 sm:flex-row sm:justify-end"><Dialog.Close className="min-h-11 rounded-xl border px-4">Annuler</Dialog.Close><button disabled={formulaire.formState.isSubmitting} className="min-h-11 rounded-xl bg-blue-700 px-5 font-semibold text-white disabled:opacity-50">{formulaire.formState.isSubmitting ? "Enregistrement…" : "Enregistrer"}</button></div></form>
     </Dialog.Popup></Dialog.Viewport></Dialog.Portal></Dialog.Root>
     {module === "candidatures" && candidatureDocuments && <GestionDocuments candidatureId={String(candidatureDocuments.id)} reference={String(candidatureDocuments.reference)} statutCandidature={String(candidatureDocuments.statut)} ouvert={true} onOuvertChange={etat => { if (!etat) setCandidatureDocuments(null); }}/>} 
   </div>;

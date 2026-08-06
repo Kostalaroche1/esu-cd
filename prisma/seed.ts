@@ -2,6 +2,7 @@ import "dotenv/config";
 import bcrypt from "bcryptjs";
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "../src/generated/prisma/client";
+import { creerConfigurationMariaDb } from "../src/lib/configuration-base-donnees";
 
 const url = process.env.DATABASE_URL;
 const email = process.env.ADMIN_INITIAL_EMAIL;
@@ -17,7 +18,7 @@ const emailAdmin = email;
 const nomAdmin = nom;
 const motDePasseAdmin = motDePasseInitial;
 
-const prisma = new PrismaClient({ adapter: new PrismaMariaDb(url) });
+const prisma = new PrismaClient({ adapter: new PrismaMariaDb(creerConfigurationMariaDb(url)) });
 
 async function initialiser() {
   const motDePasse = await bcrypt.hash(motDePasseAdmin, 12);

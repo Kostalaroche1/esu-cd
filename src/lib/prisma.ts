@@ -1,12 +1,13 @@
 import { PrismaMariaDb } from "@prisma/adapter-mariadb";
 import { PrismaClient } from "@/generated/prisma/client";
+import { creerConfigurationMariaDb } from "@/lib/configuration-base-donnees";
 
 const globalPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function creerClientPrisma() {
   const url = process.env.DATABASE_URL;
   if (!url) throw new Error("La variable DATABASE_URL est obligatoire.");
-  return new PrismaClient({ adapter: new PrismaMariaDb(url) });
+  return new PrismaClient({ adapter: new PrismaMariaDb(creerConfigurationMariaDb(url)) });
 }
 
 export const prisma = globalPrisma.prisma ?? creerClientPrisma();
