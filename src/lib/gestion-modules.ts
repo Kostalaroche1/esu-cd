@@ -38,6 +38,12 @@ function nettoyerDonnees(module: NomModule, valeur: Record<string, unknown>) {
   return donnees;
 }
 
+function genererReferenceCandidature() {
+  const annee = new Date().getFullYear();
+  const identifiant = crypto.randomUUID().replaceAll("-", "").slice(0, 8).toUpperCase();
+  return `CAND-${annee}-${identifiant}`;
+}
+
 export async function listerModule(requete: NextRequest, module: NomModule) {
   const acces = await exigerAutorisation("lire");
   if (acces.erreur) return acces.erreur;
@@ -74,11 +80,13 @@ export async function creerDansModule(requete: NextRequest, module: NomModule) {
     const analyse = schemasModules[module].safeParse(await requete.json());
     if (!analyse.success) return NextResponse.json({ succes: false, message: "Données invalides.", erreurs: analyse.error.flatten().fieldErrors }, { status: 422 });
     const donnees = nettoyerDonnees(module, analyse.data as Record<string, unknown>);
+    if (module === "candidatures") donnees.reference = genererReferenceCandidature();
     if (module === "utilisateurs") {
       if (!donnees.motDePasse) return NextResponse.json({ succes: false, message: "Le mot de passe est obligatoire à la création." }, { status: 422 });
       donnees.motDePasse = await bcrypt.hash(String(donnees.motDePasse), 12);
     }
     if (module === "candidatures" && acces.session.user.role === "ETUDIANT") donnees.etudiantId = acces.session.user.etudiantId;
+    if (module === "candidatures" && !donnees.etudiantId) return NextResponse.json({ succes: false, message: "L’étudiant associé est obligatoire." }, { status: 422 });
     if (module === "evaluations" && acces.session.user.role === "EVALUATEUR") donnees.evaluateurId = acces.session.user.id;
     if (module === "attributions") {
       const candidature = await prisma.candidature.findUnique({ where: { id: String(donnees.candidatureId) }, select: { statut: true, etudiantId: true } });

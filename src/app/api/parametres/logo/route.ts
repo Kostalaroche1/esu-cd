@@ -24,6 +24,12 @@ export async function GET() {
 export async function POST(requete: NextRequest) {
   const acces = await exigerAutorisation("parametrer");
   if (acces.erreur) return acces.erreur;
+  if (!process.env.BLOB_READ_WRITE_TOKEN?.trim()) {
+    return NextResponse.json(
+      { succes: false, message: "Le stockage Vercel Blob n’est pas configuré. Renseignez BLOB_READ_WRITE_TOKEN puis redémarrez l’application." },
+      { status: 503 },
+    );
+  }
   let nouvelleUrl: string | null = null;
   try {
     const fichier = (await requete.formData()).get("logo");
@@ -44,7 +50,7 @@ export async function POST(requete: NextRequest) {
     return NextResponse.json({ succes: true, message: "Le logo de l’ESU a été mis à jour.", donnees: { url: blob.url } });
   } catch (erreur) {
     if (nouvelleUrl) await del(nouvelleUrl).catch(console.error);
-    return erreurApi(erreur, "Le téléversement du logo a échoué. Vérifiez BLOB_READ_WRITE_TOKEN.");
+    return erreurApi(erreur, "Le téléversement du logo a échoué. Vérifiez que le jeton Vercel Blob est valide et autorisé pour ce stockage.");
   }
 }
 
