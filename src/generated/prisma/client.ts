@@ -77,6 +77,16 @@ export type Candidature = Prisma.CandidatureModel
  */
 export type DocumentCandidature = Prisma.DocumentCandidatureModel
 /**
+ * Model DocumentRequisAppel
+ * 
+ */
+export type DocumentRequisAppel = Prisma.DocumentRequisAppelModel
+/**
+ * Model HistoriqueCandidature
+ * 
+ */
+export type HistoriqueCandidature = Prisma.HistoriqueCandidatureModel
+/**
  * Model Evaluation
  * 
  */
@@ -101,6 +111,11 @@ export type Renouvellement = Prisma.RenouvellementModel
  * 
  */
 export type Notification = Prisma.NotificationModel
+/**
+ * Model JournalAudit
+ * 
+ */
+export type JournalAudit = Prisma.JournalAuditModel
 /**
  * Model Parametre
  * 

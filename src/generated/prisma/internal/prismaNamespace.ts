@@ -404,11 +404,14 @@ export const ModelName = {
   AppelCandidature: 'AppelCandidature',
   Candidature: 'Candidature',
   DocumentCandidature: 'DocumentCandidature',
+  DocumentRequisAppel: 'DocumentRequisAppel',
+  HistoriqueCandidature: 'HistoriqueCandidature',
   Evaluation: 'Evaluation',
   AttributionBourse: 'AttributionBourse',
   Paiement: 'Paiement',
   Renouvellement: 'Renouvellement',
   Notification: 'Notification',
+  JournalAudit: 'JournalAudit',
   Parametre: 'Parametre'
 } as const
 
@@ -425,7 +428,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "utilisateur" | "etablissement" | "etudiant" | "programmeBourse" | "appelCandidature" | "candidature" | "documentCandidature" | "evaluation" | "attributionBourse" | "paiement" | "renouvellement" | "notification" | "parametre"
+    modelProps: "utilisateur" | "etablissement" | "etudiant" | "programmeBourse" | "appelCandidature" | "candidature" | "documentCandidature" | "documentRequisAppel" | "historiqueCandidature" | "evaluation" | "attributionBourse" | "paiement" | "renouvellement" | "notification" | "journalAudit" | "parametre"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -891,6 +894,138 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    DocumentRequisAppel: {
+      payload: Prisma.$DocumentRequisAppelPayload<ExtArgs>
+      fields: Prisma.DocumentRequisAppelFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.DocumentRequisAppelFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.DocumentRequisAppelFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>
+        }
+        findFirst: {
+          args: Prisma.DocumentRequisAppelFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.DocumentRequisAppelFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>
+        }
+        findMany: {
+          args: Prisma.DocumentRequisAppelFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>[]
+        }
+        create: {
+          args: Prisma.DocumentRequisAppelCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>
+        }
+        createMany: {
+          args: Prisma.DocumentRequisAppelCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.DocumentRequisAppelDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>
+        }
+        update: {
+          args: Prisma.DocumentRequisAppelUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>
+        }
+        deleteMany: {
+          args: Prisma.DocumentRequisAppelDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.DocumentRequisAppelUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.DocumentRequisAppelUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$DocumentRequisAppelPayload>
+        }
+        aggregate: {
+          args: Prisma.DocumentRequisAppelAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateDocumentRequisAppel>
+        }
+        groupBy: {
+          args: Prisma.DocumentRequisAppelGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DocumentRequisAppelGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.DocumentRequisAppelCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.DocumentRequisAppelCountAggregateOutputType> | number
+        }
+      }
+    }
+    HistoriqueCandidature: {
+      payload: Prisma.$HistoriqueCandidaturePayload<ExtArgs>
+      fields: Prisma.HistoriqueCandidatureFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HistoriqueCandidatureFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HistoriqueCandidatureFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>
+        }
+        findFirst: {
+          args: Prisma.HistoriqueCandidatureFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HistoriqueCandidatureFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>
+        }
+        findMany: {
+          args: Prisma.HistoriqueCandidatureFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>[]
+        }
+        create: {
+          args: Prisma.HistoriqueCandidatureCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>
+        }
+        createMany: {
+          args: Prisma.HistoriqueCandidatureCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.HistoriqueCandidatureDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>
+        }
+        update: {
+          args: Prisma.HistoriqueCandidatureUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>
+        }
+        deleteMany: {
+          args: Prisma.HistoriqueCandidatureDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HistoriqueCandidatureUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.HistoriqueCandidatureUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HistoriqueCandidaturePayload>
+        }
+        aggregate: {
+          args: Prisma.HistoriqueCandidatureAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHistoriqueCandidature>
+        }
+        groupBy: {
+          args: Prisma.HistoriqueCandidatureGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HistoriqueCandidatureGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HistoriqueCandidatureCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HistoriqueCandidatureCountAggregateOutputType> | number
+        }
+      }
+    }
     Evaluation: {
       payload: Prisma.$EvaluationPayload<ExtArgs>
       fields: Prisma.EvaluationFieldRefs
@@ -1221,6 +1356,72 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    JournalAudit: {
+      payload: Prisma.$JournalAuditPayload<ExtArgs>
+      fields: Prisma.JournalAuditFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.JournalAuditFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.JournalAuditFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>
+        }
+        findFirst: {
+          args: Prisma.JournalAuditFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.JournalAuditFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>
+        }
+        findMany: {
+          args: Prisma.JournalAuditFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>[]
+        }
+        create: {
+          args: Prisma.JournalAuditCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>
+        }
+        createMany: {
+          args: Prisma.JournalAuditCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.JournalAuditDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>
+        }
+        update: {
+          args: Prisma.JournalAuditUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>
+        }
+        deleteMany: {
+          args: Prisma.JournalAuditDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.JournalAuditUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.JournalAuditUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$JournalAuditPayload>
+        }
+        aggregate: {
+          args: Prisma.JournalAuditAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateJournalAudit>
+        }
+        groupBy: {
+          args: Prisma.JournalAuditGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JournalAuditGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.JournalAuditCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.JournalAuditCountAggregateOutputType> | number
+        }
+      }
+    }
     Parametre: {
       payload: Prisma.$ParametrePayload<ExtArgs>
       fields: Prisma.ParametreFieldRefs
@@ -1334,6 +1535,9 @@ export const UtilisateurScalarFieldEnum = {
   role: 'role',
   estActif: 'estActif',
   etudiantId: 'etudiantId',
+  tentativesConnexion: 'tentativesConnexion',
+  verrouilleJusqua: 'verrouilleJusqua',
+  doitChangerMotDePasse: 'doitChangerMotDePasse',
   creeLe: 'creeLe',
   modifieLe: 'modifieLe'
 } as const
@@ -1440,6 +1644,10 @@ export const DocumentCandidatureScalarFieldEnum = {
   cheminFichier: 'cheminFichier',
   estValide: 'estValide',
   commentaire: 'commentaire',
+  statutVerification: 'statutVerification',
+  motifVerification: 'motifVerification',
+  verifieLe: 'verifieLe',
+  verifieParId: 'verifieParId',
   typeMime: 'typeMime',
   tailleOctets: 'tailleOctets',
   candidatureId: 'candidatureId',
@@ -1447,6 +1655,30 @@ export const DocumentCandidatureScalarFieldEnum = {
 } as const
 
 export type DocumentCandidatureScalarFieldEnum = (typeof DocumentCandidatureScalarFieldEnum)[keyof typeof DocumentCandidatureScalarFieldEnum]
+
+
+export const DocumentRequisAppelScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  estObligatoire: 'estObligatoire',
+  appelId: 'appelId',
+  creeLe: 'creeLe'
+} as const
+
+export type DocumentRequisAppelScalarFieldEnum = (typeof DocumentRequisAppelScalarFieldEnum)[keyof typeof DocumentRequisAppelScalarFieldEnum]
+
+
+export const HistoriqueCandidatureScalarFieldEnum = {
+  id: 'id',
+  ancienStatut: 'ancienStatut',
+  nouveauStatut: 'nouveauStatut',
+  commentaire: 'commentaire',
+  candidatureId: 'candidatureId',
+  utilisateurId: 'utilisateurId',
+  creeLe: 'creeLe'
+} as const
+
+export type HistoriqueCandidatureScalarFieldEnum = (typeof HistoriqueCandidatureScalarFieldEnum)[keyof typeof HistoriqueCandidatureScalarFieldEnum]
 
 
 export const EvaluationScalarFieldEnum = {
@@ -1490,6 +1722,9 @@ export const PaiementScalarFieldEnum = {
   statut: 'statut',
   modePaiement: 'modePaiement',
   preuveUrl: 'preuveUrl',
+  preuveChemin: 'preuveChemin',
+  preuveNom: 'preuveNom',
+  preuveTypeMime: 'preuveTypeMime',
   attributionId: 'attributionId',
   creeLe: 'creeLe'
 } as const
@@ -1503,6 +1738,8 @@ export const RenouvellementScalarFieldEnum = {
   decision: 'decision',
   commentaire: 'commentaire',
   dateDecision: 'dateDecision',
+  dateDebutSuspension: 'dateDebutSuspension',
+  dateFinSuspension: 'dateFinSuspension',
   attributionId: 'attributionId',
   creeLe: 'creeLe'
 } as const
@@ -1515,11 +1752,25 @@ export const NotificationScalarFieldEnum = {
   titre: 'titre',
   message: 'message',
   estLue: 'estLue',
+  lien: 'lien',
   utilisateurId: 'utilisateurId',
   creeLe: 'creeLe'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const JournalAuditScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entite: 'entite',
+  entiteId: 'entiteId',
+  details: 'details',
+  utilisateurId: 'utilisateurId',
+  creeLe: 'creeLe'
+} as const
+
+export type JournalAuditScalarFieldEnum = (typeof JournalAuditScalarFieldEnum)[keyof typeof JournalAuditScalarFieldEnum]
 
 
 export const ParametreScalarFieldEnum = {
@@ -1635,11 +1886,31 @@ export const DocumentCandidatureOrderByRelevanceFieldEnum = {
   nomFichier: 'nomFichier',
   cheminFichier: 'cheminFichier',
   commentaire: 'commentaire',
+  motifVerification: 'motifVerification',
+  verifieParId: 'verifieParId',
   typeMime: 'typeMime',
   candidatureId: 'candidatureId'
 } as const
 
 export type DocumentCandidatureOrderByRelevanceFieldEnum = (typeof DocumentCandidatureOrderByRelevanceFieldEnum)[keyof typeof DocumentCandidatureOrderByRelevanceFieldEnum]
+
+
+export const DocumentRequisAppelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  appelId: 'appelId'
+} as const
+
+export type DocumentRequisAppelOrderByRelevanceFieldEnum = (typeof DocumentRequisAppelOrderByRelevanceFieldEnum)[keyof typeof DocumentRequisAppelOrderByRelevanceFieldEnum]
+
+
+export const HistoriqueCandidatureOrderByRelevanceFieldEnum = {
+  id: 'id',
+  commentaire: 'commentaire',
+  candidatureId: 'candidatureId',
+  utilisateurId: 'utilisateurId'
+} as const
+
+export type HistoriqueCandidatureOrderByRelevanceFieldEnum = (typeof HistoriqueCandidatureOrderByRelevanceFieldEnum)[keyof typeof HistoriqueCandidatureOrderByRelevanceFieldEnum]
 
 
 export const EvaluationOrderByRelevanceFieldEnum = {
@@ -1670,6 +1941,9 @@ export const PaiementOrderByRelevanceFieldEnum = {
   devise: 'devise',
   modePaiement: 'modePaiement',
   preuveUrl: 'preuveUrl',
+  preuveChemin: 'preuveChemin',
+  preuveNom: 'preuveNom',
+  preuveTypeMime: 'preuveTypeMime',
   attributionId: 'attributionId'
 } as const
 
@@ -1691,10 +1965,23 @@ export const NotificationOrderByRelevanceFieldEnum = {
   id: 'id',
   titre: 'titre',
   message: 'message',
+  lien: 'lien',
   utilisateurId: 'utilisateurId'
 } as const
 
 export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
+
+
+export const JournalAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entite: 'entite',
+  entiteId: 'entiteId',
+  details: 'details',
+  utilisateurId: 'utilisateurId'
+} as const
+
+export type JournalAuditOrderByRelevanceFieldEnum = (typeof JournalAuditOrderByRelevanceFieldEnum)[keyof typeof JournalAuditOrderByRelevanceFieldEnum]
 
 
 export const ParametreOrderByRelevanceFieldEnum = {
@@ -1734,6 +2021,13 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
  * Reference to a field of type 'DateTime'
  */
 export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1748,13 +2042,6 @@ export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
  * Reference to a field of type 'StatutCandidature'
  */
 export type EnumStatutCandidatureFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutCandidature'>
@@ -1765,6 +2052,13 @@ export type EnumStatutCandidatureFieldRefInput<$PrismaModel> = FieldRefInputType
  * Reference to a field of type 'TypeDocument'
  */
 export type EnumTypeDocumentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeDocument'>
+    
+
+
+/**
+ * Reference to a field of type 'StatutVerificationDocument'
+ */
+export type EnumStatutVerificationDocumentFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutVerificationDocument'>
     
 
 
@@ -1953,11 +2247,14 @@ export type GlobalOmitConfig = {
   appelCandidature?: Prisma.AppelCandidatureOmit
   candidature?: Prisma.CandidatureOmit
   documentCandidature?: Prisma.DocumentCandidatureOmit
+  documentRequisAppel?: Prisma.DocumentRequisAppelOmit
+  historiqueCandidature?: Prisma.HistoriqueCandidatureOmit
   evaluation?: Prisma.EvaluationOmit
   attributionBourse?: Prisma.AttributionBourseOmit
   paiement?: Prisma.PaiementOmit
   renouvellement?: Prisma.RenouvellementOmit
   notification?: Prisma.NotificationOmit
+  journalAudit?: Prisma.JournalAuditOmit
   parametre?: Prisma.ParametreOmit
 }
 

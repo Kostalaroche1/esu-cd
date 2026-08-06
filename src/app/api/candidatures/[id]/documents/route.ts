@@ -19,7 +19,7 @@ export async function GET(_: NextRequest, contexte: Contexte) {
   const { id } = await contexte.params;
   const candidature = await candidatureAccessible(id, acces.session.user.role === "ETUDIANT" ? acces.session.user.etudiantId : null);
   if (!candidature) return NextResponse.json({ succes: false, message: "Candidature introuvable." }, { status: 404 });
-  const donnees = await prisma.documentCandidature.findMany({ where: { candidatureId: id }, orderBy: { creeLe: "desc" } });
+  const donnees = await prisma.documentCandidature.findMany({ where: { candidatureId: id }, include: { verifiePar: { select: { nomComplet: true } } }, orderBy: { creeLe: "desc" } });
   return NextResponse.json({ succes: true, donnees });
 }
 

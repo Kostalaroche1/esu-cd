@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import type { RoleUtilisateur } from "@/generated/prisma/client";
 
 const schemaConnexion = z.object({
-  email: z.string().email(),
+  email: z.string().trim().toLowerCase().email(),
   motDePasse: z.string().min(6),
 });
 
@@ -28,8 +28,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         });
 
         if (!utilisateur?.estActif) return null;
+        if (utilisateur.verrouilleJusqua && utilisateur.verrouilleJusqua > new Date()) return null;
         const valide = await bcrypt.compare(resultat.data.motDePasse, utilisateur.motDePasse);
-        if (!valide) return null;
+        if (!valide) {
+          const tentatives = utilisateur.tentativesConnexion + 1;
+          await prisma.utilisateur.update({ where: { id: utilisateur.id }, data: { tentativesConnexion: tentatives, verrouilleJusqua: tentatives >= 5 ? new Date(Date.now() + 15 * 60 * 1000) : null } });
+          return null;
+        }
+        if (utilisateur.tentativesConnexion || utilisateur.verrouilleJusqua) await prisma.utilisateur.update({ where: { id: utilisateur.id }, data: { tentativesConnexion: 0, verrouilleJusqua: null } });
 
         return {
           id: utilisateur.id,

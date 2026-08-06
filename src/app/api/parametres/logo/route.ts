@@ -1,7 +1,7 @@
 import { del, put } from "@vercel/blob";
 import { NextRequest, NextResponse } from "next/server";
 import { exigerAutorisation, erreurApi } from "@/lib/api";
-import { CLE_CHEMIN_LOGO_ESU, CLE_URL_LOGO_ESU, TAILLE_MAXIMALE_LOGO, TYPES_IMAGE_LOGO_ACCEPTES } from "@/lib/logo-esu";
+import { CLE_CHEMIN_LOGO_ESU, CLE_URL_LOGO_ESU, construireUrlLogo, TAILLE_MAXIMALE_LOGO, TYPES_IMAGE_LOGO_ACCEPTES } from "@/lib/logo-esu";
 import { prisma } from "@/lib/prisma";
 
 const extensionsParType: Record<string, string> = { "image/png": "png", "image/jpeg": "jpg", "image/webp": "webp" };
@@ -16,8 +16,8 @@ function contenuCorrespondAuType(octets: Uint8Array, type: string) {
 /** La lecture est publique afin que le logo soit disponible sur la page de connexion. */
 export async function GET() {
   try {
-    const parametre = await prisma.parametre.findUnique({ where: { cle: CLE_URL_LOGO_ESU }, select: { valeur: true } });
-    return NextResponse.json({ succes: true, donnees: { url: parametre?.valeur ?? null } });
+    const parametre = await prisma.parametre.findUnique({ where: { cle: CLE_CHEMIN_LOGO_ESU }, select: { modifieLe: true } });
+    return NextResponse.json({ succes: true, donnees: { url: parametre ? construireUrlLogo(parametre.modifieLe.getTime()) : null } });
   } catch (erreur) { return erreurApi(erreur, "Impossible de charger le logo de l’ESU."); }
 }
 
@@ -40,14 +40,14 @@ export async function POST(requete: NextRequest) {
     if (!contenuCorrespondAuType(octets, fichier.type)) return NextResponse.json({ succes: false, message: "Le contenu du fichier ne correspond pas à une image valide." }, { status: 422 });
 
     const ancienChemin = await prisma.parametre.findUnique({ where: { cle: CLE_CHEMIN_LOGO_ESU }, select: { valeur: true } });
-    const blob = await put(`identite/logo-esu.${extensionsParType[fichier.type]}`, fichier, { access: "public", addRandomSuffix: true, contentType: fichier.type });
+    const blob = await put(`identite/logo-esu.${extensionsParType[fichier.type]}`, fichier, { access: "private", addRandomSuffix: true, contentType: fichier.type });
     nouvelleUrl = blob.url;
     await prisma.$transaction([
       prisma.parametre.upsert({ where: { cle: CLE_URL_LOGO_ESU }, create: { cle: CLE_URL_LOGO_ESU, valeur: blob.url }, update: { valeur: blob.url } }),
       prisma.parametre.upsert({ where: { cle: CLE_CHEMIN_LOGO_ESU }, create: { cle: CLE_CHEMIN_LOGO_ESU, valeur: blob.pathname }, update: { valeur: blob.pathname } }),
     ]);
     if (ancienChemin?.valeur && ancienChemin.valeur !== blob.pathname) await del(ancienChemin.valeur).catch(console.error);
-    return NextResponse.json({ succes: true, message: "Le logo de l’ESU a été mis à jour.", donnees: { url: blob.url } });
+    return NextResponse.json({ succes: true, message: "Le logo de l’ESU a été mis à jour.", donnees: { url: construireUrlLogo() } });
   } catch (erreur) {
     if (nouvelleUrl) await del(nouvelleUrl).catch(console.error);
     return erreurApi(erreur, "Le téléversement du logo a échoué. Vérifiez que le jeton Vercel Blob est valide et autorisé pour ce stockage.");

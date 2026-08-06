@@ -19,7 +19,16 @@ export async function PATCH(requete: NextRequest, contexte: Contexte) {
     const etat = correspondance[action as keyof typeof correspondance];
     if (!etat) return NextResponse.json({ succes: false, message: "Action documentaire invalide." }, { status: 422 });
     if (["REJETE", "REMPLACEMENT_DEMANDE"].includes(etat) && motif.length < 3) return NextResponse.json({ succes: false, message: "Indiquez un motif d’au moins 3 caractères." }, { status: 422 });
-    const donnees = await prisma.documentCandidature.update({ where: { id: (await contexte.params).id }, data: encoderVerification(etat, motif) });
+    const id = (await contexte.params).id;
+    const existant = await prisma.documentCandidature.findUnique({ where: { id }, select: { candidature: { select: { etudiant: { select: { utilisateur: { select: { id: true } } } } } } } });
+    if (!existant) return NextResponse.json({ succes: false, message: "Document introuvable." }, { status: 404 });
+    const donnees = await prisma.$transaction(async transaction => {
+      const document = await transaction.documentCandidature.update({ where: { id }, data: { ...encoderVerification(etat, motif), verifieLe: etat === "A_VERIFIER" ? null : new Date(), verifieParId: etat === "A_VERIFIER" ? null : acces.session.user.id } });
+      await transaction.journalAudit.create({ data: { action, entite: "DocumentCandidature", entiteId: id, details: motif || null, utilisateurId: acces.session.user.id } });
+      const destinataireId = existant.candidature.etudiant.utilisateur?.id;
+      if (destinataireId && ["REJETE", "REMPLACEMENT_DEMANDE"].includes(etat)) await transaction.notification.create({ data: { utilisateurId: destinataireId, titre: etat === "REJETE" ? "Document rejeté" : "Remplacement demandé", message: motif, lien: "/candidatures" } });
+      return document;
+    });
     return NextResponse.json({ succes: true, message: etat === "VALIDE" ? "Document validé." : etat === "REJETE" ? "Document rejeté." : etat === "REMPLACEMENT_DEMANDE" ? "Remplacement demandé." : "Vérification réinitialisée.", donnees });
   } catch (erreur) { return erreurApi(erreur, "La vérification du document a échoué."); }
 }

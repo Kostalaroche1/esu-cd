@@ -76,3 +76,13 @@ export const StatutPaiement = {
 } as const
 
 export type StatutPaiement = (typeof StatutPaiement)[keyof typeof StatutPaiement]
+
+
+export const StatutVerificationDocument = {
+  A_VERIFIER: 'A_VERIFIER',
+  VALIDE: 'VALIDE',
+  REJETE: 'REJETE',
+  REMPLACEMENT_DEMANDE: 'REMPLACEMENT_DEMANDE'
+} as const
+
+export type StatutVerificationDocument = (typeof StatutVerificationDocument)[keyof typeof StatutVerificationDocument]

@@ -58,11 +58,14 @@ export const ModelName = {
   AppelCandidature: 'AppelCandidature',
   Candidature: 'Candidature',
   DocumentCandidature: 'DocumentCandidature',
+  DocumentRequisAppel: 'DocumentRequisAppel',
+  HistoriqueCandidature: 'HistoriqueCandidature',
   Evaluation: 'Evaluation',
   AttributionBourse: 'AttributionBourse',
   Paiement: 'Paiement',
   Renouvellement: 'Renouvellement',
   Notification: 'Notification',
+  JournalAudit: 'JournalAudit',
   Parametre: 'Parametre'
 } as const
 
@@ -90,6 +93,9 @@ export const UtilisateurScalarFieldEnum = {
   role: 'role',
   estActif: 'estActif',
   etudiantId: 'etudiantId',
+  tentativesConnexion: 'tentativesConnexion',
+  verrouilleJusqua: 'verrouilleJusqua',
+  doitChangerMotDePasse: 'doitChangerMotDePasse',
   creeLe: 'creeLe',
   modifieLe: 'modifieLe'
 } as const
@@ -196,6 +202,10 @@ export const DocumentCandidatureScalarFieldEnum = {
   cheminFichier: 'cheminFichier',
   estValide: 'estValide',
   commentaire: 'commentaire',
+  statutVerification: 'statutVerification',
+  motifVerification: 'motifVerification',
+  verifieLe: 'verifieLe',
+  verifieParId: 'verifieParId',
   typeMime: 'typeMime',
   tailleOctets: 'tailleOctets',
   candidatureId: 'candidatureId',
@@ -203,6 +213,30 @@ export const DocumentCandidatureScalarFieldEnum = {
 } as const
 
 export type DocumentCandidatureScalarFieldEnum = (typeof DocumentCandidatureScalarFieldEnum)[keyof typeof DocumentCandidatureScalarFieldEnum]
+
+
+export const DocumentRequisAppelScalarFieldEnum = {
+  id: 'id',
+  type: 'type',
+  estObligatoire: 'estObligatoire',
+  appelId: 'appelId',
+  creeLe: 'creeLe'
+} as const
+
+export type DocumentRequisAppelScalarFieldEnum = (typeof DocumentRequisAppelScalarFieldEnum)[keyof typeof DocumentRequisAppelScalarFieldEnum]
+
+
+export const HistoriqueCandidatureScalarFieldEnum = {
+  id: 'id',
+  ancienStatut: 'ancienStatut',
+  nouveauStatut: 'nouveauStatut',
+  commentaire: 'commentaire',
+  candidatureId: 'candidatureId',
+  utilisateurId: 'utilisateurId',
+  creeLe: 'creeLe'
+} as const
+
+export type HistoriqueCandidatureScalarFieldEnum = (typeof HistoriqueCandidatureScalarFieldEnum)[keyof typeof HistoriqueCandidatureScalarFieldEnum]
 
 
 export const EvaluationScalarFieldEnum = {
@@ -246,6 +280,9 @@ export const PaiementScalarFieldEnum = {
   statut: 'statut',
   modePaiement: 'modePaiement',
   preuveUrl: 'preuveUrl',
+  preuveChemin: 'preuveChemin',
+  preuveNom: 'preuveNom',
+  preuveTypeMime: 'preuveTypeMime',
   attributionId: 'attributionId',
   creeLe: 'creeLe'
 } as const
@@ -259,6 +296,8 @@ export const RenouvellementScalarFieldEnum = {
   decision: 'decision',
   commentaire: 'commentaire',
   dateDecision: 'dateDecision',
+  dateDebutSuspension: 'dateDebutSuspension',
+  dateFinSuspension: 'dateFinSuspension',
   attributionId: 'attributionId',
   creeLe: 'creeLe'
 } as const
@@ -271,11 +310,25 @@ export const NotificationScalarFieldEnum = {
   titre: 'titre',
   message: 'message',
   estLue: 'estLue',
+  lien: 'lien',
   utilisateurId: 'utilisateurId',
   creeLe: 'creeLe'
 } as const
 
 export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const JournalAuditScalarFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entite: 'entite',
+  entiteId: 'entiteId',
+  details: 'details',
+  utilisateurId: 'utilisateurId',
+  creeLe: 'creeLe'
+} as const
+
+export type JournalAuditScalarFieldEnum = (typeof JournalAuditScalarFieldEnum)[keyof typeof JournalAuditScalarFieldEnum]
 
 
 export const ParametreScalarFieldEnum = {
@@ -391,11 +444,31 @@ export const DocumentCandidatureOrderByRelevanceFieldEnum = {
   nomFichier: 'nomFichier',
   cheminFichier: 'cheminFichier',
   commentaire: 'commentaire',
+  motifVerification: 'motifVerification',
+  verifieParId: 'verifieParId',
   typeMime: 'typeMime',
   candidatureId: 'candidatureId'
 } as const
 
 export type DocumentCandidatureOrderByRelevanceFieldEnum = (typeof DocumentCandidatureOrderByRelevanceFieldEnum)[keyof typeof DocumentCandidatureOrderByRelevanceFieldEnum]
+
+
+export const DocumentRequisAppelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  appelId: 'appelId'
+} as const
+
+export type DocumentRequisAppelOrderByRelevanceFieldEnum = (typeof DocumentRequisAppelOrderByRelevanceFieldEnum)[keyof typeof DocumentRequisAppelOrderByRelevanceFieldEnum]
+
+
+export const HistoriqueCandidatureOrderByRelevanceFieldEnum = {
+  id: 'id',
+  commentaire: 'commentaire',
+  candidatureId: 'candidatureId',
+  utilisateurId: 'utilisateurId'
+} as const
+
+export type HistoriqueCandidatureOrderByRelevanceFieldEnum = (typeof HistoriqueCandidatureOrderByRelevanceFieldEnum)[keyof typeof HistoriqueCandidatureOrderByRelevanceFieldEnum]
 
 
 export const EvaluationOrderByRelevanceFieldEnum = {
@@ -426,6 +499,9 @@ export const PaiementOrderByRelevanceFieldEnum = {
   devise: 'devise',
   modePaiement: 'modePaiement',
   preuveUrl: 'preuveUrl',
+  preuveChemin: 'preuveChemin',
+  preuveNom: 'preuveNom',
+  preuveTypeMime: 'preuveTypeMime',
   attributionId: 'attributionId'
 } as const
 
@@ -447,10 +523,23 @@ export const NotificationOrderByRelevanceFieldEnum = {
   id: 'id',
   titre: 'titre',
   message: 'message',
+  lien: 'lien',
   utilisateurId: 'utilisateurId'
 } as const
 
 export type NotificationOrderByRelevanceFieldEnum = (typeof NotificationOrderByRelevanceFieldEnum)[keyof typeof NotificationOrderByRelevanceFieldEnum]
+
+
+export const JournalAuditOrderByRelevanceFieldEnum = {
+  id: 'id',
+  action: 'action',
+  entite: 'entite',
+  entiteId: 'entiteId',
+  details: 'details',
+  utilisateurId: 'utilisateurId'
+} as const
+
+export type JournalAuditOrderByRelevanceFieldEnum = (typeof JournalAuditOrderByRelevanceFieldEnum)[keyof typeof JournalAuditOrderByRelevanceFieldEnum]
 
 
 export const ParametreOrderByRelevanceFieldEnum = {

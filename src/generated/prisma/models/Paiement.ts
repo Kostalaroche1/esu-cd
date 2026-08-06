@@ -45,6 +45,9 @@ export type PaiementMinAggregateOutputType = {
   statut: $Enums.StatutPaiement | null
   modePaiement: string | null
   preuveUrl: string | null
+  preuveChemin: string | null
+  preuveNom: string | null
+  preuveTypeMime: string | null
   attributionId: string | null
   creeLe: Date | null
 }
@@ -60,6 +63,9 @@ export type PaiementMaxAggregateOutputType = {
   statut: $Enums.StatutPaiement | null
   modePaiement: string | null
   preuveUrl: string | null
+  preuveChemin: string | null
+  preuveNom: string | null
+  preuveTypeMime: string | null
   attributionId: string | null
   creeLe: Date | null
 }
@@ -75,6 +81,9 @@ export type PaiementCountAggregateOutputType = {
   statut: number
   modePaiement: number
   preuveUrl: number
+  preuveChemin: number
+  preuveNom: number
+  preuveTypeMime: number
   attributionId: number
   creeLe: number
   _all: number
@@ -100,6 +109,9 @@ export type PaiementMinAggregateInputType = {
   statut?: true
   modePaiement?: true
   preuveUrl?: true
+  preuveChemin?: true
+  preuveNom?: true
+  preuveTypeMime?: true
   attributionId?: true
   creeLe?: true
 }
@@ -115,6 +127,9 @@ export type PaiementMaxAggregateInputType = {
   statut?: true
   modePaiement?: true
   preuveUrl?: true
+  preuveChemin?: true
+  preuveNom?: true
+  preuveTypeMime?: true
   attributionId?: true
   creeLe?: true
 }
@@ -130,6 +145,9 @@ export type PaiementCountAggregateInputType = {
   statut?: true
   modePaiement?: true
   preuveUrl?: true
+  preuveChemin?: true
+  preuveNom?: true
+  preuveTypeMime?: true
   attributionId?: true
   creeLe?: true
   _all?: true
@@ -232,6 +250,9 @@ export type PaiementGroupByOutputType = {
   statut: $Enums.StatutPaiement
   modePaiement: string | null
   preuveUrl: string | null
+  preuveChemin: string | null
+  preuveNom: string | null
+  preuveTypeMime: string | null
   attributionId: string
   creeLe: Date
   _count: PaiementCountAggregateOutputType | null
@@ -270,6 +291,9 @@ export type PaiementWhereInput = {
   statut?: Prisma.EnumStatutPaiementFilter<"Paiement"> | $Enums.StatutPaiement
   modePaiement?: Prisma.StringNullableFilter<"Paiement"> | string | null
   preuveUrl?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveChemin?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveNom?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveTypeMime?: Prisma.StringNullableFilter<"Paiement"> | string | null
   attributionId?: Prisma.StringFilter<"Paiement"> | string
   creeLe?: Prisma.DateTimeFilter<"Paiement"> | Date | string
   attribution?: Prisma.XOR<Prisma.AttributionBourseScalarRelationFilter, Prisma.AttributionBourseWhereInput>
@@ -286,6 +310,9 @@ export type PaiementOrderByWithRelationInput = {
   statut?: Prisma.SortOrder
   modePaiement?: Prisma.SortOrderInput | Prisma.SortOrder
   preuveUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  preuveChemin?: Prisma.SortOrderInput | Prisma.SortOrder
+  preuveNom?: Prisma.SortOrderInput | Prisma.SortOrder
+  preuveTypeMime?: Prisma.SortOrderInput | Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
   attribution?: Prisma.AttributionBourseOrderByWithRelationInput
@@ -306,6 +333,9 @@ export type PaiementWhereUniqueInput = Prisma.AtLeast<{
   statut?: Prisma.EnumStatutPaiementFilter<"Paiement"> | $Enums.StatutPaiement
   modePaiement?: Prisma.StringNullableFilter<"Paiement"> | string | null
   preuveUrl?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveChemin?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveNom?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveTypeMime?: Prisma.StringNullableFilter<"Paiement"> | string | null
   attributionId?: Prisma.StringFilter<"Paiement"> | string
   creeLe?: Prisma.DateTimeFilter<"Paiement"> | Date | string
   attribution?: Prisma.XOR<Prisma.AttributionBourseScalarRelationFilter, Prisma.AttributionBourseWhereInput>
@@ -322,6 +352,9 @@ export type PaiementOrderByWithAggregationInput = {
   statut?: Prisma.SortOrder
   modePaiement?: Prisma.SortOrderInput | Prisma.SortOrder
   preuveUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  preuveChemin?: Prisma.SortOrderInput | Prisma.SortOrder
+  preuveNom?: Prisma.SortOrderInput | Prisma.SortOrder
+  preuveTypeMime?: Prisma.SortOrderInput | Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
   _count?: Prisma.PaiementCountOrderByAggregateInput
@@ -345,6 +378,9 @@ export type PaiementScalarWhereWithAggregatesInput = {
   statut?: Prisma.EnumStatutPaiementWithAggregatesFilter<"Paiement"> | $Enums.StatutPaiement
   modePaiement?: Prisma.StringNullableWithAggregatesFilter<"Paiement"> | string | null
   preuveUrl?: Prisma.StringNullableWithAggregatesFilter<"Paiement"> | string | null
+  preuveChemin?: Prisma.StringNullableWithAggregatesFilter<"Paiement"> | string | null
+  preuveNom?: Prisma.StringNullableWithAggregatesFilter<"Paiement"> | string | null
+  preuveTypeMime?: Prisma.StringNullableWithAggregatesFilter<"Paiement"> | string | null
   attributionId?: Prisma.StringWithAggregatesFilter<"Paiement"> | string
   creeLe?: Prisma.DateTimeWithAggregatesFilter<"Paiement"> | Date | string
 }
@@ -360,6 +396,9 @@ export type PaiementCreateInput = {
   statut?: $Enums.StatutPaiement
   modePaiement?: string | null
   preuveUrl?: string | null
+  preuveChemin?: string | null
+  preuveNom?: string | null
+  preuveTypeMime?: string | null
   creeLe?: Date | string
   attribution: Prisma.AttributionBourseCreateNestedOneWithoutPaiementsInput
 }
@@ -375,6 +414,9 @@ export type PaiementUncheckedCreateInput = {
   statut?: $Enums.StatutPaiement
   modePaiement?: string | null
   preuveUrl?: string | null
+  preuveChemin?: string | null
+  preuveNom?: string | null
+  preuveTypeMime?: string | null
   attributionId: string
   creeLe?: Date | string
 }
@@ -390,6 +432,9 @@ export type PaiementUpdateInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attribution?: Prisma.AttributionBourseUpdateOneRequiredWithoutPaiementsNestedInput
 }
@@ -405,6 +450,9 @@ export type PaiementUncheckedUpdateInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attributionId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -420,6 +468,9 @@ export type PaiementCreateManyInput = {
   statut?: $Enums.StatutPaiement
   modePaiement?: string | null
   preuveUrl?: string | null
+  preuveChemin?: string | null
+  preuveNom?: string | null
+  preuveTypeMime?: string | null
   attributionId: string
   creeLe?: Date | string
 }
@@ -435,6 +486,9 @@ export type PaiementUpdateManyMutationInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -449,6 +503,9 @@ export type PaiementUncheckedUpdateManyInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   attributionId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -480,6 +537,9 @@ export type PaiementCountOrderByAggregateInput = {
   statut?: Prisma.SortOrder
   modePaiement?: Prisma.SortOrder
   preuveUrl?: Prisma.SortOrder
+  preuveChemin?: Prisma.SortOrder
+  preuveNom?: Prisma.SortOrder
+  preuveTypeMime?: Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
 }
@@ -499,6 +559,9 @@ export type PaiementMaxOrderByAggregateInput = {
   statut?: Prisma.SortOrder
   modePaiement?: Prisma.SortOrder
   preuveUrl?: Prisma.SortOrder
+  preuveChemin?: Prisma.SortOrder
+  preuveNom?: Prisma.SortOrder
+  preuveTypeMime?: Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
 }
@@ -514,6 +577,9 @@ export type PaiementMinOrderByAggregateInput = {
   statut?: Prisma.SortOrder
   modePaiement?: Prisma.SortOrder
   preuveUrl?: Prisma.SortOrder
+  preuveChemin?: Prisma.SortOrder
+  preuveNom?: Prisma.SortOrder
+  preuveTypeMime?: Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
 }
@@ -579,6 +645,9 @@ export type PaiementCreateWithoutAttributionInput = {
   statut?: $Enums.StatutPaiement
   modePaiement?: string | null
   preuveUrl?: string | null
+  preuveChemin?: string | null
+  preuveNom?: string | null
+  preuveTypeMime?: string | null
   creeLe?: Date | string
 }
 
@@ -593,6 +662,9 @@ export type PaiementUncheckedCreateWithoutAttributionInput = {
   statut?: $Enums.StatutPaiement
   modePaiement?: string | null
   preuveUrl?: string | null
+  preuveChemin?: string | null
+  preuveNom?: string | null
+  preuveTypeMime?: string | null
   creeLe?: Date | string
 }
 
@@ -636,6 +708,9 @@ export type PaiementScalarWhereInput = {
   statut?: Prisma.EnumStatutPaiementFilter<"Paiement"> | $Enums.StatutPaiement
   modePaiement?: Prisma.StringNullableFilter<"Paiement"> | string | null
   preuveUrl?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveChemin?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveNom?: Prisma.StringNullableFilter<"Paiement"> | string | null
+  preuveTypeMime?: Prisma.StringNullableFilter<"Paiement"> | string | null
   attributionId?: Prisma.StringFilter<"Paiement"> | string
   creeLe?: Prisma.DateTimeFilter<"Paiement"> | Date | string
 }
@@ -651,6 +726,9 @@ export type PaiementCreateManyAttributionInput = {
   statut?: $Enums.StatutPaiement
   modePaiement?: string | null
   preuveUrl?: string | null
+  preuveChemin?: string | null
+  preuveNom?: string | null
+  preuveTypeMime?: string | null
   creeLe?: Date | string
 }
 
@@ -665,6 +743,9 @@ export type PaiementUpdateWithoutAttributionInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -679,6 +760,9 @@ export type PaiementUncheckedUpdateWithoutAttributionInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -693,6 +777,9 @@ export type PaiementUncheckedUpdateManyWithoutAttributionInput = {
   statut?: Prisma.EnumStatutPaiementFieldUpdateOperationsInput | $Enums.StatutPaiement
   modePaiement?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   preuveUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveChemin?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveNom?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  preuveTypeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -709,6 +796,9 @@ export type PaiementSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   statut?: boolean
   modePaiement?: boolean
   preuveUrl?: boolean
+  preuveChemin?: boolean
+  preuveNom?: boolean
+  preuveTypeMime?: boolean
   attributionId?: boolean
   creeLe?: boolean
   attribution?: boolean | Prisma.AttributionBourseDefaultArgs<ExtArgs>
@@ -727,11 +817,14 @@ export type PaiementSelectScalar = {
   statut?: boolean
   modePaiement?: boolean
   preuveUrl?: boolean
+  preuveChemin?: boolean
+  preuveNom?: boolean
+  preuveTypeMime?: boolean
   attributionId?: boolean
   creeLe?: boolean
 }
 
-export type PaiementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "periode" | "montant" | "devise" | "datePrevue" | "datePaiement" | "statut" | "modePaiement" | "preuveUrl" | "attributionId" | "creeLe", ExtArgs["result"]["paiement"]>
+export type PaiementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "reference" | "periode" | "montant" | "devise" | "datePrevue" | "datePaiement" | "statut" | "modePaiement" | "preuveUrl" | "preuveChemin" | "preuveNom" | "preuveTypeMime" | "attributionId" | "creeLe", ExtArgs["result"]["paiement"]>
 export type PaiementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attribution?: boolean | Prisma.AttributionBourseDefaultArgs<ExtArgs>
 }
@@ -752,6 +845,9 @@ export type $PaiementPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     statut: $Enums.StatutPaiement
     modePaiement: string | null
     preuveUrl: string | null
+    preuveChemin: string | null
+    preuveNom: string | null
+    preuveTypeMime: string | null
     attributionId: string
     creeLe: Date
   }, ExtArgs["result"]["paiement"]>
@@ -1134,6 +1230,9 @@ export interface PaiementFieldRefs {
   readonly statut: Prisma.FieldRef<"Paiement", 'StatutPaiement'>
   readonly modePaiement: Prisma.FieldRef<"Paiement", 'String'>
   readonly preuveUrl: Prisma.FieldRef<"Paiement", 'String'>
+  readonly preuveChemin: Prisma.FieldRef<"Paiement", 'String'>
+  readonly preuveNom: Prisma.FieldRef<"Paiement", 'String'>
+  readonly preuveTypeMime: Prisma.FieldRef<"Paiement", 'String'>
   readonly attributionId: Prisma.FieldRef<"Paiement", 'String'>
   readonly creeLe: Prisma.FieldRef<"Paiement", 'DateTime'>
 }

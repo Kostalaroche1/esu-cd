@@ -18,12 +18,13 @@ const marqueurs: Record<Exclude<EtatDocument, "A_VERIFIER" | "VALIDE">, string> 
 };
 
 export function encoderVerification(etat: EtatDocument, motif?: string | null) {
-  if (etat === "VALIDE") return { estValide: true, commentaire: null };
-  if (etat === "A_VERIFIER") return { estValide: false, commentaire: null };
-  return { estValide: false, commentaire: `${marqueurs[etat]}${motif?.trim() ?? ""}` };
+  if (etat === "VALIDE") return { estValide: true, commentaire: null, statutVerification: etat, motifVerification: null };
+  if (etat === "A_VERIFIER") return { estValide: false, commentaire: null, statutVerification: etat, motifVerification: null };
+  return { estValide: false, commentaire: `${marqueurs[etat]}${motif?.trim() ?? ""}`, statutVerification: etat, motifVerification: motif?.trim() || null };
 }
 
-export function lireVerification(estValide: boolean, commentaire?: string | null): { etat: EtatDocument; motif: string | null } {
+export function lireVerification(estValide: boolean, commentaire?: string | null, statutVerification?: EtatDocument, motifVerification?: string | null): { etat: EtatDocument; motif: string | null } {
+  if (statutVerification) return { etat: statutVerification, motif: motifVerification ?? null };
   if (estValide) return { etat: "VALIDE", motif: null };
   for (const [etat, marqueur] of Object.entries(marqueurs)) {
     if (commentaire?.startsWith(marqueur)) return { etat: etat as EtatDocument, motif: commentaire.slice(marqueur.length) || null };

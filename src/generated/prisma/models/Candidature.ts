@@ -269,6 +269,7 @@ export type CandidatureWhereInput = {
   documents?: Prisma.DocumentCandidatureListRelationFilter
   evaluations?: Prisma.EvaluationListRelationFilter
   attribution?: Prisma.XOR<Prisma.AttributionBourseNullableScalarRelationFilter, Prisma.AttributionBourseWhereInput> | null
+  historique?: Prisma.HistoriqueCandidatureListRelationFilter
 }
 
 export type CandidatureOrderByWithRelationInput = {
@@ -288,6 +289,7 @@ export type CandidatureOrderByWithRelationInput = {
   documents?: Prisma.DocumentCandidatureOrderByRelationAggregateInput
   evaluations?: Prisma.EvaluationOrderByRelationAggregateInput
   attribution?: Prisma.AttributionBourseOrderByWithRelationInput
+  historique?: Prisma.HistoriqueCandidatureOrderByRelationAggregateInput
   _relevance?: Prisma.CandidatureOrderByRelevanceInput
 }
 
@@ -312,6 +314,7 @@ export type CandidatureWhereUniqueInput = Prisma.AtLeast<{
   documents?: Prisma.DocumentCandidatureListRelationFilter
   evaluations?: Prisma.EvaluationListRelationFilter
   attribution?: Prisma.XOR<Prisma.AttributionBourseNullableScalarRelationFilter, Prisma.AttributionBourseWhereInput> | null
+  historique?: Prisma.HistoriqueCandidatureListRelationFilter
 }, "id" | "reference" | "etudiantId_appelId">
 
 export type CandidatureOrderByWithAggregationInput = {
@@ -365,6 +368,7 @@ export type CandidatureCreateInput = {
   documents?: Prisma.DocumentCandidatureCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUncheckedCreateInput = {
@@ -382,6 +386,7 @@ export type CandidatureUncheckedCreateInput = {
   documents?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseUncheckedCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUpdateInput = {
@@ -399,6 +404,7 @@ export type CandidatureUpdateInput = {
   documents?: Prisma.DocumentCandidatureUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateInput = {
@@ -416,6 +422,7 @@ export type CandidatureUncheckedUpdateInput = {
   documents?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUncheckedUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureCreateManyInput = {
@@ -636,6 +643,20 @@ export type CandidatureUpdateOneRequiredWithoutDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.CandidatureUpdateToOneWithWhereWithoutDocumentsInput, Prisma.CandidatureUpdateWithoutDocumentsInput>, Prisma.CandidatureUncheckedUpdateWithoutDocumentsInput>
 }
 
+export type CandidatureCreateNestedOneWithoutHistoriqueInput = {
+  create?: Prisma.XOR<Prisma.CandidatureCreateWithoutHistoriqueInput, Prisma.CandidatureUncheckedCreateWithoutHistoriqueInput>
+  connectOrCreate?: Prisma.CandidatureCreateOrConnectWithoutHistoriqueInput
+  connect?: Prisma.CandidatureWhereUniqueInput
+}
+
+export type CandidatureUpdateOneRequiredWithoutHistoriqueNestedInput = {
+  create?: Prisma.XOR<Prisma.CandidatureCreateWithoutHistoriqueInput, Prisma.CandidatureUncheckedCreateWithoutHistoriqueInput>
+  connectOrCreate?: Prisma.CandidatureCreateOrConnectWithoutHistoriqueInput
+  upsert?: Prisma.CandidatureUpsertWithoutHistoriqueInput
+  connect?: Prisma.CandidatureWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.CandidatureUpdateToOneWithWhereWithoutHistoriqueInput, Prisma.CandidatureUpdateWithoutHistoriqueInput>, Prisma.CandidatureUncheckedUpdateWithoutHistoriqueInput>
+}
+
 export type CandidatureCreateNestedOneWithoutEvaluationsInput = {
   create?: Prisma.XOR<Prisma.CandidatureCreateWithoutEvaluationsInput, Prisma.CandidatureUncheckedCreateWithoutEvaluationsInput>
   connectOrCreate?: Prisma.CandidatureCreateOrConnectWithoutEvaluationsInput
@@ -678,6 +699,7 @@ export type CandidatureCreateWithoutEtudiantInput = {
   documents?: Prisma.DocumentCandidatureCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUncheckedCreateWithoutEtudiantInput = {
@@ -694,6 +716,7 @@ export type CandidatureUncheckedCreateWithoutEtudiantInput = {
   documents?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseUncheckedCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureCreateOrConnectWithoutEtudiantInput = {
@@ -753,6 +776,7 @@ export type CandidatureCreateWithoutAppelInput = {
   documents?: Prisma.DocumentCandidatureCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUncheckedCreateWithoutAppelInput = {
@@ -769,6 +793,7 @@ export type CandidatureUncheckedCreateWithoutAppelInput = {
   documents?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseUncheckedCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureCreateOrConnectWithoutAppelInput = {
@@ -811,6 +836,7 @@ export type CandidatureCreateWithoutDocumentsInput = {
   appel: Prisma.AppelCandidatureCreateNestedOneWithoutCandidaturesInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUncheckedCreateWithoutDocumentsInput = {
@@ -827,6 +853,7 @@ export type CandidatureUncheckedCreateWithoutDocumentsInput = {
   modifieLe?: Date | string
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseUncheckedCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureCreateOrConnectWithoutDocumentsInput = {
@@ -859,6 +886,7 @@ export type CandidatureUpdateWithoutDocumentsInput = {
   appel?: Prisma.AppelCandidatureUpdateOneRequiredWithoutCandidaturesNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateWithoutDocumentsInput = {
@@ -873,6 +901,91 @@ export type CandidatureUncheckedUpdateWithoutDocumentsInput = {
   appelId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput
+  attribution?: Prisma.AttributionBourseUncheckedUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
+}
+
+export type CandidatureCreateWithoutHistoriqueInput = {
+  id?: string
+  reference: string
+  dateSoumission?: Date | string | null
+  motivation?: string | null
+  statut?: $Enums.StatutCandidature
+  scoreFinal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  commentaire?: string | null
+  creeLe?: Date | string
+  modifieLe?: Date | string
+  etudiant: Prisma.EtudiantCreateNestedOneWithoutCandidaturesInput
+  appel: Prisma.AppelCandidatureCreateNestedOneWithoutCandidaturesInput
+  documents?: Prisma.DocumentCandidatureCreateNestedManyWithoutCandidatureInput
+  evaluations?: Prisma.EvaluationCreateNestedManyWithoutCandidatureInput
+  attribution?: Prisma.AttributionBourseCreateNestedOneWithoutCandidatureInput
+}
+
+export type CandidatureUncheckedCreateWithoutHistoriqueInput = {
+  id?: string
+  reference: string
+  dateSoumission?: Date | string | null
+  motivation?: string | null
+  statut?: $Enums.StatutCandidature
+  scoreFinal?: runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  commentaire?: string | null
+  etudiantId: string
+  appelId: string
+  creeLe?: Date | string
+  modifieLe?: Date | string
+  documents?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
+  evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutCandidatureInput
+  attribution?: Prisma.AttributionBourseUncheckedCreateNestedOneWithoutCandidatureInput
+}
+
+export type CandidatureCreateOrConnectWithoutHistoriqueInput = {
+  where: Prisma.CandidatureWhereUniqueInput
+  create: Prisma.XOR<Prisma.CandidatureCreateWithoutHistoriqueInput, Prisma.CandidatureUncheckedCreateWithoutHistoriqueInput>
+}
+
+export type CandidatureUpsertWithoutHistoriqueInput = {
+  update: Prisma.XOR<Prisma.CandidatureUpdateWithoutHistoriqueInput, Prisma.CandidatureUncheckedUpdateWithoutHistoriqueInput>
+  create: Prisma.XOR<Prisma.CandidatureCreateWithoutHistoriqueInput, Prisma.CandidatureUncheckedCreateWithoutHistoriqueInput>
+  where?: Prisma.CandidatureWhereInput
+}
+
+export type CandidatureUpdateToOneWithWhereWithoutHistoriqueInput = {
+  where?: Prisma.CandidatureWhereInput
+  data: Prisma.XOR<Prisma.CandidatureUpdateWithoutHistoriqueInput, Prisma.CandidatureUncheckedUpdateWithoutHistoriqueInput>
+}
+
+export type CandidatureUpdateWithoutHistoriqueInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
+  dateSoumission?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutCandidatureFieldUpdateOperationsInput | $Enums.StatutCandidature
+  scoreFinal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  etudiant?: Prisma.EtudiantUpdateOneRequiredWithoutCandidaturesNestedInput
+  appel?: Prisma.AppelCandidatureUpdateOneRequiredWithoutCandidaturesNestedInput
+  documents?: Prisma.DocumentCandidatureUpdateManyWithoutCandidatureNestedInput
+  evaluations?: Prisma.EvaluationUpdateManyWithoutCandidatureNestedInput
+  attribution?: Prisma.AttributionBourseUpdateOneWithoutCandidatureNestedInput
+}
+
+export type CandidatureUncheckedUpdateWithoutHistoriqueInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  reference?: Prisma.StringFieldUpdateOperationsInput | string
+  dateSoumission?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  motivation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statut?: Prisma.EnumStatutCandidatureFieldUpdateOperationsInput | $Enums.StatutCandidature
+  scoreFinal?: Prisma.NullableDecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string | null
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  etudiantId?: Prisma.StringFieldUpdateOperationsInput | string
+  appelId?: Prisma.StringFieldUpdateOperationsInput | string
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  documents?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUncheckedUpdateOneWithoutCandidatureNestedInput
 }
@@ -891,6 +1004,7 @@ export type CandidatureCreateWithoutEvaluationsInput = {
   appel: Prisma.AppelCandidatureCreateNestedOneWithoutCandidaturesInput
   documents?: Prisma.DocumentCandidatureCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUncheckedCreateWithoutEvaluationsInput = {
@@ -907,6 +1021,7 @@ export type CandidatureUncheckedCreateWithoutEvaluationsInput = {
   modifieLe?: Date | string
   documents?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
   attribution?: Prisma.AttributionBourseUncheckedCreateNestedOneWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureCreateOrConnectWithoutEvaluationsInput = {
@@ -939,6 +1054,7 @@ export type CandidatureUpdateWithoutEvaluationsInput = {
   appel?: Prisma.AppelCandidatureUpdateOneRequiredWithoutCandidaturesNestedInput
   documents?: Prisma.DocumentCandidatureUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateWithoutEvaluationsInput = {
@@ -955,6 +1071,7 @@ export type CandidatureUncheckedUpdateWithoutEvaluationsInput = {
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUncheckedUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureCreateWithoutAttributionInput = {
@@ -971,6 +1088,7 @@ export type CandidatureCreateWithoutAttributionInput = {
   appel: Prisma.AppelCandidatureCreateNestedOneWithoutCandidaturesInput
   documents?: Prisma.DocumentCandidatureCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationCreateNestedManyWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureUncheckedCreateWithoutAttributionInput = {
@@ -987,6 +1105,7 @@ export type CandidatureUncheckedCreateWithoutAttributionInput = {
   modifieLe?: Date | string
   documents?: Prisma.DocumentCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
   evaluations?: Prisma.EvaluationUncheckedCreateNestedManyWithoutCandidatureInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedCreateNestedManyWithoutCandidatureInput
 }
 
 export type CandidatureCreateOrConnectWithoutAttributionInput = {
@@ -1019,6 +1138,7 @@ export type CandidatureUpdateWithoutAttributionInput = {
   appel?: Prisma.AppelCandidatureUpdateOneRequiredWithoutCandidaturesNestedInput
   documents?: Prisma.DocumentCandidatureUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateWithoutAttributionInput = {
@@ -1035,6 +1155,7 @@ export type CandidatureUncheckedUpdateWithoutAttributionInput = {
   modifieLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   documents?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureCreateManyEtudiantInput = {
@@ -1064,6 +1185,7 @@ export type CandidatureUpdateWithoutEtudiantInput = {
   documents?: Prisma.DocumentCandidatureUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateWithoutEtudiantInput = {
@@ -1080,6 +1202,7 @@ export type CandidatureUncheckedUpdateWithoutEtudiantInput = {
   documents?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUncheckedUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateManyWithoutEtudiantInput = {
@@ -1122,6 +1245,7 @@ export type CandidatureUpdateWithoutAppelInput = {
   documents?: Prisma.DocumentCandidatureUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateWithoutAppelInput = {
@@ -1138,6 +1262,7 @@ export type CandidatureUncheckedUpdateWithoutAppelInput = {
   documents?: Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
   evaluations?: Prisma.EvaluationUncheckedUpdateManyWithoutCandidatureNestedInput
   attribution?: Prisma.AttributionBourseUncheckedUpdateOneWithoutCandidatureNestedInput
+  historique?: Prisma.HistoriqueCandidatureUncheckedUpdateManyWithoutCandidatureNestedInput
 }
 
 export type CandidatureUncheckedUpdateManyWithoutAppelInput = {
@@ -1161,11 +1286,13 @@ export type CandidatureUncheckedUpdateManyWithoutAppelInput = {
 export type CandidatureCountOutputType = {
   documents: number
   evaluations: number
+  historique: number
 }
 
 export type CandidatureCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   documents?: boolean | CandidatureCountOutputTypeCountDocumentsArgs
   evaluations?: boolean | CandidatureCountOutputTypeCountEvaluationsArgs
+  historique?: boolean | CandidatureCountOutputTypeCountHistoriqueArgs
 }
 
 /**
@@ -1192,6 +1319,13 @@ export type CandidatureCountOutputTypeCountEvaluationsArgs<ExtArgs extends runti
   where?: Prisma.EvaluationWhereInput
 }
 
+/**
+ * CandidatureCountOutputType without action
+ */
+export type CandidatureCountOutputTypeCountHistoriqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.HistoriqueCandidatureWhereInput
+}
+
 
 export type CandidatureSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1210,6 +1344,7 @@ export type CandidatureSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   documents?: boolean | Prisma.Candidature$documentsArgs<ExtArgs>
   evaluations?: boolean | Prisma.Candidature$evaluationsArgs<ExtArgs>
   attribution?: boolean | Prisma.Candidature$attributionArgs<ExtArgs>
+  historique?: boolean | Prisma.Candidature$historiqueArgs<ExtArgs>
   _count?: boolean | Prisma.CandidatureCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["candidature"]>
 
@@ -1236,6 +1371,7 @@ export type CandidatureInclude<ExtArgs extends runtime.Types.Extensions.Internal
   documents?: boolean | Prisma.Candidature$documentsArgs<ExtArgs>
   evaluations?: boolean | Prisma.Candidature$evaluationsArgs<ExtArgs>
   attribution?: boolean | Prisma.Candidature$attributionArgs<ExtArgs>
+  historique?: boolean | Prisma.Candidature$historiqueArgs<ExtArgs>
   _count?: boolean | Prisma.CandidatureCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -1247,6 +1383,7 @@ export type $CandidaturePayload<ExtArgs extends runtime.Types.Extensions.Interna
     documents: Prisma.$DocumentCandidaturePayload<ExtArgs>[]
     evaluations: Prisma.$EvaluationPayload<ExtArgs>[]
     attribution: Prisma.$AttributionBoursePayload<ExtArgs> | null
+    historique: Prisma.$HistoriqueCandidaturePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1605,6 +1742,7 @@ export interface Prisma__CandidatureClient<T, Null = never, ExtArgs extends runt
   documents<T extends Prisma.Candidature$documentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Candidature$documentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentCandidaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   evaluations<T extends Prisma.Candidature$evaluationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Candidature$evaluationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EvaluationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   attribution<T extends Prisma.Candidature$attributionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Candidature$attributionArgs<ExtArgs>>): Prisma.Prisma__AttributionBourseClient<runtime.Types.Result.GetResult<Prisma.$AttributionBoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  historique<T extends Prisma.Candidature$historiqueArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Candidature$historiqueArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HistoriqueCandidaturePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2057,6 +2195,30 @@ export type Candidature$attributionArgs<ExtArgs extends runtime.Types.Extensions
    */
   include?: Prisma.AttributionBourseInclude<ExtArgs> | null
   where?: Prisma.AttributionBourseWhereInput
+}
+
+/**
+ * Candidature.historique
+ */
+export type Candidature$historiqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the HistoriqueCandidature
+   */
+  select?: Prisma.HistoriqueCandidatureSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the HistoriqueCandidature
+   */
+  omit?: Prisma.HistoriqueCandidatureOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.HistoriqueCandidatureInclude<ExtArgs> | null
+  where?: Prisma.HistoriqueCandidatureWhereInput
+  orderBy?: Prisma.HistoriqueCandidatureOrderByWithRelationInput | Prisma.HistoriqueCandidatureOrderByWithRelationInput[]
+  cursor?: Prisma.HistoriqueCandidatureWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.HistoriqueCandidatureScalarFieldEnum | Prisma.HistoriqueCandidatureScalarFieldEnum[]
 }
 
 /**

@@ -30,6 +30,8 @@ export type RenouvellementMinAggregateOutputType = {
   decision: string | null
   commentaire: string | null
   dateDecision: Date | null
+  dateDebutSuspension: Date | null
+  dateFinSuspension: Date | null
   attributionId: string | null
   creeLe: Date | null
 }
@@ -40,6 +42,8 @@ export type RenouvellementMaxAggregateOutputType = {
   decision: string | null
   commentaire: string | null
   dateDecision: Date | null
+  dateDebutSuspension: Date | null
+  dateFinSuspension: Date | null
   attributionId: string | null
   creeLe: Date | null
 }
@@ -50,6 +54,8 @@ export type RenouvellementCountAggregateOutputType = {
   decision: number
   commentaire: number
   dateDecision: number
+  dateDebutSuspension: number
+  dateFinSuspension: number
   attributionId: number
   creeLe: number
   _all: number
@@ -62,6 +68,8 @@ export type RenouvellementMinAggregateInputType = {
   decision?: true
   commentaire?: true
   dateDecision?: true
+  dateDebutSuspension?: true
+  dateFinSuspension?: true
   attributionId?: true
   creeLe?: true
 }
@@ -72,6 +80,8 @@ export type RenouvellementMaxAggregateInputType = {
   decision?: true
   commentaire?: true
   dateDecision?: true
+  dateDebutSuspension?: true
+  dateFinSuspension?: true
   attributionId?: true
   creeLe?: true
 }
@@ -82,6 +92,8 @@ export type RenouvellementCountAggregateInputType = {
   decision?: true
   commentaire?: true
   dateDecision?: true
+  dateDebutSuspension?: true
+  dateFinSuspension?: true
   attributionId?: true
   creeLe?: true
   _all?: true
@@ -165,6 +177,8 @@ export type RenouvellementGroupByOutputType = {
   decision: string
   commentaire: string | null
   dateDecision: Date
+  dateDebutSuspension: Date | null
+  dateFinSuspension: Date | null
   attributionId: string
   creeLe: Date
   _count: RenouvellementCountAggregateOutputType | null
@@ -196,6 +210,8 @@ export type RenouvellementWhereInput = {
   decision?: Prisma.StringFilter<"Renouvellement"> | string
   commentaire?: Prisma.StringNullableFilter<"Renouvellement"> | string | null
   dateDecision?: Prisma.DateTimeFilter<"Renouvellement"> | Date | string
+  dateDebutSuspension?: Prisma.DateTimeNullableFilter<"Renouvellement"> | Date | string | null
+  dateFinSuspension?: Prisma.DateTimeNullableFilter<"Renouvellement"> | Date | string | null
   attributionId?: Prisma.StringFilter<"Renouvellement"> | string
   creeLe?: Prisma.DateTimeFilter<"Renouvellement"> | Date | string
   attribution?: Prisma.XOR<Prisma.AttributionBourseScalarRelationFilter, Prisma.AttributionBourseWhereInput>
@@ -207,6 +223,8 @@ export type RenouvellementOrderByWithRelationInput = {
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
   dateDecision?: Prisma.SortOrder
+  dateDebutSuspension?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateFinSuspension?: Prisma.SortOrderInput | Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
   attribution?: Prisma.AttributionBourseOrderByWithRelationInput
@@ -223,6 +241,8 @@ export type RenouvellementWhereUniqueInput = Prisma.AtLeast<{
   decision?: Prisma.StringFilter<"Renouvellement"> | string
   commentaire?: Prisma.StringNullableFilter<"Renouvellement"> | string | null
   dateDecision?: Prisma.DateTimeFilter<"Renouvellement"> | Date | string
+  dateDebutSuspension?: Prisma.DateTimeNullableFilter<"Renouvellement"> | Date | string | null
+  dateFinSuspension?: Prisma.DateTimeNullableFilter<"Renouvellement"> | Date | string | null
   attributionId?: Prisma.StringFilter<"Renouvellement"> | string
   creeLe?: Prisma.DateTimeFilter<"Renouvellement"> | Date | string
   attribution?: Prisma.XOR<Prisma.AttributionBourseScalarRelationFilter, Prisma.AttributionBourseWhereInput>
@@ -234,6 +254,8 @@ export type RenouvellementOrderByWithAggregationInput = {
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
   dateDecision?: Prisma.SortOrder
+  dateDebutSuspension?: Prisma.SortOrderInput | Prisma.SortOrder
+  dateFinSuspension?: Prisma.SortOrderInput | Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
   _count?: Prisma.RenouvellementCountOrderByAggregateInput
@@ -250,6 +272,8 @@ export type RenouvellementScalarWhereWithAggregatesInput = {
   decision?: Prisma.StringWithAggregatesFilter<"Renouvellement"> | string
   commentaire?: Prisma.StringNullableWithAggregatesFilter<"Renouvellement"> | string | null
   dateDecision?: Prisma.DateTimeWithAggregatesFilter<"Renouvellement"> | Date | string
+  dateDebutSuspension?: Prisma.DateTimeNullableWithAggregatesFilter<"Renouvellement"> | Date | string | null
+  dateFinSuspension?: Prisma.DateTimeNullableWithAggregatesFilter<"Renouvellement"> | Date | string | null
   attributionId?: Prisma.StringWithAggregatesFilter<"Renouvellement"> | string
   creeLe?: Prisma.DateTimeWithAggregatesFilter<"Renouvellement"> | Date | string
 }
@@ -260,6 +284,8 @@ export type RenouvellementCreateInput = {
   decision: string
   commentaire?: string | null
   dateDecision?: Date | string
+  dateDebutSuspension?: Date | string | null
+  dateFinSuspension?: Date | string | null
   creeLe?: Date | string
   attribution: Prisma.AttributionBourseCreateNestedOneWithoutRenouvellementsInput
 }
@@ -270,6 +296,8 @@ export type RenouvellementUncheckedCreateInput = {
   decision: string
   commentaire?: string | null
   dateDecision?: Date | string
+  dateDebutSuspension?: Date | string | null
+  dateFinSuspension?: Date | string | null
   attributionId: string
   creeLe?: Date | string
 }
@@ -280,6 +308,8 @@ export type RenouvellementUpdateInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   attribution?: Prisma.AttributionBourseUpdateOneRequiredWithoutRenouvellementsNestedInput
 }
@@ -290,6 +320,8 @@ export type RenouvellementUncheckedUpdateInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attributionId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -300,6 +332,8 @@ export type RenouvellementCreateManyInput = {
   decision: string
   commentaire?: string | null
   dateDecision?: Date | string
+  dateDebutSuspension?: Date | string | null
+  dateFinSuspension?: Date | string | null
   attributionId: string
   creeLe?: Date | string
 }
@@ -310,6 +344,8 @@ export type RenouvellementUpdateManyMutationInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -319,6 +355,8 @@ export type RenouvellementUncheckedUpdateManyInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   attributionId?: Prisma.StringFieldUpdateOperationsInput | string
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -350,6 +388,8 @@ export type RenouvellementCountOrderByAggregateInput = {
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
   dateDecision?: Prisma.SortOrder
+  dateDebutSuspension?: Prisma.SortOrder
+  dateFinSuspension?: Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
 }
@@ -360,6 +400,8 @@ export type RenouvellementMaxOrderByAggregateInput = {
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
   dateDecision?: Prisma.SortOrder
+  dateDebutSuspension?: Prisma.SortOrder
+  dateFinSuspension?: Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
 }
@@ -370,6 +412,8 @@ export type RenouvellementMinOrderByAggregateInput = {
   decision?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
   dateDecision?: Prisma.SortOrder
+  dateDebutSuspension?: Prisma.SortOrder
+  dateFinSuspension?: Prisma.SortOrder
   attributionId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
 }
@@ -422,6 +466,8 @@ export type RenouvellementCreateWithoutAttributionInput = {
   decision: string
   commentaire?: string | null
   dateDecision?: Date | string
+  dateDebutSuspension?: Date | string | null
+  dateFinSuspension?: Date | string | null
   creeLe?: Date | string
 }
 
@@ -431,6 +477,8 @@ export type RenouvellementUncheckedCreateWithoutAttributionInput = {
   decision: string
   commentaire?: string | null
   dateDecision?: Date | string
+  dateDebutSuspension?: Date | string | null
+  dateFinSuspension?: Date | string | null
   creeLe?: Date | string
 }
 
@@ -469,6 +517,8 @@ export type RenouvellementScalarWhereInput = {
   decision?: Prisma.StringFilter<"Renouvellement"> | string
   commentaire?: Prisma.StringNullableFilter<"Renouvellement"> | string | null
   dateDecision?: Prisma.DateTimeFilter<"Renouvellement"> | Date | string
+  dateDebutSuspension?: Prisma.DateTimeNullableFilter<"Renouvellement"> | Date | string | null
+  dateFinSuspension?: Prisma.DateTimeNullableFilter<"Renouvellement"> | Date | string | null
   attributionId?: Prisma.StringFilter<"Renouvellement"> | string
   creeLe?: Prisma.DateTimeFilter<"Renouvellement"> | Date | string
 }
@@ -479,6 +529,8 @@ export type RenouvellementCreateManyAttributionInput = {
   decision: string
   commentaire?: string | null
   dateDecision?: Date | string
+  dateDebutSuspension?: Date | string | null
+  dateFinSuspension?: Date | string | null
   creeLe?: Date | string
 }
 
@@ -488,6 +540,8 @@ export type RenouvellementUpdateWithoutAttributionInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -497,6 +551,8 @@ export type RenouvellementUncheckedUpdateWithoutAttributionInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -506,6 +562,8 @@ export type RenouvellementUncheckedUpdateManyWithoutAttributionInput = {
   decision?: Prisma.StringFieldUpdateOperationsInput | string
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   dateDecision?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  dateDebutSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  dateFinSuspension?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
@@ -517,6 +575,8 @@ export type RenouvellementSelect<ExtArgs extends runtime.Types.Extensions.Intern
   decision?: boolean
   commentaire?: boolean
   dateDecision?: boolean
+  dateDebutSuspension?: boolean
+  dateFinSuspension?: boolean
   attributionId?: boolean
   creeLe?: boolean
   attribution?: boolean | Prisma.AttributionBourseDefaultArgs<ExtArgs>
@@ -530,11 +590,13 @@ export type RenouvellementSelectScalar = {
   decision?: boolean
   commentaire?: boolean
   dateDecision?: boolean
+  dateDebutSuspension?: boolean
+  dateFinSuspension?: boolean
   attributionId?: boolean
   creeLe?: boolean
 }
 
-export type RenouvellementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "anneeAcademique" | "decision" | "commentaire" | "dateDecision" | "attributionId" | "creeLe", ExtArgs["result"]["renouvellement"]>
+export type RenouvellementOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "anneeAcademique" | "decision" | "commentaire" | "dateDecision" | "dateDebutSuspension" | "dateFinSuspension" | "attributionId" | "creeLe", ExtArgs["result"]["renouvellement"]>
 export type RenouvellementInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   attribution?: boolean | Prisma.AttributionBourseDefaultArgs<ExtArgs>
 }
@@ -550,6 +612,8 @@ export type $RenouvellementPayload<ExtArgs extends runtime.Types.Extensions.Inte
     decision: string
     commentaire: string | null
     dateDecision: Date
+    dateDebutSuspension: Date | null
+    dateFinSuspension: Date | null
     attributionId: string
     creeLe: Date
   }, ExtArgs["result"]["renouvellement"]>
@@ -927,6 +991,8 @@ export interface RenouvellementFieldRefs {
   readonly decision: Prisma.FieldRef<"Renouvellement", 'String'>
   readonly commentaire: Prisma.FieldRef<"Renouvellement", 'String'>
   readonly dateDecision: Prisma.FieldRef<"Renouvellement", 'DateTime'>
+  readonly dateDebutSuspension: Prisma.FieldRef<"Renouvellement", 'DateTime'>
+  readonly dateFinSuspension: Prisma.FieldRef<"Renouvellement", 'DateTime'>
   readonly attributionId: Prisma.FieldRef<"Renouvellement", 'String'>
   readonly creeLe: Prisma.FieldRef<"Renouvellement", 'DateTime'>
 }

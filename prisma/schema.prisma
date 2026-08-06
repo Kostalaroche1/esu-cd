@@ -58,6 +58,13 @@ enum StatutPaiement {
   ANNULE
 }
 
+enum StatutVerificationDocument {
+  A_VERIFIER
+  VALIDE
+  REJETE
+  REMPLACEMENT_DEMANDE
+}
+
 model Utilisateur {
   id           String          @id @default(cuid())
   nomComplet   String
@@ -69,6 +76,11 @@ model Utilisateur {
   etudiant     Etudiant?       @relation(fields: [etudiantId], references: [id])
   evaluations  Evaluation[]
   notifications Notification[]
+  documentsVerifies DocumentCandidature[] @relation("VerificationDocument")
+  journauxAudit JournalAudit[]
+  tentativesConnexion Int            @default(0)
+  verrouilleJusqua    DateTime?
+  doitChangerMotDePasse Boolean       @default(false)
   creeLe       DateTime        @default(now())
   modifieLe    DateTime        @updatedAt
   @@index([role, estActif])
@@ -146,6 +158,7 @@ model AppelCandidature {
   programmeId        String
   programme          ProgrammeBourse  @relation(fields: [programmeId], references: [id])
   candidatures       Candidature[]
+  documentsRequis    DocumentRequisAppel[]
   creeLe             DateTime          @default(now())
   modifieLe          DateTime          @updatedAt
   @@index([programmeId, estPublie])
@@ -167,6 +180,7 @@ model Candidature {
   documents       DocumentCandidature[]
   evaluations     Evaluation[]
   attribution     AttributionBourse?
+  historique      HistoriqueCandidature[]
   creeLe          DateTime            @default(now())
   modifieLe       DateTime            @updatedAt
   @@unique([etudiantId, appelId])
@@ -181,6 +195,11 @@ model DocumentCandidature {
   cheminFichier  String
   estValide      Boolean         @default(false)
   commentaire    String?
+  statutVerification StatutVerificationDocument @default(A_VERIFIER)
+  motifVerification String?        @db.Text
+  verifieLe       DateTime?
+  verifieParId    String?
+  verifiePar      Utilisateur?      @relation("VerificationDocument", fields: [verifieParId], references: [id])
   typeMime       String?
   tailleOctets   Int?
   candidatureId  String
@@ -188,6 +207,33 @@ model DocumentCandidature {
   creeLe         DateTime        @default(now())
 
   @@index([candidatureId, type])
+  @@index([statutVerification, creeLe])
+  @@index([verifieParId])
+}
+
+model DocumentRequisAppel {
+  id          String             @id @default(cuid())
+  type        TypeDocument
+  estObligatoire Boolean         @default(true)
+  appelId     String
+  appel       AppelCandidature   @relation(fields: [appelId], references: [id], onDelete: Cascade)
+  creeLe      DateTime           @default(now())
+
+  @@unique([appelId, type])
+  @@index([appelId, estObligatoire])
+}
+
+model HistoriqueCandidature {
+  id             String             @id @default(cuid())
+  ancienStatut   StatutCandidature?
+  nouveauStatut  StatutCandidature
+  commentaire    String?            @db.Text
+  candidatureId  String
+  candidature    Candidature        @relation(fields: [candidatureId], references: [id], onDelete: Cascade)
+  utilisateurId  String?
+  creeLe         DateTime           @default(now())
+
+  @@index([candidatureId, creeLe])
 }
 
 model Evaluation {
@@ -235,6 +281,9 @@ model Paiement {
   statut          StatutPaiement  @default(PREVU)
   modePaiement    String?
   preuveUrl       String?
+  preuveChemin    String?
+  preuveNom       String?
+  preuveTypeMime  String?
   attributionId  String
   attribution    AttributionBourse @relation(fields: [attributionId], references: [id], onDelete: Cascade)
   creeLe          DateTime        @default(now())
@@ -247,6 +296,8 @@ model Renouvellement {
   decision          String
   commentaire       String?            @db.Text
   dateDecision      DateTime            @default(now())
+  dateDebutSuspension DateTime?
+  dateFinSuspension   DateTime?
   attributionId     String
   attribution       AttributionBourse  @relation(fields: [attributionId], references: [id], onDelete: Cascade)
   creeLe            DateTime           @default(now())
@@ -259,9 +310,24 @@ model Notification {
   titre         String
   message       String      @db.Text
   estLue        Boolean     @default(false)
+  lien          String?
   utilisateurId String
   utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id], onDelete: Cascade)
   creeLe        DateTime    @default(now())
+}
+
+model JournalAudit {
+  id            String      @id @default(cuid())
+  action        String
+  entite        String
+  entiteId      String?
+  details       String?     @db.Text
+  utilisateurId String
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+  creeLe        DateTime    @default(now())
+
+  @@index([entite, entiteId])
+  @@index([utilisateurId, creeLe])
 }
 
 model Parametre {

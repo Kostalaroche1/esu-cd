@@ -4,12 +4,13 @@ import Link from "next/link";
 import { signOut } from "next-auth/react";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useState } from "react";
-import { BarChart3, BadgeDollarSign, Building2, ChevronLeft, ChevronRight, ClipboardCheck, Files, GraduationCap, LayoutDashboard, LogOut, Menu, Megaphone, RefreshCw, Settings, Users, WalletCards, X } from "lucide-react";
+import { BarChart3, BadgeDollarSign, Bell, Building2, ChevronLeft, ChevronRight, ClipboardCheck, Files, GraduationCap, LayoutDashboard, LockKeyhole, LogOut, Menu, Megaphone, RefreshCw, Settings, Users, WalletCards, X } from "lucide-react";
 import type { RoleUtilisateur } from "@/generated/prisma/client";
 import { LogoEsu } from "@/components/identite/logo-esu";
 
 const liens = [
   { href: "/tableau-de-bord", libelle: "Tableau de bord", icone: LayoutDashboard },
+  { href: "/notifications", libelle: "Notifications", icone: Bell },
   { href: "/etudiants", libelle: "Étudiants", icone: GraduationCap, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES"] },
   { href: "/etablissements", libelle: "Établissements", icone: Building2, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES"] },
   { href: "/programmes", libelle: "Programmes", icone: BadgeDollarSign },
@@ -22,6 +23,7 @@ const liens = [
   { href: "/rapports", libelle: "Rapports", icone: BarChart3, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR", "GESTIONNAIRE_BOURSES", "COMPTABLE"] },
   { href: "/utilisateurs", libelle: "Utilisateurs", icone: Users, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR"] },
   { href: "/parametres", libelle: "Paramètres", icone: Settings, roles: ["SUPER_ADMINISTRATEUR", "ADMINISTRATEUR"] },
+  { href: "/mon-compte", libelle: "Sécurité du compte", icone: LockKeyhole },
 ] satisfies { href: string; libelle: string; icone: typeof Menu; roles?: RoleUtilisateur[] }[];
 
 const ContexteUtilisateur = createContext<{ nom: string; role: RoleUtilisateur } | null>(null);

@@ -41,6 +41,10 @@ export type DocumentCandidatureMinAggregateOutputType = {
   cheminFichier: string | null
   estValide: boolean | null
   commentaire: string | null
+  statutVerification: $Enums.StatutVerificationDocument | null
+  motifVerification: string | null
+  verifieLe: Date | null
+  verifieParId: string | null
   typeMime: string | null
   tailleOctets: number | null
   candidatureId: string | null
@@ -54,6 +58,10 @@ export type DocumentCandidatureMaxAggregateOutputType = {
   cheminFichier: string | null
   estValide: boolean | null
   commentaire: string | null
+  statutVerification: $Enums.StatutVerificationDocument | null
+  motifVerification: string | null
+  verifieLe: Date | null
+  verifieParId: string | null
   typeMime: string | null
   tailleOctets: number | null
   candidatureId: string | null
@@ -67,6 +75,10 @@ export type DocumentCandidatureCountAggregateOutputType = {
   cheminFichier: number
   estValide: number
   commentaire: number
+  statutVerification: number
+  motifVerification: number
+  verifieLe: number
+  verifieParId: number
   typeMime: number
   tailleOctets: number
   candidatureId: number
@@ -90,6 +102,10 @@ export type DocumentCandidatureMinAggregateInputType = {
   cheminFichier?: true
   estValide?: true
   commentaire?: true
+  statutVerification?: true
+  motifVerification?: true
+  verifieLe?: true
+  verifieParId?: true
   typeMime?: true
   tailleOctets?: true
   candidatureId?: true
@@ -103,6 +119,10 @@ export type DocumentCandidatureMaxAggregateInputType = {
   cheminFichier?: true
   estValide?: true
   commentaire?: true
+  statutVerification?: true
+  motifVerification?: true
+  verifieLe?: true
+  verifieParId?: true
   typeMime?: true
   tailleOctets?: true
   candidatureId?: true
@@ -116,6 +136,10 @@ export type DocumentCandidatureCountAggregateInputType = {
   cheminFichier?: true
   estValide?: true
   commentaire?: true
+  statutVerification?: true
+  motifVerification?: true
+  verifieLe?: true
+  verifieParId?: true
   typeMime?: true
   tailleOctets?: true
   candidatureId?: true
@@ -216,6 +240,10 @@ export type DocumentCandidatureGroupByOutputType = {
   cheminFichier: string
   estValide: boolean
   commentaire: string | null
+  statutVerification: $Enums.StatutVerificationDocument
+  motifVerification: string | null
+  verifieLe: Date | null
+  verifieParId: string | null
   typeMime: string | null
   tailleOctets: number | null
   candidatureId: string
@@ -252,10 +280,15 @@ export type DocumentCandidatureWhereInput = {
   cheminFichier?: Prisma.StringFilter<"DocumentCandidature"> | string
   estValide?: Prisma.BoolFilter<"DocumentCandidature"> | boolean
   commentaire?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFilter<"DocumentCandidature"> | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  verifieLe?: Prisma.DateTimeNullableFilter<"DocumentCandidature"> | Date | string | null
+  verifieParId?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
   typeMime?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
   tailleOctets?: Prisma.IntNullableFilter<"DocumentCandidature"> | number | null
   candidatureId?: Prisma.StringFilter<"DocumentCandidature"> | string
   creeLe?: Prisma.DateTimeFilter<"DocumentCandidature"> | Date | string
+  verifiePar?: Prisma.XOR<Prisma.UtilisateurNullableScalarRelationFilter, Prisma.UtilisateurWhereInput> | null
   candidature?: Prisma.XOR<Prisma.CandidatureScalarRelationFilter, Prisma.CandidatureWhereInput>
 }
 
@@ -266,10 +299,15 @@ export type DocumentCandidatureOrderByWithRelationInput = {
   cheminFichier?: Prisma.SortOrder
   estValide?: Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
+  statutVerification?: Prisma.SortOrder
+  motifVerification?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifieLe?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifieParId?: Prisma.SortOrderInput | Prisma.SortOrder
   typeMime?: Prisma.SortOrderInput | Prisma.SortOrder
   tailleOctets?: Prisma.SortOrderInput | Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
   creeLe?: Prisma.SortOrder
+  verifiePar?: Prisma.UtilisateurOrderByWithRelationInput
   candidature?: Prisma.CandidatureOrderByWithRelationInput
   _relevance?: Prisma.DocumentCandidatureOrderByRelevanceInput
 }
@@ -284,10 +322,15 @@ export type DocumentCandidatureWhereUniqueInput = Prisma.AtLeast<{
   cheminFichier?: Prisma.StringFilter<"DocumentCandidature"> | string
   estValide?: Prisma.BoolFilter<"DocumentCandidature"> | boolean
   commentaire?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFilter<"DocumentCandidature"> | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  verifieLe?: Prisma.DateTimeNullableFilter<"DocumentCandidature"> | Date | string | null
+  verifieParId?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
   typeMime?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
   tailleOctets?: Prisma.IntNullableFilter<"DocumentCandidature"> | number | null
   candidatureId?: Prisma.StringFilter<"DocumentCandidature"> | string
   creeLe?: Prisma.DateTimeFilter<"DocumentCandidature"> | Date | string
+  verifiePar?: Prisma.XOR<Prisma.UtilisateurNullableScalarRelationFilter, Prisma.UtilisateurWhereInput> | null
   candidature?: Prisma.XOR<Prisma.CandidatureScalarRelationFilter, Prisma.CandidatureWhereInput>
 }, "id">
 
@@ -298,6 +341,10 @@ export type DocumentCandidatureOrderByWithAggregationInput = {
   cheminFichier?: Prisma.SortOrder
   estValide?: Prisma.SortOrder
   commentaire?: Prisma.SortOrderInput | Prisma.SortOrder
+  statutVerification?: Prisma.SortOrder
+  motifVerification?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifieLe?: Prisma.SortOrderInput | Prisma.SortOrder
+  verifieParId?: Prisma.SortOrderInput | Prisma.SortOrder
   typeMime?: Prisma.SortOrderInput | Prisma.SortOrder
   tailleOctets?: Prisma.SortOrderInput | Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
@@ -319,6 +366,10 @@ export type DocumentCandidatureScalarWhereWithAggregatesInput = {
   cheminFichier?: Prisma.StringWithAggregatesFilter<"DocumentCandidature"> | string
   estValide?: Prisma.BoolWithAggregatesFilter<"DocumentCandidature"> | boolean
   commentaire?: Prisma.StringNullableWithAggregatesFilter<"DocumentCandidature"> | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentWithAggregatesFilter<"DocumentCandidature"> | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.StringNullableWithAggregatesFilter<"DocumentCandidature"> | string | null
+  verifieLe?: Prisma.DateTimeNullableWithAggregatesFilter<"DocumentCandidature"> | Date | string | null
+  verifieParId?: Prisma.StringNullableWithAggregatesFilter<"DocumentCandidature"> | string | null
   typeMime?: Prisma.StringNullableWithAggregatesFilter<"DocumentCandidature"> | string | null
   tailleOctets?: Prisma.IntNullableWithAggregatesFilter<"DocumentCandidature"> | number | null
   candidatureId?: Prisma.StringWithAggregatesFilter<"DocumentCandidature"> | string
@@ -332,9 +383,13 @@ export type DocumentCandidatureCreateInput = {
   cheminFichier: string
   estValide?: boolean
   commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
   typeMime?: string | null
   tailleOctets?: number | null
   creeLe?: Date | string
+  verifiePar?: Prisma.UtilisateurCreateNestedOneWithoutDocumentsVerifiesInput
   candidature: Prisma.CandidatureCreateNestedOneWithoutDocumentsInput
 }
 
@@ -345,6 +400,10 @@ export type DocumentCandidatureUncheckedCreateInput = {
   cheminFichier: string
   estValide?: boolean
   commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  verifieParId?: string | null
   typeMime?: string | null
   tailleOctets?: number | null
   candidatureId: string
@@ -358,9 +417,13 @@ export type DocumentCandidatureUpdateInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiePar?: Prisma.UtilisateurUpdateOneWithoutDocumentsVerifiesNestedInput
   candidature?: Prisma.CandidatureUpdateOneRequiredWithoutDocumentsNestedInput
 }
 
@@ -371,6 +434,10 @@ export type DocumentCandidatureUncheckedUpdateInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifieParId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -384,6 +451,10 @@ export type DocumentCandidatureCreateManyInput = {
   cheminFichier: string
   estValide?: boolean
   commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  verifieParId?: string | null
   typeMime?: string | null
   tailleOctets?: number | null
   candidatureId: string
@@ -397,6 +468,9 @@ export type DocumentCandidatureUpdateManyMutationInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -409,6 +483,10 @@ export type DocumentCandidatureUncheckedUpdateManyInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifieParId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -438,6 +516,10 @@ export type DocumentCandidatureCountOrderByAggregateInput = {
   cheminFichier?: Prisma.SortOrder
   estValide?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
+  statutVerification?: Prisma.SortOrder
+  motifVerification?: Prisma.SortOrder
+  verifieLe?: Prisma.SortOrder
+  verifieParId?: Prisma.SortOrder
   typeMime?: Prisma.SortOrder
   tailleOctets?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
@@ -455,6 +537,10 @@ export type DocumentCandidatureMaxOrderByAggregateInput = {
   cheminFichier?: Prisma.SortOrder
   estValide?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
+  statutVerification?: Prisma.SortOrder
+  motifVerification?: Prisma.SortOrder
+  verifieLe?: Prisma.SortOrder
+  verifieParId?: Prisma.SortOrder
   typeMime?: Prisma.SortOrder
   tailleOctets?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
@@ -468,6 +554,10 @@ export type DocumentCandidatureMinOrderByAggregateInput = {
   cheminFichier?: Prisma.SortOrder
   estValide?: Prisma.SortOrder
   commentaire?: Prisma.SortOrder
+  statutVerification?: Prisma.SortOrder
+  motifVerification?: Prisma.SortOrder
+  verifieLe?: Prisma.SortOrder
+  verifieParId?: Prisma.SortOrder
   typeMime?: Prisma.SortOrder
   tailleOctets?: Prisma.SortOrder
   candidatureId?: Prisma.SortOrder
@@ -476,6 +566,48 @@ export type DocumentCandidatureMinOrderByAggregateInput = {
 
 export type DocumentCandidatureSumOrderByAggregateInput = {
   tailleOctets?: Prisma.SortOrder
+}
+
+export type DocumentCandidatureCreateNestedManyWithoutVerifieParInput = {
+  create?: Prisma.XOR<Prisma.DocumentCandidatureCreateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput> | Prisma.DocumentCandidatureCreateWithoutVerifieParInput[] | Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput[]
+  connectOrCreate?: Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput | Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput[]
+  createMany?: Prisma.DocumentCandidatureCreateManyVerifieParInputEnvelope
+  connect?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+}
+
+export type DocumentCandidatureUncheckedCreateNestedManyWithoutVerifieParInput = {
+  create?: Prisma.XOR<Prisma.DocumentCandidatureCreateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput> | Prisma.DocumentCandidatureCreateWithoutVerifieParInput[] | Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput[]
+  connectOrCreate?: Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput | Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput[]
+  createMany?: Prisma.DocumentCandidatureCreateManyVerifieParInputEnvelope
+  connect?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+}
+
+export type DocumentCandidatureUpdateManyWithoutVerifieParNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCandidatureCreateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput> | Prisma.DocumentCandidatureCreateWithoutVerifieParInput[] | Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput[]
+  connectOrCreate?: Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput | Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput[]
+  upsert?: Prisma.DocumentCandidatureUpsertWithWhereUniqueWithoutVerifieParInput | Prisma.DocumentCandidatureUpsertWithWhereUniqueWithoutVerifieParInput[]
+  createMany?: Prisma.DocumentCandidatureCreateManyVerifieParInputEnvelope
+  set?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  disconnect?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  delete?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  connect?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  update?: Prisma.DocumentCandidatureUpdateWithWhereUniqueWithoutVerifieParInput | Prisma.DocumentCandidatureUpdateWithWhereUniqueWithoutVerifieParInput[]
+  updateMany?: Prisma.DocumentCandidatureUpdateManyWithWhereWithoutVerifieParInput | Prisma.DocumentCandidatureUpdateManyWithWhereWithoutVerifieParInput[]
+  deleteMany?: Prisma.DocumentCandidatureScalarWhereInput | Prisma.DocumentCandidatureScalarWhereInput[]
+}
+
+export type DocumentCandidatureUncheckedUpdateManyWithoutVerifieParNestedInput = {
+  create?: Prisma.XOR<Prisma.DocumentCandidatureCreateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput> | Prisma.DocumentCandidatureCreateWithoutVerifieParInput[] | Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput[]
+  connectOrCreate?: Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput | Prisma.DocumentCandidatureCreateOrConnectWithoutVerifieParInput[]
+  upsert?: Prisma.DocumentCandidatureUpsertWithWhereUniqueWithoutVerifieParInput | Prisma.DocumentCandidatureUpsertWithWhereUniqueWithoutVerifieParInput[]
+  createMany?: Prisma.DocumentCandidatureCreateManyVerifieParInputEnvelope
+  set?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  disconnect?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  delete?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  connect?: Prisma.DocumentCandidatureWhereUniqueInput | Prisma.DocumentCandidatureWhereUniqueInput[]
+  update?: Prisma.DocumentCandidatureUpdateWithWhereUniqueWithoutVerifieParInput | Prisma.DocumentCandidatureUpdateWithWhereUniqueWithoutVerifieParInput[]
+  updateMany?: Prisma.DocumentCandidatureUpdateManyWithWhereWithoutVerifieParInput | Prisma.DocumentCandidatureUpdateManyWithWhereWithoutVerifieParInput[]
+  deleteMany?: Prisma.DocumentCandidatureScalarWhereInput | Prisma.DocumentCandidatureScalarWhereInput[]
 }
 
 export type DocumentCandidatureCreateNestedManyWithoutCandidatureInput = {
@@ -524,6 +656,88 @@ export type EnumTypeDocumentFieldUpdateOperationsInput = {
   set?: $Enums.TypeDocument
 }
 
+export type EnumStatutVerificationDocumentFieldUpdateOperationsInput = {
+  set?: $Enums.StatutVerificationDocument
+}
+
+export type DocumentCandidatureCreateWithoutVerifieParInput = {
+  id?: string
+  type: $Enums.TypeDocument
+  nomFichier: string
+  cheminFichier: string
+  estValide?: boolean
+  commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  typeMime?: string | null
+  tailleOctets?: number | null
+  creeLe?: Date | string
+  candidature: Prisma.CandidatureCreateNestedOneWithoutDocumentsInput
+}
+
+export type DocumentCandidatureUncheckedCreateWithoutVerifieParInput = {
+  id?: string
+  type: $Enums.TypeDocument
+  nomFichier: string
+  cheminFichier: string
+  estValide?: boolean
+  commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  typeMime?: string | null
+  tailleOctets?: number | null
+  candidatureId: string
+  creeLe?: Date | string
+}
+
+export type DocumentCandidatureCreateOrConnectWithoutVerifieParInput = {
+  where: Prisma.DocumentCandidatureWhereUniqueInput
+  create: Prisma.XOR<Prisma.DocumentCandidatureCreateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput>
+}
+
+export type DocumentCandidatureCreateManyVerifieParInputEnvelope = {
+  data: Prisma.DocumentCandidatureCreateManyVerifieParInput | Prisma.DocumentCandidatureCreateManyVerifieParInput[]
+  skipDuplicates?: boolean
+}
+
+export type DocumentCandidatureUpsertWithWhereUniqueWithoutVerifieParInput = {
+  where: Prisma.DocumentCandidatureWhereUniqueInput
+  update: Prisma.XOR<Prisma.DocumentCandidatureUpdateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedUpdateWithoutVerifieParInput>
+  create: Prisma.XOR<Prisma.DocumentCandidatureCreateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedCreateWithoutVerifieParInput>
+}
+
+export type DocumentCandidatureUpdateWithWhereUniqueWithoutVerifieParInput = {
+  where: Prisma.DocumentCandidatureWhereUniqueInput
+  data: Prisma.XOR<Prisma.DocumentCandidatureUpdateWithoutVerifieParInput, Prisma.DocumentCandidatureUncheckedUpdateWithoutVerifieParInput>
+}
+
+export type DocumentCandidatureUpdateManyWithWhereWithoutVerifieParInput = {
+  where: Prisma.DocumentCandidatureScalarWhereInput
+  data: Prisma.XOR<Prisma.DocumentCandidatureUpdateManyMutationInput, Prisma.DocumentCandidatureUncheckedUpdateManyWithoutVerifieParInput>
+}
+
+export type DocumentCandidatureScalarWhereInput = {
+  AND?: Prisma.DocumentCandidatureScalarWhereInput | Prisma.DocumentCandidatureScalarWhereInput[]
+  OR?: Prisma.DocumentCandidatureScalarWhereInput[]
+  NOT?: Prisma.DocumentCandidatureScalarWhereInput | Prisma.DocumentCandidatureScalarWhereInput[]
+  id?: Prisma.StringFilter<"DocumentCandidature"> | string
+  type?: Prisma.EnumTypeDocumentFilter<"DocumentCandidature"> | $Enums.TypeDocument
+  nomFichier?: Prisma.StringFilter<"DocumentCandidature"> | string
+  cheminFichier?: Prisma.StringFilter<"DocumentCandidature"> | string
+  estValide?: Prisma.BoolFilter<"DocumentCandidature"> | boolean
+  commentaire?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFilter<"DocumentCandidature"> | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  verifieLe?: Prisma.DateTimeNullableFilter<"DocumentCandidature"> | Date | string | null
+  verifieParId?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  typeMime?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
+  tailleOctets?: Prisma.IntNullableFilter<"DocumentCandidature"> | number | null
+  candidatureId?: Prisma.StringFilter<"DocumentCandidature"> | string
+  creeLe?: Prisma.DateTimeFilter<"DocumentCandidature"> | Date | string
+}
+
 export type DocumentCandidatureCreateWithoutCandidatureInput = {
   id?: string
   type: $Enums.TypeDocument
@@ -531,9 +745,13 @@ export type DocumentCandidatureCreateWithoutCandidatureInput = {
   cheminFichier: string
   estValide?: boolean
   commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
   typeMime?: string | null
   tailleOctets?: number | null
   creeLe?: Date | string
+  verifiePar?: Prisma.UtilisateurCreateNestedOneWithoutDocumentsVerifiesInput
 }
 
 export type DocumentCandidatureUncheckedCreateWithoutCandidatureInput = {
@@ -543,6 +761,10 @@ export type DocumentCandidatureUncheckedCreateWithoutCandidatureInput = {
   cheminFichier: string
   estValide?: boolean
   commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  verifieParId?: string | null
   typeMime?: string | null
   tailleOctets?: number | null
   creeLe?: Date | string
@@ -574,20 +796,68 @@ export type DocumentCandidatureUpdateManyWithWhereWithoutCandidatureInput = {
   data: Prisma.XOR<Prisma.DocumentCandidatureUpdateManyMutationInput, Prisma.DocumentCandidatureUncheckedUpdateManyWithoutCandidatureInput>
 }
 
-export type DocumentCandidatureScalarWhereInput = {
-  AND?: Prisma.DocumentCandidatureScalarWhereInput | Prisma.DocumentCandidatureScalarWhereInput[]
-  OR?: Prisma.DocumentCandidatureScalarWhereInput[]
-  NOT?: Prisma.DocumentCandidatureScalarWhereInput | Prisma.DocumentCandidatureScalarWhereInput[]
-  id?: Prisma.StringFilter<"DocumentCandidature"> | string
-  type?: Prisma.EnumTypeDocumentFilter<"DocumentCandidature"> | $Enums.TypeDocument
-  nomFichier?: Prisma.StringFilter<"DocumentCandidature"> | string
-  cheminFichier?: Prisma.StringFilter<"DocumentCandidature"> | string
-  estValide?: Prisma.BoolFilter<"DocumentCandidature"> | boolean
-  commentaire?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
-  typeMime?: Prisma.StringNullableFilter<"DocumentCandidature"> | string | null
-  tailleOctets?: Prisma.IntNullableFilter<"DocumentCandidature"> | number | null
-  candidatureId?: Prisma.StringFilter<"DocumentCandidature"> | string
-  creeLe?: Prisma.DateTimeFilter<"DocumentCandidature"> | Date | string
+export type DocumentCandidatureCreateManyVerifieParInput = {
+  id?: string
+  type: $Enums.TypeDocument
+  nomFichier: string
+  cheminFichier: string
+  estValide?: boolean
+  commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  typeMime?: string | null
+  tailleOctets?: number | null
+  candidatureId: string
+  creeLe?: Date | string
+}
+
+export type DocumentCandidatureUpdateWithoutVerifieParInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
+  nomFichier?: Prisma.StringFieldUpdateOperationsInput | string
+  cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
+  estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  candidature?: Prisma.CandidatureUpdateOneRequiredWithoutDocumentsNestedInput
+}
+
+export type DocumentCandidatureUncheckedUpdateWithoutVerifieParInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
+  nomFichier?: Prisma.StringFieldUpdateOperationsInput | string
+  cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
+  estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type DocumentCandidatureUncheckedUpdateManyWithoutVerifieParInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  type?: Prisma.EnumTypeDocumentFieldUpdateOperationsInput | $Enums.TypeDocument
+  nomFichier?: Prisma.StringFieldUpdateOperationsInput | string
+  cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
+  estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  candidatureId?: Prisma.StringFieldUpdateOperationsInput | string
+  creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type DocumentCandidatureCreateManyCandidatureInput = {
@@ -597,6 +867,10 @@ export type DocumentCandidatureCreateManyCandidatureInput = {
   cheminFichier: string
   estValide?: boolean
   commentaire?: string | null
+  statutVerification?: $Enums.StatutVerificationDocument
+  motifVerification?: string | null
+  verifieLe?: Date | string | null
+  verifieParId?: string | null
   typeMime?: string | null
   tailleOctets?: number | null
   creeLe?: Date | string
@@ -609,9 +883,13 @@ export type DocumentCandidatureUpdateWithoutCandidatureInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  verifiePar?: Prisma.UtilisateurUpdateOneWithoutDocumentsVerifiesNestedInput
 }
 
 export type DocumentCandidatureUncheckedUpdateWithoutCandidatureInput = {
@@ -621,6 +899,10 @@ export type DocumentCandidatureUncheckedUpdateWithoutCandidatureInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifieParId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -633,6 +915,10 @@ export type DocumentCandidatureUncheckedUpdateManyWithoutCandidatureInput = {
   cheminFichier?: Prisma.StringFieldUpdateOperationsInput | string
   estValide?: Prisma.BoolFieldUpdateOperationsInput | boolean
   commentaire?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  statutVerification?: Prisma.EnumStatutVerificationDocumentFieldUpdateOperationsInput | $Enums.StatutVerificationDocument
+  motifVerification?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  verifieLe?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verifieParId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   typeMime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tailleOctets?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   creeLe?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -647,10 +933,15 @@ export type DocumentCandidatureSelect<ExtArgs extends runtime.Types.Extensions.I
   cheminFichier?: boolean
   estValide?: boolean
   commentaire?: boolean
+  statutVerification?: boolean
+  motifVerification?: boolean
+  verifieLe?: boolean
+  verifieParId?: boolean
   typeMime?: boolean
   tailleOctets?: boolean
   candidatureId?: boolean
   creeLe?: boolean
+  verifiePar?: boolean | Prisma.DocumentCandidature$verifieParArgs<ExtArgs>
   candidature?: boolean | Prisma.CandidatureDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["documentCandidature"]>
 
@@ -663,20 +954,26 @@ export type DocumentCandidatureSelectScalar = {
   cheminFichier?: boolean
   estValide?: boolean
   commentaire?: boolean
+  statutVerification?: boolean
+  motifVerification?: boolean
+  verifieLe?: boolean
+  verifieParId?: boolean
   typeMime?: boolean
   tailleOctets?: boolean
   candidatureId?: boolean
   creeLe?: boolean
 }
 
-export type DocumentCandidatureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "nomFichier" | "cheminFichier" | "estValide" | "commentaire" | "typeMime" | "tailleOctets" | "candidatureId" | "creeLe", ExtArgs["result"]["documentCandidature"]>
+export type DocumentCandidatureOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "nomFichier" | "cheminFichier" | "estValide" | "commentaire" | "statutVerification" | "motifVerification" | "verifieLe" | "verifieParId" | "typeMime" | "tailleOctets" | "candidatureId" | "creeLe", ExtArgs["result"]["documentCandidature"]>
 export type DocumentCandidatureInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  verifiePar?: boolean | Prisma.DocumentCandidature$verifieParArgs<ExtArgs>
   candidature?: boolean | Prisma.CandidatureDefaultArgs<ExtArgs>
 }
 
 export type $DocumentCandidaturePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "DocumentCandidature"
   objects: {
+    verifiePar: Prisma.$UtilisateurPayload<ExtArgs> | null
     candidature: Prisma.$CandidaturePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -686,6 +983,10 @@ export type $DocumentCandidaturePayload<ExtArgs extends runtime.Types.Extensions
     cheminFichier: string
     estValide: boolean
     commentaire: string | null
+    statutVerification: $Enums.StatutVerificationDocument
+    motifVerification: string | null
+    verifieLe: Date | null
+    verifieParId: string | null
     typeMime: string | null
     tailleOctets: number | null
     candidatureId: string
@@ -1030,6 +1331,7 @@ readonly fields: DocumentCandidatureFieldRefs;
  */
 export interface Prisma__DocumentCandidatureClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  verifiePar<T extends Prisma.DocumentCandidature$verifieParArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.DocumentCandidature$verifieParArgs<ExtArgs>>): Prisma.Prisma__UtilisateurClient<runtime.Types.Result.GetResult<Prisma.$UtilisateurPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   candidature<T extends Prisma.CandidatureDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.CandidatureDefaultArgs<ExtArgs>>): Prisma.Prisma__CandidatureClient<runtime.Types.Result.GetResult<Prisma.$CandidaturePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1066,6 +1368,10 @@ export interface DocumentCandidatureFieldRefs {
   readonly cheminFichier: Prisma.FieldRef<"DocumentCandidature", 'String'>
   readonly estValide: Prisma.FieldRef<"DocumentCandidature", 'Boolean'>
   readonly commentaire: Prisma.FieldRef<"DocumentCandidature", 'String'>
+  readonly statutVerification: Prisma.FieldRef<"DocumentCandidature", 'StatutVerificationDocument'>
+  readonly motifVerification: Prisma.FieldRef<"DocumentCandidature", 'String'>
+  readonly verifieLe: Prisma.FieldRef<"DocumentCandidature", 'DateTime'>
+  readonly verifieParId: Prisma.FieldRef<"DocumentCandidature", 'String'>
   readonly typeMime: Prisma.FieldRef<"DocumentCandidature", 'String'>
   readonly tailleOctets: Prisma.FieldRef<"DocumentCandidature", 'Int'>
   readonly candidatureId: Prisma.FieldRef<"DocumentCandidature", 'String'>
@@ -1415,6 +1721,25 @@ export type DocumentCandidatureDeleteManyArgs<ExtArgs extends runtime.Types.Exte
    * Limit how many DocumentCandidatures to delete.
    */
   limit?: number
+}
+
+/**
+ * DocumentCandidature.verifiePar
+ */
+export type DocumentCandidature$verifieParArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Utilisateur
+   */
+  select?: Prisma.UtilisateurSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Utilisateur
+   */
+  omit?: Prisma.UtilisateurOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UtilisateurInclude<ExtArgs> | null
+  where?: Prisma.UtilisateurWhereInput
 }
 
 /**

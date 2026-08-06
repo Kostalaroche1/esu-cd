@@ -699,10 +699,6 @@ export type EtudiantUncheckedUpdateManyWithoutEtablissementNestedInput = {
   deleteMany?: Prisma.EtudiantScalarWhereInput | Prisma.EtudiantScalarWhereInput[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type EtudiantCreateNestedOneWithoutCandidaturesInput = {
   create?: Prisma.XOR<Prisma.EtudiantCreateWithoutCandidaturesInput, Prisma.EtudiantUncheckedCreateWithoutCandidaturesInput>
   connectOrCreate?: Prisma.EtudiantCreateOrConnectWithoutCandidaturesInput
