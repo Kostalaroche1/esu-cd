@@ -1,2 +1,7 @@
 import { SecuriteCompte } from "@/components/compte/securite-compte";
-export default function Page(){return <SecuriteCompte/>}
+import { auth } from "@/auth";
+
+export default async function Page() {
+  const session = await auth();
+  return <SecuriteCompte changementObligatoire={Boolean(session?.user.doitChangerMotDePasse)}/>;
+}

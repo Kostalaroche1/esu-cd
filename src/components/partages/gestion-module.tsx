@@ -93,7 +93,22 @@ export function GestionModule({ module }: { module: NomModule }) {
   const sources = useMemo(() => [...new Set(champsVisibles.map(c => c.source).filter(Boolean) as string[])], [champsVisibles]);
   const choixStatuts = champsVisibles.find(champ => champ.nom === "statut")?.options;
   useEffect(() => {
-    for (const source of sources) void fetch(`/api/${source}?taille=100`, { cache: "no-store" }).then(r => r.json()).then(r => setOptions(o => ({ ...o, [source]: r.donnees ?? [] })));
+    let estActif = true;
+    async function chargerSource(source: string) {
+      try {
+        const reponse = await fetch(`/api/${source}?taille=100`, { cache: "no-store" });
+        const resultat = await reponse.json().catch(() => null);
+        if (!reponse.ok) throw new Error(resultat?.message ?? `Impossible de charger ${source}.`);
+        if (estActif) setOptions(optionsActuelles => ({ ...optionsActuelles, [source]: resultat?.donnees ?? [] }));
+      } catch (erreur) {
+        if (estActif) {
+          setOptions(optionsActuelles => ({ ...optionsActuelles, [source]: [] }));
+          toast.error(erreur instanceof Error ? erreur.message : `Impossible de charger ${source}.`);
+        }
+      }
+    }
+    for (const source of sources) void chargerSource(source);
+    return () => { estActif = false; };
   }, [sources]);
 
   function ouvrirCreation() {
@@ -160,6 +175,6 @@ function Champ({ champ, formulaire, options }: { champ: ChampFormulaire; formula
   const classe = "mt-1.5 min-h-11 w-full rounded-xl border px-3 outline-none focus:border-blue-600";
   if (champ.type === "checkbox") return <label className="flex min-h-11 items-center gap-3 self-end rounded-xl border px-3"><input type="checkbox" {...formulaire.register(champ.nom)}/><span>{champ.libelle}</span></label>;
   return <label className={champ.type === "textarea" ? "sm:col-span-2" : ""}><span className="text-sm font-medium">{champ.libelle}{champ.requis && <span className="text-red-600"> *</span>}</span>
-    {champ.type === "textarea" ? <textarea rows={4} className={classe} {...formulaire.register(champ.nom)}/> : champ.type === "select" ? <select className={classe} {...formulaire.register(champ.nom)}><option value="">Sélectionner…</option>{(champ.options ?? []).map(v => <option key={v} value={v}>{v.replaceAll("_", " ")}</option>)}{options.map(option => <option key={String(option[champ.valeurOption ?? "id"])} value={String(option[champ.valeurOption ?? "id"])}>{String(lire(option, champ.etiquetteOption ?? "nom"))}</option>)}</select> : champ.type === "password" ? <ChampMotDePasse autoComplete="new-password" className={classe} {...formulaire.register(champ.nom)}/> : <input type={champ.type ?? "text"} step={champ.type === "number" ? "any" : undefined} className={classe} {...formulaire.register(champ.nom, { valueAsNumber: champ.type === "number" })}/>} {erreur && <span className="mt-1 block text-xs text-red-600">{String(erreur)}</span>}
+    {champ.type === "textarea" ? <textarea rows={4} className={classe} {...formulaire.register(champ.nom)}/> : champ.type === "select" ? <select className={`${classe} bg-white text-slate-900`} {...formulaire.register(champ.nom)}><option className="bg-white text-slate-900" value="">Sélectionner…</option>{(champ.options ?? []).map(v => <option className="bg-white text-slate-900" key={v} value={v}>{v.replaceAll("_", " ")}</option>)}{options.map(option => <option className="bg-white text-slate-900" key={String(option[champ.valeurOption ?? "id"])} value={String(option[champ.valeurOption ?? "id"])}>{String(lire(option, champ.etiquetteOption ?? "nom"))}</option>)}</select> : champ.type === "password" ? <ChampMotDePasse autoComplete="new-password" className={classe} {...formulaire.register(champ.nom)}/> : <input type={champ.type ?? "text"} step={champ.type === "number" ? "any" : undefined} className={classe} {...formulaire.register(champ.nom, { valueAsNumber: champ.type === "number" })}/>} {erreur && <span className="mt-1 block text-xs text-red-600">{String(erreur)}</span>}
   </label>;
 }

@@ -23,6 +23,16 @@ Copier `.env.example` vers `.env`, puis renseigner :
 
 Les trois variables `ADMIN_INITIAL_*` ne sont nécessaires que pendant `npm run seed`. Ne jamais mettre leurs valeurs réelles dans Git.
 
+## Données fictives pour la démonstration
+
+Pour préparer les captures d’écran, définir temporairement `MOT_DE_PASSE_ETUDIANTS_DEMO` dans `.env`, puis exécuter :
+
+```bash
+npm run seed:demonstration
+```
+
+Cette commande réutilise les comptes actifs du personnel déjà présents, ne modifie aucun mot de passe existant et ajoute des ressources identifiées par `DEMO-*`. Les étudiants fictifs reçoivent des prénoms uniques et une adresse de la forme `prenom@esu.cd`. Si `BLOB_READ_WRITE_TOKEN` est disponible, de petits PDF fictifs sont également enregistrés dans le stockage Blob privé. La commande peut être relancée sans dupliquer les données.
+
 ## Installation locale
 
 ```bash
@@ -54,4 +64,3 @@ npm run build
 6. Déployer. Le script `postinstall` exécute automatiquement `prisma generate`.
 
 Le système de fichiers Vercel n’est jamais utilisé pour un stockage persistant.
-
