@@ -26,10 +26,9 @@ Il ne représente pas automatiquement une université étrangère ou une future 
 ## 3. Qui fait quoi ?
 
 ### 3.1 Super-administrateur
-
-Le `SUPER_ADMINISTRATEUR`(
     mail:ministere@esu.cd
-    password:besu@cd2026-2027) contrôle toute l’application. Pour une démonstration, il peut présenter le système dans cet ordre :
+    password:besu@cd2026-2027
+Le `SUPER_ADMINISTRATEUR` contrôle toute l’application. Pour une démonstration, il peut présenter le système dans cet ordre :
 
 1. créer ou vérifier les établissements ;
 2. créer les comptes du personnel et attribuer les rôles ;
@@ -44,8 +43,10 @@ Le `SUPER_ADMINISTRATEUR`(
 Le super-administrateur intervient surtout pour la configuration, la sécurité, la supervision générale et les opérations exceptionnelles.
 
 ### 3.2 Administrateur
-
-L’`ADMINISTRATEUR` assure l’administration quotidienne :
+ mail:admin@esu.cd
+ password:besu@cd2026-2027
+L’`ADMINISTRATEUR`
+ assure l’administration quotidienne :
 
 - gérer les ressources et comptes autorisés ;
 - activer ou désactiver des comptes ;
@@ -58,7 +59,8 @@ L’`ADMINISTRATEUR` assure l’administration quotidienne :
 Contrairement au super-administrateur, l’administrateur ne possède pas le droit général de suppression.
 
 ### 3.3 Gestionnaire des bourses
-
+mail:gestionnaire@esu.cd
+password:besu@cd2026-2027
 Le `GESTIONNAIRE_BOURSES` conduit le workflow métier :
 
 - enregistrer les programmes de bourses ;
@@ -76,7 +78,8 @@ Le `GESTIONNAIRE_BOURSES` conduit le workflow métier :
 Le gestionnaire ne saisit pas le mot de passe des étudiants inscrits publiquement et ne comptabilise pas les décaissements à la place du comptable.
 
 ### 3.4 Évaluateur
-
+mail:evaluateur@esu.cd
+password:besu@cd2026-2027
 L’`EVALUATEUR` traite uniquement les dossiers qui lui sont affectés :
 
 1. ouvrir **Évaluations** ;
@@ -90,7 +93,8 @@ L’`EVALUATEUR` traite uniquement les dossiers qui lui sont affectés :
 Le score final est calculé automatiquement à partir des critères pondérés. L’évaluateur donne un avis technique, mais il ne crée pas lui-même la décision administrative finale ni la bourse.
 
 ### 3.5 Comptable
-
+mail:comptable@esu.cd
+password:besu@cd2026-2027
 Le `COMPTABLE` suit l’argent versé au bénéficiaire. Il :
 
 - consulte les attributions accordées ;
@@ -104,10 +108,11 @@ Le `COMPTABLE` suit l’argent versé au bénéficiaire. Il :
 Le comptable n’évalue pas la candidature et n’a pas accès aux pièces académiques privées du dossier.
 
 ### 3.6 Étudiant
-
+mail:melchack@esu.cd
+password:besu@cd2026-2027
 L’`ETUDIANT` gère uniquement ses propres informations :
 
-- créer son compte depuis `/inscription` ;
+- créer son compte depuis `/inscription` dans la page de connexion, après avoir cliqué sur créer un compte ;
 - choisir son établissement actuel ;
 - se connecter et, si cela est demandé, remplacer le mot de passe initial ;
 - consulter les appels publiés et ouverts ;

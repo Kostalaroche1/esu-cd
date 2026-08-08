@@ -17,13 +17,22 @@ type Ligne = Record<string, unknown>;
 type Pagination = { page: number; taille: number; total: number; pages: number };
 type Valeurs = Record<string, string | number | boolean | null>;
 
+function obtenirNomComplet(objet: Ligne) {
+  if (typeof objet.nomComplet === "string" && objet.nomComplet.trim()) {
+    return objet.nomComplet.trim();
+  }
+
+  return [objet.prenom, objet.postnom, objet.nom]
+    .filter(valeur => typeof valeur === "string" && valeur.trim())
+    .join(" ");
+}
+
 function lire(ligne: Ligne, chemin: string): unknown {
   const parties = chemin.split(".");
   let valeur: unknown = ligne;
   for (const partie of parties) {
     if (partie === "nomComplet" && valeur && typeof valeur === "object") {
-      const objet = valeur as Ligne;
-      return [objet.prenom, objet.postnom, objet.nom].filter(Boolean).join(" ");
+      return obtenirNomComplet(valeur as Ligne);
     }
     valeur = valeur && typeof valeur === "object" ? (valeur as Ligne)[partie] : undefined;
   }
